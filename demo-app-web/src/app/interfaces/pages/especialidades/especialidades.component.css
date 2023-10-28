@@ -1,0 +1,17 @@
+.card-especialidad {
+    max-width: 400px;
+
+  }
+  .filter-bar {
+    width: 200px; /* Ancho fijo para el filtro */
+  }
+  
+  .especialidad-card {
+    margin: 10px; /* Espacio entre las cards */
+    max-width: 400px;
+  }
+  .responsive-grid{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 24px;
+  }

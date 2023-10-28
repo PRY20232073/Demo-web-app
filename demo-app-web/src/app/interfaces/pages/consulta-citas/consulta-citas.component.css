@@ -1,0 +1,20 @@
+@import '../../../../../node_modules/angular-calendar/css/angular-calendar.css'; 
+.container {
+    display: flex;
+    align-items: stretch;
+  }
+  
+  .calendar {
+    flex: 2;
+    padding: 16px;
+  }
+  
+  .doctor-info {
+    flex: 1;
+    padding: 16px;
+  }
+  
+  .mat-card {
+    width: 100%;
+    text-align: center;
+  }

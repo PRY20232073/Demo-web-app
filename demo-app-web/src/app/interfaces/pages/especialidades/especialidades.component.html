@@ -1,0 +1,16 @@
+<div fxLayout="row">
+    <div class="filter-bar">
+      <mat-form-field>
+        <input matInput [(ngModel)]="filtro" placeholder="Buscar especialidades" />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row " fxLayout.lt-md="column" fxLayoutAlign="start" class="responsive-grid">
+      <mat-card *ngFor="let especialidad of especialidades" class="especialidad-card">
+        <img mat-card-image [src]="especialidad.imagen" alt="{{ especialidad.titulo }}" />
+        <mat-card-content>
+          <h3>{{ especialidad.titulo }}</h3>
+          <p>{{ especialidad.descripcion }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>

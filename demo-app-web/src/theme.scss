@@ -1,0 +1,63 @@
+
+@import '../node_modules/@angular/material/theming';
+@import '../node_modules/angular-calendar/css/angular-calendar.css';
+
+@include mat-core();
+// Definir el color primario
+$primary: mat-palette($mat-red, 700);
+
+// Definir el color de acento
+$accent: mat-palette($mat-blue, A700);
+
+// Definir el color de advertencia
+$warn: mat-palette($mat-deep-orange);
+
+$custom-primary-background: #D50000; // Fondo rojo para botones "primary"
+$custom-primary-text: #FFFFFF; // Texto en blanco para botones "primary"
+$custom-basic-background: #FFFFFF; // Fondo blanco para botones "basic"
+$custom-basic-text: #D50000; // Texto en rojo para botones "basic"
+
+// Crear una paleta para botones "primary"
+$primary-palette: (
+  50: $custom-primary-background,
+  100: $custom-primary-background,
+  200: $custom-primary-background,
+  300: $custom-primary-background,
+  400: $custom-primary-background,
+  500: $custom-primary-background,
+  600: $custom-primary-background,
+  700: $custom-primary-background,
+  800: $custom-primary-background,
+  900: $custom-primary-background,
+  A100: $custom-primary-background,
+  A200: $custom-primary-background,
+  A400: $custom-primary-background,
+  A700: $custom-primary-text,
+);
+
+// Crear una paleta para botones "basic"
+$basic-palette: (
+  50: $custom-basic-background,
+  100: $custom-basic-background,
+  200: $custom-basic-background,
+  300: $custom-basic-background,
+  400: $custom-basic-background,
+  500: $custom-basic-background,
+  600: $custom-basic-background,
+  700: $custom-basic-background,
+  800: $custom-basic-background,
+  900: $custom-basic-background,
+  A100: $custom-basic-background,
+  A200: $custom-basic-background,
+  A400: $custom-basic-background,
+  A700: $custom-basic-text,
+);
+
+
+// Crear un tema basado en los colores definidos
+$theme: mat-light-theme($primary, $accent, $warn);
+
+
+// Incluir el tema en el estilo global d
+@include angular-material-theme($theme);
+

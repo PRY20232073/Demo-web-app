@@ -1,0 +1,34 @@
+<form class="contact-form">
+    <mat-form-field appearance="outline">
+      <mat-label>Tipo de Documento</mat-label>
+      <mat-select>
+        <mat-option value="dni">DNI</mat-option>
+        <mat-option value="pasaporte">Pasaporte</mat-option>
+        <!-- Agrega más opciones si es necesario -->
+      </mat-select>
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline">
+      <input matInput placeholder="Número de Documento" />
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline">
+      <input matInput type="email" placeholder="Correo Electrónico" />
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline">
+      <mat-label>Comentario</mat-label>
+      <textarea matInput rows="5"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Tipo de Sugerencia</mat-label>
+        <mat-select>
+          <mat-option value="dni">Atencion al Cliente</mat-option>
+          <mat-option value="pasaporte">Diseño de la web</mat-option>
+          <!-- Agrega más opciones si es necesario -->
+        </mat-select>
+      </mat-form-field>
+
+    <button mat-raised-button color="primary">Enviar</button>
+  </form>
