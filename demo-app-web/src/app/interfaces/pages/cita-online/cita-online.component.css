@@ -42,7 +42,7 @@
 
 /* Estilos para los formularios */
 mat-form-field {
-  width: 100%;
+  width: 70%;
   margin-bottom: 16px; /* Espacio entre campos */
 }
 
@@ -50,4 +50,8 @@ mat-form-field {
 mat-form-field input,
 mat-form-field textarea {
   width: 100%;
+}
+
+form {
+  text-align: center; /* Centra el contenido horizontalmente */
 }

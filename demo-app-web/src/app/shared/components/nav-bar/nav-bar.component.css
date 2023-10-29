@@ -1,9 +1,13 @@
+a {
+  text-decoration: none; /* Elimina la decoración de subrayado */
+  color: inherit; /* Usa el color heredado para el enlace */
+}
 .button-primary {
-    background-color: #D50000; 
-    color: #FFFFFF; 
-  }
+  background-color: #D50000; 
+  color: #FFFFFF; 
+}
 .button-basic {
-    background-color: #FFFFFF; 
-    color: #D50000 !important; 
-    margin-right: 5px;
-  }
+  background-color: #FFFFFF; 
+  color: #D50000 !important; 
+  margin-right: 5px;
+}
