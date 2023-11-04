@@ -1,6 +1,9 @@
 <form class="contact-form">
     <mat-form-field appearance="outline">
-      <mat-label>Tipo de Documento</mat-label>
+      <mat-icon matIconPrefix ><span class="material-symbols-outlined">
+        account_box
+        </span></mat-icon>
+    <mat-label >Seleccione el tipo de documento</mat-label>
       <mat-select>
         <mat-option value="dni">DNI</mat-option>
         <mat-option value="pasaporte">Pasaporte</mat-option>
@@ -9,10 +12,18 @@
     </mat-form-field>
   
     <mat-form-field appearance="outline">
+      <mat-icon matIconPrefix ><span class="material-symbols-outlined">
+        person_search
+        </span></mat-icon>
+      <mat-label>Ingrese aqui el N° de Documento (Ej: 70412550)</mat-label>
       <input matInput placeholder="Número de Documento" />
     </mat-form-field>
   
     <mat-form-field appearance="outline">
+      <mat-icon matIconPrefix ><span class="material-symbols-outlined">
+        mail
+        </span></mat-icon>
+    <mat-label>Ingrese aqui su correo electronico (Ej: jperez@gmail.com)</mat-label>
       <input matInput type="email" placeholder="Correo Electrónico" />
     </mat-form-field>
   
@@ -22,6 +33,10 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
+      <mat-icon matIconPrefix ><span class="material-symbols-outlined">
+        checklist
+        </span></mat-icon>
+    <mat-label>Ingrese aqui su sugerencia</mat-label>
         <mat-label>Tipo de Sugerencia</mat-label>
         <mat-select>
           <mat-option value="dni">Atencion al Cliente</mat-option>

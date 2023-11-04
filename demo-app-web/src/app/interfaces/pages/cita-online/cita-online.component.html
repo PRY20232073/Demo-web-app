@@ -14,7 +14,10 @@
                         <form [formGroup]="stepOneForm">
                             <br>
                             <mat-form-field appearance="outline">
-                                <mat-label>Seleccione el tipo de documento</mat-label>
+                                <mat-icon matIconPrefix ><span class="material-symbols-outlined">
+                                    account_box
+                                    </span></mat-icon>
+                                <mat-label >Seleccione el tipo de documento</mat-label>
                                 <mat-select formControlName="tipoDocumento">
                                 <mat-option value="DNI">DNI</mat-option>
                                 <mat-option value="Pasaporte">Pasaporte</mat-option>
@@ -22,14 +25,23 @@
                                 </mat-select>
                             </mat-form-field>
                             <mat-form-field appearance="outline">
+                                <mat-icon matIconPrefix ><span class="material-symbols-outlined">
+                                    person_search
+                                    </span></mat-icon>
                                 <mat-label>Ingrese aqui el N° de Documento (Ej: 70412550)</mat-label>
                                 <input matInput formControlName="numeroDocumento" placeholder="Número de documento" />
                             </mat-form-field>
                             <mat-form-field appearance="outline">
+                                <mat-icon matIconPrefix ><span class="material-symbols-outlined">
+                                    call
+                                    </span></mat-icon>
                                 <mat-label>Ingrese aqui su número de celular (Ej: 991144192)</mat-label>
                                 <input matInput formControlName="numeroCelular" placeholder="Número de celular" />
                             </mat-form-field>
                             <mat-form-field appearance="outline">
+                                <mat-icon matIconPrefix ><span class="material-symbols-outlined">
+                                    calendar_month
+                                    </span></mat-icon>
                                 <mat-label>Ingrese la fecha de su nacimiento (dia/mes/año):</mat-label>
                                 <input matInput formControlName="fechaNacimiento" placeholder="Fecha de nacimiento" [matDatepicker]="picker">
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -47,6 +59,9 @@
                         <form [formGroup]="stepTwoForm">
                             <br>
                             <mat-form-field appearance="outline">
+                                <mat-icon matIconPrefix ><span class="material-symbols-outlined">
+                                    medical_information
+                                    </span></mat-icon>
                                 <mat-label>Seleccione la especialidad</mat-label>
                                 <mat-select formControlName="especialidad">
                                 <mat-option value="Cardiología">Cardiología</mat-option>
@@ -54,9 +69,13 @@
                                 <!-- Agrega más opciones según tus necesidades -->
                                 </mat-select>
                             </mat-form-field>
+
                             <mat-form-field appearance="outline">
+                                <mat-icon matIconPrefix ><span class="material-symbols-outlined">
+                                    checklist
+                                    </span></mat-icon>
                                 <mat-label>Ingrese algun mensaje u observacion de sus sintomas</mat-label>
-                                <textarea matInput formControlName="sintomas" placeholder="Síntomas"></textarea>
+                                <textarea matNativeControl formControlName="sintomas" placeholder="Síntomas"></textarea>
                             </mat-form-field>
                         </form>
                         <div>
@@ -71,6 +90,10 @@
                         <form [formGroup]="stepThreeForm">
                             <br>
                             <mat-form-field appearance="outline">
+                                <mat-icon matIconPrefix ><span class="material-symbols-outlined">
+                                    calendar_month
+                                    </span></mat-icon>
+                                    <mat-label>Selecciones la fecha de su cita (dia/mes/año):</mat-label>
                                 <input matInput formControlName="fechaCita" placeholder="Fecha de cita" [matDatepicker]="picker">
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>

@@ -11,3 +11,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: #D50000 !important; 
     margin-right: 5px;
   }
+mat-form-field mat-label,
+mat-form-field mat-select {
+  font-size: 19px !important;
+}
+mat-form-field mat-icon {
+  padding-right:12 !important; padding-top: 0 !important; padding-left: 12 !important;
+  font-size: 37px !important;
+}
+mat-form-field input,
+mat-form-field textarea,
+mat-form-field select {
+  width: 100%;
+  font-size: 19px !important;
+
+}
