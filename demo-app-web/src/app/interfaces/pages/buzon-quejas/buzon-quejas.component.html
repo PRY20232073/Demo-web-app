@@ -1,40 +1,99 @@
+<br>
+<h3 class="text-center">Buzon de quejas</h3>
 <form class="contact-form">
-    <mat-form-field appearance="outline">
-      <mat-label>Tipo de Documento</mat-label>
-      <mat-select>
-        <mat-option value="dni">DNI</mat-option>
-        <mat-option value="pasaporte">Pasaporte</mat-option>
-        <!-- Agrega más opciones si es necesario -->
-      </mat-select>
-    </mat-form-field>
-  
-    <mat-form-field appearance="outline">
-      <input matInput placeholder="Número de Documento" />
-    </mat-form-field>
-  
-    <mat-form-field appearance="outline">
-      <input matInput type="email" placeholder="Correo Electrónico" />
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-        <mat-label>Fecha de Queja</mat-label>
-        <input matInput type="date" placeholder="Fecha de Queja" />
+  <div class="row">
+    <div class="col-md-1">
+      <mat-icon class="icon-input" style="padding-left: 0%;">
+        account_box
+      </mat-icon>
+    </div>
+    <div class="col-md-11">
+      <mat-form-field appearance="outline">
+        <mat-label >Seleccione el tipo de documento</mat-label>
+          <mat-select>
+            <mat-option value="dni">DNI</mat-option>
+            <mat-option value="pasaporte">Pasaporte</mat-option>
+          </mat-select>
       </mat-form-field>
-    
+    </div>
+  </div>
   
+  <div class="row">
+    <div class="col-md-1">
+      <mat-icon class="icon-input" style="padding-left: 0%;">
+        person_search
+      </mat-icon>
+    </div>
+    <div class="col-md-11">
+      <mat-form-field appearance="outline">
+        <mat-label>Ingrese aqui el N° de Documento (Ej: 70412550)</mat-label>
+      <input matInput placeholder="Número de Documento" />
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-1">
+      <mat-icon class="icon-input" style="padding-left: 0%;" >
+        mail
+      </mat-icon>
+    </div>
+    <div class="col-md-11">
+      <mat-form-field appearance="outline">
+        <mat-label>Ingrese aqui su correo electronico (Ej: jperez&#64;gmail.com)</mat-label>
+        <input matInput type="email" placeholder="Correo Electrónico" />
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    
+  <div class="col-md-1" >
+        <mat-icon class="icon-input" style="padding-left: 0%;">
+            calendar_month
+        </mat-icon>
+    </div>
+    <div class="col-md-11">
+        <mat-form-field appearance="outline">
+            <mat-label>Selecciones la fecha de su queja (dia/mes/año):</mat-label>
+            <input matInput formControlName="fechaCita" placeholder="Fecha de cita" [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+</div>
+
+  
+<div class="row">
+  <div class="col-md-1">
+    <mat-icon class="icon-input" style="padding-left: 0%;">
+      comment
+    </mat-icon>
+  </div>
+  <div class="col-md-11">
     <mat-form-field appearance="outline">
       <mat-label>Comentario</mat-label>
       <textarea matInput rows="5"></textarea>
     </mat-form-field>
-
-    <mat-form-field appearance="outline">
-        <mat-label>Tipo de Queja</mat-label>
-        <mat-select>
-          <mat-option value="dni">Atencion al Cliente</mat-option>
-          <mat-option value="pasaporte">Diseño de la web</mat-option>
-          <!-- Agrega más opciones si es necesario -->
-        </mat-select>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-1" >
+      <mat-icon class="icon-input" style="padding-left: 0%;">
+          report
+      </mat-icon>
+  </div>
+  <div class="col-md-11">
+      <mat-form-field appearance="outline">
+          <mat-label >Seleccione el tipo de queja</mat-label>
+          <mat-select formControlName="tipoDocumento">
+          <mat-option value="DNI">Atencion al Cliente</mat-option>
+          <mat-option value="Pasaporte">Diseño de la web</mat-option>
+          </mat-select>
       </mat-form-field>
+  </div>
+</div>
 
-    <button mat-raised-button color="primary">Enviar</button>
+
   </form>
+<div class="text-center">
+  <button mat-raised-button color="primary" class="btnEnviar">Enviar</button>
+</div>

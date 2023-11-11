@@ -1,14 +1,28 @@
-<div fxLayout="row">
-    <div class="filter-bar">
-      <mat-form-field>
-        <input matInput [(ngModel)]="filtro" placeholder="Buscar especialidades" />
-      </mat-form-field>
-    </div>
-    <div fxLayout="row " fxLayout.lt-md="column" fxLayoutAlign="start" class="responsive-grid">
+<br>
+<h3 class="text-center">Especialidades</h3>
+<br>
+<div class="row align-items-center justify-content-end ">
+  <div class="col-lg-3 align-items-center">
+    <mat-form-field appearance="outline" style="margin-bottom: -1.35em">
+      <input matInput [(ngModel)]="filtro" placeholder="Buscar especialidades" />
+    </mat-form-field>
+    <!--<input matInput [(ngModel)]="filtro" placeholder="Buscar especialidades" />-->
+
+  </div>
+  <div class="col-lg-2 align-items-center">
+    <button mat-raised-button color="primary" (click)="filtrarEspecialidades()">
+      <mat-icon>search</mat-icon> Buscar
+    </button>
+    <div></div>
+  </div>
+</div>
+<div class="cards-especialidades">
+    <div fxLayout="row " fxLayout.lt-md="column"  class="responsive-grid">
       <mat-card *ngFor="let especialidad of especialidades" class="especialidad-card">
-        <img mat-card-image [src]="especialidad.imagen" alt="{{ especialidad.titulo }}" />
+        <img mat-card-image [src]="especialidad.imagen" alt="{{ especialidad.nombre_especialidad }}" />
+        <br>
         <mat-card-content>
-          <h3>{{ especialidad.titulo }}</h3>
+          <h3>{{ especialidad.nombre_especialidad }}</h3>
           <p>{{ especialidad.descripcion }}</p>
         </mat-card-content>
       </mat-card>

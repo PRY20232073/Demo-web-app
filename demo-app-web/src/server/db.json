@@ -1,0 +1,44 @@
+{
+    "tipo_documento":[
+        {
+            "id_tipo_documento": 1,
+            "nombre_tipo_documento":"DNI"
+        },
+        {
+            "id_tipo_documento": 2,
+            "nombre_tipo_documento":"Permiso de Permanecia"
+        }
+    ],
+    "especialidad":[
+        {
+            "id_especialidad": 1,
+            "nombre_especialidad":"Cardiologia",
+            "descripcion":"Nuestros cardiólogos se especializan en el diagnóstico y tratamiento de enfermedades del corazón, asegurando que tu motor principal esté en óptimas condiciones.",
+            "imagen":"https://especialidadesmedicas.pe/wp-content/uploads/2022/02/PORTADA-para-moviles-de-ESPECIALIDADES_CARDIOLOGIA-1.png"
+        },
+        {
+            "id_especialidad": 2,
+            "nombre_especialidad":"Dermatologia",
+            "descripcion":"Nuestros dermatólogos cuidan de la salud y apariencia de tu piel, ofreciendo soluciones para afecciones cutáneas y procedimientos estéticos.",
+            "imagen":"https://especialidadesmedicas.pe/wp-content/uploads/2022/02/PORTADA-para-moviles-de-ESPECIALIDADES_Dermatologia-1.png"
+        },
+        {
+            "id_especialidad": 3,
+            "nombre_especialidad":"Ginecologia y Obstetricia",
+            "descripcion":"Nuestros expertos ginecólogos y obstetras brindan atención integral a mujeres, desde la adolescencia hasta la maternidad y más allá.",
+            "imagen":"https://especialidadesmedicas.pe/wp-content/uploads/2022/02/PORTADA-para-moviles-de-ESPECIALIDADES_GINECOLOGIA-Y-OBSTETRICIA-1.png"
+        }
+    ],
+    "cita":[
+        {
+            "id":1,
+            "id_tipo_documento":1,
+            "desc_documento":"12345678",
+            "num_celular":"51987654321",
+            "fecha_nacimiento":"2023-11-10",
+            "id_especialidad":1,
+            "obs_sintomas":"sintomas",
+            "fecha_cita":"2023-11-10"
+        }
+    ]
+}

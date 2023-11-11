@@ -61,3 +61,21 @@ $theme: mat-light-theme($primary, $accent, $warn);
 // Incluir el tema en el estilo global d
 @include angular-material-theme($theme);
 
+.mat-step-icon {
+	border-radius: 50%;
+	height: 50px !important;
+	width: 50px !important;
+	position: relative;
+}
+.mat-step-header::after, .mat-step-header::before, .mat-stepper-horizontal-line {
+  top: 42px !important;
+}
+.mat-step-icon-content{
+  font-size: 30px;
+}
+
+.mat-step-icon .mat-icon {
+  font-size: 30px!important;
+  width: 30px!important;
+  height: 30px!important
+}

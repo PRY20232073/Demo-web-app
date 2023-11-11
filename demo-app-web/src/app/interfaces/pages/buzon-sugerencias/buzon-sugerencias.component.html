@@ -1,49 +1,84 @@
+<br>
+<h3 class="text-center">Buzon de Sugerencias</h3>
 <form class="contact-form">
-    <mat-form-field appearance="outline">
-      <mat-icon matIconPrefix ><span class="material-symbols-outlined">
+  <div class="row">
+    <div class="col-md-1">
+      <mat-icon class="icon-input">
         account_box
-        </span></mat-icon>
-    <mat-label >Seleccione el tipo de documento</mat-label>
-      <mat-select>
-        <mat-option value="dni">DNI</mat-option>
-        <mat-option value="pasaporte">Pasaporte</mat-option>
-        <!-- Agrega más opciones si es necesario -->
-      </mat-select>
-    </mat-form-field>
+      </mat-icon>
+    </div>
+    <div class="col-md-11">
+      <mat-form-field appearance="outline">
+        <mat-label >Seleccione el tipo de documento</mat-label>
+          <mat-select>
+            <mat-option value="dni">DNI</mat-option>
+            <mat-option value="pasaporte">Pasaporte</mat-option>
+          </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
   
+    
+<div class="row">
+  <div class="col-md-1">
+    <mat-icon class="icon-input">
+      person_search
+    </mat-icon>
+  </div>
+  <div class="col-md-11">
     <mat-form-field appearance="outline">
-      <mat-icon matIconPrefix ><span class="material-symbols-outlined">
-        person_search
-        </span></mat-icon>
       <mat-label>Ingrese aqui el N° de Documento (Ej: 70412550)</mat-label>
-      <input matInput placeholder="Número de Documento" />
+    <input matInput placeholder="Número de Documento" />
     </mat-form-field>
-  
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-1">
+    <mat-icon class="icon-input" >
+      mail
+    </mat-icon>
+  </div>
+  <div class="col-md-11">
     <mat-form-field appearance="outline">
-      <mat-icon matIconPrefix ><span class="material-symbols-outlined">
-        mail
-        </span></mat-icon>
-    <mat-label>Ingrese aqui su correo electronico (Ej: jperez@gmail.com)</mat-label>
+      <mat-label>Ingrese aqui su correo electronico (Ej: jperez&#64;gmail.com)</mat-label>
       <input matInput type="email" placeholder="Correo Electrónico" />
     </mat-form-field>
-  
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-1">
+    <mat-icon class="icon-input" style="padding-left: 0%;">
+      comment
+    </mat-icon>
+  </div>
+  <div class="col-md-11">
     <mat-form-field appearance="outline">
       <mat-label>Comentario</mat-label>
       <textarea matInput rows="5"></textarea>
     </mat-form-field>
-
+  </div>
+</div>
+  
+<div class="row">
+  <div class="col-md-1">
+    <mat-icon class="icon-input">
+      checklist
+    </mat-icon>
+  </div>
+  <div class="col-md-11">
     <mat-form-field appearance="outline">
-      <mat-icon matIconPrefix ><span class="material-symbols-outlined">
-        checklist
-        </span></mat-icon>
-    <mat-label>Ingrese aqui su sugerencia</mat-label>
-        <mat-label>Tipo de Sugerencia</mat-label>
+      <mat-label>Ingrese aqui su sugerencia</mat-label>
         <mat-select>
           <mat-option value="dni">Atencion al Cliente</mat-option>
           <mat-option value="pasaporte">Diseño de la web</mat-option>
-          <!-- Agrega más opciones si es necesario -->
         </mat-select>
-      </mat-form-field>
-
-    <button mat-raised-button color="primary">Enviar</button>
+    </mat-form-field>
+  </div>
+</div>
   </form>
+  <div class="text-center">
+    <button mat-raised-button color="primary" class="btnEnviar">Enviar</button>
+  </div>

@@ -31,8 +31,7 @@ mat-form-field {
   width: 70%;
   margin-bottom: 16px; /* Espacio entre campos */
   flex: 1;
-  align-items: center;
-  
+  align-items: center; 
 }
 
 /* Ajusta el ancho de los campos de texto */

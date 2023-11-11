@@ -1,52 +1,86 @@
+<br>
+<h3 class="text-center">Cita online</h3>
+
 <div class="container">
     <div class="side-by-side">
         <div class="left-half">
-            <!-- Colocar aquí la imagen o contenido de la mitad izquierda -->
             <img src="../../../../assets/Group 34.svg" alt="Imagen" />
           </div>
           <div class="right-half">
             <mat-card>
               <mat-card-content>
-                <mat-horizontal-stepper linear #stepper>
+                <mat-horizontal-stepper linear labelPosition="bottom" #stepper>
                  <!-- Paso 1: Datos personales -->
                     <mat-step>
+                        
+                        <ng-template matStepperIcon="edit">
+                            <mat-icon>check</mat-icon>
+                        </ng-template>
                         <ng-template matStepLabel>Paso 1: Datos personales</ng-template>
+
                         <form [formGroup]="stepOneForm">
                             <br>
-                            <mat-form-field appearance="outline">
-                                <mat-icon matIconPrefix ><span class="material-symbols-outlined">
-                                    account_box
-                                    </span></mat-icon>
-                                <mat-label >Seleccione el tipo de documento</mat-label>
-                                <mat-select formControlName="tipoDocumento">
-                                <mat-option value="DNI">DNI</mat-option>
-                                <mat-option value="Pasaporte">Pasaporte</mat-option>
-                                <!-- Agrega más opciones según tus necesidades -->
-                                </mat-select>
-                            </mat-form-field>
-                            <mat-form-field appearance="outline">
-                                <mat-icon matIconPrefix ><span class="material-symbols-outlined">
-                                    person_search
-                                    </span></mat-icon>
-                                <mat-label>Ingrese aqui el N° de Documento (Ej: 70412550)</mat-label>
-                                <input matInput formControlName="numeroDocumento" placeholder="Número de documento" />
-                            </mat-form-field>
-                            <mat-form-field appearance="outline">
-                                <mat-icon matIconPrefix ><span class="material-symbols-outlined">
-                                    call
-                                    </span></mat-icon>
-                                <mat-label>Ingrese aqui su número de celular (Ej: 991144192)</mat-label>
-                                <input matInput formControlName="numeroCelular" placeholder="Número de celular" />
-                            </mat-form-field>
-                            <mat-form-field appearance="outline">
-                                <mat-icon matIconPrefix ><span class="material-symbols-outlined">
-                                    calendar_month
-                                    </span></mat-icon>
-                                <mat-label>Ingrese la fecha de su nacimiento (dia/mes/año):</mat-label>
-                                <input matInput formControlName="fechaNacimiento" placeholder="Fecha de nacimiento" [matDatepicker]="picker">
-                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                <mat-datepicker #picker></mat-datepicker>
-                            </mat-form-field>
+                            <div class="row">
+                                <div class="col-md-1" style="padding-left: 0%;">
+                                    <mat-icon class="icon-input">
+                                        description
+                                    </mat-icon>
+                                </div>
+                                <div class="col-md-11">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label >Seleccione el tipo de documento</mat-label>
+                                        <mat-select formControlName="tipoDocumento">
+                                        <mat-option value="DNI">DNI</mat-option>
+                                        <mat-option value="Pasaporte">Pasaporte</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-1" style="padding-left: 0%;">
+                                    <mat-icon class="icon-input">
+                                        person_search
+                                    </mat-icon>
+                                </div>
+                                <div class="col-md-11">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Ingrese aqui el N° de Documento (Ej: 70412550)</mat-label>
+                                        <input matInput formControlName="numeroDocumento" placeholder="Número de documento" />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-1" style="padding-left: 0%;">
+                                    <mat-icon class="icon-input">
+                                        call
+                                    </mat-icon>
+                                </div>
+                                <div class="col-md-11">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Ingrese aqui su número de celular (Ej: 991144192)</mat-label>
+                                        <input matInput formControlName="numeroCelular" placeholder="Número de celular" />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-1" style="padding-left: 0%;">
+                                    <mat-icon class="icon-input">
+                                        calendar_month
+                                    </mat-icon>
+                                </div>
+                                <div class="col-md-11">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Ingrese la fecha de su nacimiento (dia/mes/año):</mat-label>
+                                        <input matInput formControlName="fechaNacimiento" placeholder="Fecha de nacimiento" [matDatepicker]="picker">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
                         </form>
                         <div class="center">
                             <button mat-raised-button color="primary" (click)="nextStep(0)">Siguiente</button>   
@@ -58,25 +92,37 @@
                         <ng-template matStepLabel>Paso 2: Síntomas y especialidad</ng-template>
                         <form [formGroup]="stepTwoForm">
                             <br>
-                            <mat-form-field appearance="outline">
-                                <mat-icon matIconPrefix ><span class="material-symbols-outlined">
-                                    medical_information
-                                    </span></mat-icon>
-                                <mat-label>Seleccione la especialidad</mat-label>
-                                <mat-select formControlName="especialidad">
-                                <mat-option value="Cardiología">Cardiología</mat-option>
-                                <mat-option value="Dermatología">Dermatología</mat-option>
-                                <!-- Agrega más opciones según tus necesidades -->
-                                </mat-select>
-                            </mat-form-field>
 
-                            <mat-form-field appearance="outline">
-                                <mat-icon matIconPrefix ><span class="material-symbols-outlined">
-                                    checklist
-                                    </span></mat-icon>
-                                <mat-label>Ingrese algun mensaje u observacion de sus sintomas</mat-label>
-                                <textarea matNativeControl formControlName="sintomas" placeholder="Síntomas"></textarea>
-                            </mat-form-field>
+                            <div class="row">
+                                <div class="col-md-1" style="padding-left: 0%;">
+                                    <mat-icon class="icon-input">
+                                        medical_information
+                                    </mat-icon>
+                                </div>
+                                <div class="col-md-11">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Seleccione la especialidad</mat-label>
+                                        <mat-select formControlName="especialidad">
+                                        <mat-option value="Cardiología">Cardiología</mat-option>
+                                        <mat-option value="Dermatología">Dermatología</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-1" style="padding-left: 0%;">
+                                    <mat-icon class="icon-input">
+                                        checklist
+                                    </mat-icon>
+                                </div>
+                                <div class="col-md-11">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Ingrese algun mensaje u observacion de sus sintomas</mat-label>
+                                        <textarea matNativeControl formControlName="sintomas" placeholder="Síntomas"></textarea>
+                                    </mat-form-field>
+                                </div>
+                            </div>
                         </form>
                         <div>
                         <button mat-raised-button color="primary" (click)="nextStep(1)">Siguiente</button>
@@ -89,15 +135,23 @@
                         <ng-template matStepLabel>Paso 3: Fecha de cita</ng-template>
                         <form [formGroup]="stepThreeForm">
                             <br>
-                            <mat-form-field appearance="outline">
-                                <mat-icon matIconPrefix ><span class="material-symbols-outlined">
-                                    calendar_month
-                                    </span></mat-icon>
-                                    <mat-label>Selecciones la fecha de su cita (dia/mes/año):</mat-label>
-                                <input matInput formControlName="fechaCita" placeholder="Fecha de cita" [matDatepicker]="picker">
-                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                <mat-datepicker #picker></mat-datepicker>
-                            </mat-form-field>
+
+                            <div class="row">
+                                <div class="col-md-1" style="padding-left: 0%;">
+                                    <mat-icon class="icon-input">
+                                        calendar_month
+                                    </mat-icon>
+                                </div>
+                                <div class="col-md-11">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Selecciones la fecha de su cita (dia/mes/año):</mat-label>
+                                        <input matInput formControlName="fechaCita" placeholder="Fecha de cita" [matDatepicker]="picker">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
                         </form>
                         <div>
                         <button mat-button (click)="prevStep(2)">Atrás</button>

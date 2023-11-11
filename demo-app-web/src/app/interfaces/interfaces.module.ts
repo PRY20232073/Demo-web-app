@@ -16,6 +16,8 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { FlatpickrModule } from 'angularx-flatpickr';
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     CitaOnlineComponent,
@@ -38,6 +40,7 @@ import { FlatpickrModule } from 'angularx-flatpickr';
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
+    HttpClientModule,
   ],
 })
 export class InterfacesModule {}
