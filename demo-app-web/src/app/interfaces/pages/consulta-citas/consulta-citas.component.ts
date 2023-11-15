@@ -1,9 +1,4 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  ViewChild,
-  TemplateRef,
-} from '@angular/core';
+import { Component, ViewChild, TemplateRef } from '@angular/core';
 import {
   startOfDay,
   endOfDay,
@@ -23,8 +18,12 @@ import {
   CalendarView,
 } from 'angular-calendar';
 import { EventColor } from 'calendar-utils';
-
-const colors: Record<string, EventColor> = {
+import { CalendarOptions } from '@fullcalendar/core'; // useful for typechecking
+import interactionPlugin from '@fullcalendar/interaction';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import esLocale from '@fullcalendar/core/locales/es';
+/*const colors: Record<string, EventColor> = {
   red: {
     primary: '#ad2121',
     secondary: '#FAE3E3',
@@ -37,12 +36,12 @@ const colors: Record<string, EventColor> = {
     primary: '#e3bc08',
     secondary: '#FDF1BA',
   },
-};
+};*/
 @Component({
   selector: 'app-consulta-citas',
   templateUrl: './consulta-citas.component.html',
   styleUrls: ['./consulta-citas.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  /*changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [
     `
       h3 {
@@ -54,9 +53,29 @@ const colors: Record<string, EventColor> = {
         padding: 15px;
       }
     `,
-  ],
+  ],*/
 })
 export class ConsultaCitasComponent {
+  calendarOptions: CalendarOptions = {
+    initialView: 'dayGridMonth',
+    themeSystem: 'bootstrap5',
+    plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+    locale: esLocale,
+    dateClick: this.handleDateClick.bind(this), // MUST ensure `this` context is maintained
+    headerToolbar: {
+      left: 'prev,next',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay',
+    },
+    events: [
+      { title: 'event 1', date: '2023-11-01' },
+      { title: 'event 2', date: '2023-11-02' },
+    ],
+  };
+  handleDateClick(arg: any) {
+    console.log('date click! ' + arg.dateStr);
+  }
+  /*
   @ViewChild('modalContent', { static: true }) modalContent!: TemplateRef<any>;
 
   view: CalendarView = CalendarView.Month;
@@ -199,5 +218,5 @@ export class ConsultaCitasComponent {
 
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
-  }
+  }*/
 }

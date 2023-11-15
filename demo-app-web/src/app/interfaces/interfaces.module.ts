@@ -17,6 +17,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { HttpClientModule } from '@angular/common/http';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
     UbicacionComponent,
   ],
   imports: [
+    FullCalendarModule,
     CommonModule,
     NgbModalModule,
     InterfacesRoutingModule,

@@ -23,6 +23,8 @@
     "@fullcalendar/angular": "^6.1.9",
     "@fullcalendar/core": "^6.1.9",
     "@fullcalendar/daygrid": "^6.1.9",
+    "@fullcalendar/interaction": "^6.1.9",
+    "@fullcalendar/timegrid": "^6.1.9",
     "@ng-bootstrap/ng-bootstrap": "^15.1.2",
     "@popperjs/core": "^2.11.6",
     "angular-calendar": "^0.31.0",

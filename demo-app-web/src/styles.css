@@ -48,3 +48,12 @@ will-change: auto;
   max-width: 300px;
   justify-content: center;
 }
+.row{
+  display: flex;
+}
+.col-md-1{
+  flex: 0 0 10%;
+}
+.col-md-11{
+  flex: 0 0 90%;
+}
