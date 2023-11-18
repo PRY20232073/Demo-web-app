@@ -57,3 +57,20 @@ will-change: auto;
 .col-md-11{
   flex: 0 0 90%;
 }
+.text-center{
+  text-align: center;
+}
+.side-by-side {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.label-input{
+  text-align: left;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+.mat-mdc-form-field-hint-wrapper{
+  padding-left: 0% !important;
+}

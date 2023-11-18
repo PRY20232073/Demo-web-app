@@ -79,3 +79,20 @@ $theme: mat-light-theme($primary, $accent, $warn);
   width: 30px!important;
   height: 30px!important
 }
+.fc.fc-theme-standard .fc-view-harness th {
+  background: #D50000 !important;
+  color: #FFFFFF !important;
+
+}
+.fc-col-header-cell-cushion{
+  color: #FFFFFF !important;
+
+}
+.fc.fc-theme-standard .fc-daygrid-event-harness a {
+  color: #D50000 !important;
+}
+.fc .fc-button-primary {
+  background-color:  #D50000 !important;
+  border-color:  #D50000 !important;
+  color:  white !important;
+}

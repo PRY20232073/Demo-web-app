@@ -18,7 +18,8 @@ import { FormsModule } from '@angular/forms';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { HttpClientModule } from '@angular/common/http';
 import { FullCalendarModule } from '@fullcalendar/angular';
-
+import { DatePipe } from '@angular/common';
+import { DoctoresComponent } from './pages/doctores/doctores.component';
 @NgModule({
   declarations: [
     CitaOnlineComponent,
@@ -29,6 +30,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     BuzonSugerenciasComponent,
     BuzonQuejasComponent,
     UbicacionComponent,
+    DoctoresComponent,
   ],
   imports: [
     FullCalendarModule,
@@ -44,5 +46,6 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     }),
     HttpClientModule,
   ],
+  providers: [DatePipe],
 })
 export class InterfacesModule {}

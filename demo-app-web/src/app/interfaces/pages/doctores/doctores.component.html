@@ -1,4 +1,4 @@
-<h1 class="text-center">Especialidades</h1>
+<h1 class="text-center">Doctores</h1>
 <div class="row align-items-center justify-content-end buscador">
   <div style="flex: 0 0 70%;">
 
@@ -7,7 +7,7 @@
   </div>
   <div class="card-header" style="flex: 0 0 30%;">
     <mat-form-field appearance="outline" class="input-buscador">
-      <input matInput [(ngModel)]="filtro" placeholder="Buscar especialidades" />
+      <input matInput [(ngModel)]="filtro" placeholder="Buscar doctores" />
     </mat-form-field>
     <button mat-raised-button color="primary" (click)="filtrarEspecialidades()" class="btn-buscador" >
       <mat-icon >search</mat-icon> Buscar
@@ -17,14 +17,21 @@
 <div class="cards-especialidades">
     <div fxLayout="row " fxLayout.lt-md="column"  class="responsive-grid">
       <mat-card *ngFor="let especialidad of especialidades" class="especialidad-card">
-        <img mat-card-image [src]="especialidad.imagen" alt="{{ especialidad.nombre_especialidad }}" />
+        <mat-card-header>
+            <mat-card-title>
+                {{ especialidad.nombre_doctor }}
+            </mat-card-title>
+            <mat-card-subtitle>
+                {{ especialidad.especialidad }}
+            </mat-card-subtitle>
+
+        </mat-card-header>
+        <img mat-card-image [src]="especialidad.imagen" alt="{{ especialidad.nombre_doctor }}" />
         <br>
         <mat-card-content style="flex-grow: 1;">
-          <h3>{{ especialidad.nombre_especialidad }}</h3>
-          <p>{{ especialidad.descripcion }}</p>
+          <p>{{ especialidad.experiencia }}</p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button><a href="doctores">SABER MAS</a></button>
         </mat-card-actions>
       </mat-card>
     </div>

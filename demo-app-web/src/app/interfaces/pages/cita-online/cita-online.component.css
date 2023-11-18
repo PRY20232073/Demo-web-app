@@ -23,7 +23,6 @@
   flex: 1;
   padding: 16px;
   text-align: center; /* Centra el contenido horizontalmente */
-
 }
 
 /* Estilos para los formularios */
@@ -32,6 +31,14 @@ mat-form-field {
   margin-bottom: 16px; /* Espacio entre campos */
   flex: 1;
   align-items: center; 
+}
+.button-hour{
+  margin-right: 5px; 
+  margin-top: 5px; 
+  font-size: 16px;
+  border-style: solid;
+  border-color: gray;
+  border-width: 2px;
 }
 
 /* Ajusta el ancho de los campos de texto */

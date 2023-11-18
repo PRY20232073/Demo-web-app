@@ -1,10 +1,34 @@
+<h1 class="text-center">Tus Citas</h1>
 <br>
-<h3 class="text-center">Tus Citas</h3>
-<br>
-<div class="card-section">
-  
-</div >
-<div class="calendar-section">
-  <full-calendar [options]="calendarOptions"></full-calendar>
-
+<div class="side-by-sides">
+  <div class="left-half">
+    <div class="citas">
+      <h2>Tus citas programas para hoy:</h2>
+      <div *ngIf="selectedDate && selectedAppointments.length > 0">
+        <h3>Citas para el {{ selectedDate | date: 'dd/MM/yyyy' }}</h3>
+        <div *ngFor="let appointment of selectedAppointments">
+          <mat-card class="card-events">
+            <mat-card-header>
+              <mat-card-title>{{ 'Cita a las ' + formatDate(appointment.start) }}</mat-card-title>
+              <mat-card-subtitle>{{ appointment.title }}</mat-card-subtitle>
+              <mat-card-subtitle>{{ appointment['doctor'] }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content></mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div >
+  <div class="right-half">
+    <!-- <full-calendar [options]="calendarOptions" class="calendar"></full-calendar> -->
+    <div class='demo-app-main'>
+      <full-calendar *ngIf='calendarVisible()' [options]='calendarOptions()' class="calendar">
+        <ng-template #eventContent let-arg>
+          <b>{{ arg.timeText }}</b>
+          <i>{{ arg.event.title }}</i>
+        </ng-template>
+      </full-calendar>
+    </div>
+  </div>
 </div>
+

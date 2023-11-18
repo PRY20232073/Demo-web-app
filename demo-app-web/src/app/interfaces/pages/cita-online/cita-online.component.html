@@ -1,6 +1,6 @@
-<br>
-<h3 class="text-center">Cita online</h3>
 
+<h1 class="text-center">Cita online</h1>
+<mat-divider></mat-divider>
 <div class="container">
     <div class="side-by-side">
         <div class="left-half">
@@ -9,9 +9,9 @@
           <div class="right-half">
             <mat-card>
               <mat-card-content>
-                <mat-horizontal-stepper linear labelPosition="bottom" #stepper>
+                <mat-stepper linear labelPosition="bottom" [linear]="false" #stepper>
                  <!-- Paso 1: Datos personales -->
-                    <mat-step>
+                    <mat-step [stepControl]="stepOneForm"> 
                         
                         <ng-template matStepperIcon="edit">
                             <mat-icon>check</mat-icon>
@@ -22,21 +22,38 @@
                             <br>
                             <div class="row">
                                 <div class="col-md-1" style="padding-left: 0%;">
+                                </div>
+                                <div class="col-md-11 label-input">
+                                    <mat-label >Seleccione el tipo de documento</mat-label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1" style="padding-left: 0%;">
                                     <mat-icon class="icon-input">
                                         description
                                     </mat-icon>
                                 </div>
                                 <div class="col-md-11">
                                     <mat-form-field appearance="outline">
-                                        <mat-label >Seleccione el tipo de documento</mat-label>
-                                        <mat-select formControlName="tipoDocumento">
+                                        <mat-select formControlName="tipoDocumento" 
+                                            placeholder="Seleccione el tipo de documento"
+                                            value="DNI" required> 
                                         <mat-option value="DNI">DNI</mat-option>
                                         <mat-option value="Pasaporte">Pasaporte</mat-option>
                                         </mat-select>
+                                        <mat-hint style="color: red;" *ngIf="stepOneForm.get('tipoDocumento')?.touched && stepOneForm.get('tipoDocumento')?.hasError('required')">
+                                            Debe seleccionar el tipo de documento
+                                        </mat-hint>
                                     </mat-form-field>
                                 </div>
                             </div>
-
+                            <div class="row">
+                                <div class="col-md-1" style="padding-left: 0%;">
+                                </div>
+                                <div class="col-md-11 label-input">
+                                    <mat-label >Ingrese aqui el N° de Documento (Ej: 70412550)</mat-label>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-1" style="padding-left: 0%;">
                                     <mat-icon class="icon-input">
@@ -45,12 +62,21 @@
                                 </div>
                                 <div class="col-md-11">
                                     <mat-form-field appearance="outline">
-                                        <mat-label>Ingrese aqui el N° de Documento (Ej: 70412550)</mat-label>
-                                        <input matInput formControlName="numeroDocumento" placeholder="Número de documento" />
+                                        <input matInput formControlName="numeroDocumento" placeholder="" required/>
+                                        <mat-hint style="color: red;" *ngIf="stepOneForm.get('numeroDocumento')?.touched && stepOneForm.get('numeroDocumento')?.hasError('required')">
+                                            Debe escribir su número de documento
+                                        </mat-hint>
                                     </mat-form-field>
                                 </div>
                             </div>
 
+                            <div class="row">
+                                <div class="col-md-1" style="padding-left: 0%;">
+                                </div>
+                                <div class="col-md-11 label-input">
+                                    <mat-label >Ingrese aqui su número de celular (Ej: 991144192)</mat-label>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-1" style="padding-left: 0%;">
                                     <mat-icon class="icon-input">
@@ -59,12 +85,21 @@
                                 </div>
                                 <div class="col-md-11">
                                     <mat-form-field appearance="outline">
-                                        <mat-label>Ingrese aqui su número de celular (Ej: 991144192)</mat-label>
-                                        <input matInput formControlName="numeroCelular" placeholder="Número de celular" />
+                                        <input matInput formControlName="numeroCelular" placeholder="" required/>
+                                        <mat-hint style="color: red;" *ngIf="stepOneForm.get('numeroCelular')?.touched && stepOneForm.get('numeroCelular')?.hasError('required')">
+                                            Debe escribir su número de celular
+                                        </mat-hint>
                                     </mat-form-field>
                                 </div>
                             </div>
 
+                            <div class="row">
+                                <div class="col-md-1" style="padding-left: 0%;">
+                                </div>
+                                <div class="col-md-11 label-input">
+                                    <mat-label >Ingrese la fecha de su nacimiento (dia/mes/año):</mat-label>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-1" style="padding-left: 0%;">
                                     <mat-icon class="icon-input">
@@ -73,17 +108,19 @@
                                 </div>
                                 <div class="col-md-11">
                                     <mat-form-field appearance="outline">
-                                        <mat-label>Ingrese la fecha de su nacimiento (dia/mes/año):</mat-label>
-                                        <input matInput formControlName="fechaNacimiento" placeholder="Fecha de nacimiento" [matDatepicker]="picker">
+                                        <input matInput formControlName="fechaNacimiento" placeholder="Fecha de nacimiento (dia/mes/año)" [matDatepicker]="picker" required>
                                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                        <mat-datepicker #picker></mat-datepicker>
+                                        <mat-datepicker #picker startView="multi-year" [startAt]="startDate"></mat-datepicker>
+                                        <mat-hint style="color: red;" *ngIf="stepOneForm.get('fechaNacimiento')?.touched && stepOneForm.get('fechaNacimiento')?.hasError('required')">
+                                            Debe escribir o seleccionar su fecha de nacimiento
+                                        </mat-hint>
                                     </mat-form-field>
                                 </div>
                             </div>
 
                         </form>
                         <div class="center">
-                            <button mat-raised-button color="primary" (click)="nextStep(0)">Siguiente</button>   
+                            <button mat-raised-button color="primary" (click)="nextStep(0)" matStepperNext>Siguiente</button>   
                         </div>
                     </mat-step>
             
@@ -92,7 +129,13 @@
                         <ng-template matStepLabel>Paso 2: Síntomas y especialidad</ng-template>
                         <form [formGroup]="stepTwoForm">
                             <br>
-
+                            <div class="row">
+                                <div class="col-md-1" style="padding-left: 0%;">
+                                </div>
+                                <div class="col-md-11 label-input">
+                                    <mat-label >Seleccione la especialidad:</mat-label>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-1" style="padding-left: 0%;">
                                     <mat-icon class="icon-input">
@@ -101,15 +144,32 @@
                                 </div>
                                 <div class="col-md-11">
                                     <mat-form-field appearance="outline">
-                                        <mat-label>Seleccione la especialidad</mat-label>
+                                        <input matInput 
+                                        placeholder="Escribe la especialidad" 
+                                        [formControl]="myControl"
+                                        [matAutocomplete]="auto"
+                                        required>
+                                        <!--
                                         <mat-select formControlName="especialidad">
                                         <mat-option value="Cardiología">Cardiología</mat-option>
                                         <mat-option value="Dermatología">Dermatología</mat-option>
-                                        </mat-select>
+                                        </mat-select>-->
+                                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                                {{ option }}
+                                              </mat-option>
+                                          </mat-autocomplete>
                                     </mat-form-field>
                                 </div>
                             </div>
 
+                            <div class="row">
+                                <div class="col-md-1" style="padding-left: 0%;">
+                                </div>
+                                <div class="col-md-11 label-input">
+                                    <mat-label>Ingrese algun mensaje u observacion de sus sintomas:</mat-label>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-1" style="padding-left: 0%;">
                                     <mat-icon class="icon-input">
@@ -118,15 +178,13 @@
                                 </div>
                                 <div class="col-md-11">
                                     <mat-form-field appearance="outline">
-                                        <mat-label>Ingrese algun mensaje u observacion de sus sintomas</mat-label>
                                         <textarea matNativeControl formControlName="sintomas" placeholder="Síntomas"></textarea>
                                     </mat-form-field>
                                 </div>
                             </div>
                         </form>
                         <div>
-                        <button mat-raised-button color="primary" (click)="nextStep(1)">Siguiente</button>
-                        <button mat-raised-button class="button-basic" (click)="prevStep(1)">Atrás</button>
+                        <button mat-raised-button color="primary" (click)="nextStep(1)" matStepperNext>Siguiente</button>
                         </div>
                     </mat-step>
             
@@ -135,7 +193,13 @@
                         <ng-template matStepLabel>Paso 3: Fecha de cita</ng-template>
                         <form [formGroup]="stepThreeForm">
                             <br>
-
+                            <div class="row">
+                                <div class="col-md-1" style="padding-left: 0%;">
+                                </div>
+                                <div class="col-md-11 label-input">
+                                    <mat-label>Selecciona la fecha de su cita (dia/mes/año):</mat-label>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-1" style="padding-left: 0%;">
                                     <mat-icon class="icon-input">
@@ -144,21 +208,49 @@
                                 </div>
                                 <div class="col-md-11">
                                     <mat-form-field appearance="outline">
-                                        <mat-label>Selecciones la fecha de su cita (dia/mes/año):</mat-label>
-                                        <input matInput formControlName="fechaCita" placeholder="Fecha de cita" [matDatepicker]="picker">
-                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                        <mat-datepicker #picker></mat-datepicker>
+                                        <input matInput formControlName="fechaCita" placeholder="Fecha de cita" [matDatepicker]="pickerCita"
+                                        [min]="ahora" (dateChange)="onSelect($event)" >
+                                        <mat-datepicker-toggle matSuffix [for]="pickerCita"></mat-datepicker-toggle>
+                                        <mat-datepicker #pickerCita ></mat-datepicker>
+                                        <mat-hint style="color: red;" *ngIf="stepOneForm.get('fechaCita')?.touched && stepOneForm.get('fechaCita')?.hasError('required')">
+                                            Debe escribir o seleccionar su fecha de nacimiento
+                                        </mat-hint>
                                     </mat-form-field>
                                 </div>
                             </div>
-
+                            <div *ngIf="selectedDate">
+                                <div class="row">
+                                    <div class="col-md-1" style="padding-left: 0%;align-items: center; display:flex">
+                                        <mat-icon class="icon-input">
+                                            schedule
+                                        </mat-icon>
+                                    </div>
+                                    <div class="col-md-11 label-input" style="align-items: center; display:flex">
+                                        <mat-label>Elige tu hora:</mat-label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-1" style="padding-left: 0%;"></div>
+                                    <div class="col-md-11">
+                                        <div class="time-buttons">
+                                            <button mat-stroked-button color="primary" 
+                                            *ngFor="let hour of availableHours" 
+                                            (click)="selectHour(hour)" 
+                                            [disabled]="isHourDisabled(hour)"
+                                            class="button-hour">
+                                                {{ hour }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
                         <div>
                         <button mat-button (click)="prevStep(2)">Atrás</button>
                         <button mat-button (click)="submitForm()">Enviar</button>
                         </div>
                     </mat-step>
-                </mat-horizontal-stepper>
+                </mat-stepper>
               </mat-card-content>
             </mat-card>
           </div>

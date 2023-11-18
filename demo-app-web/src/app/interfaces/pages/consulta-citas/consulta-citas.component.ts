@@ -1,222 +1,162 @@
-import { Component, ViewChild, TemplateRef } from '@angular/core';
 import {
-  startOfDay,
-  endOfDay,
-  subDays,
-  addDays,
-  endOfMonth,
-  isSameDay,
-  isSameMonth,
-  addHours,
-} from 'date-fns';
-import { Subject } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+  Component,
+  ViewChild,
+  TemplateRef,
+  signal,
+  Signal,
+  ChangeDetectorRef,
+} from '@angular/core';
 import {
-  CalendarEvent,
-  CalendarEventAction,
-  CalendarEventTimesChangedEvent,
-  CalendarView,
-} from 'angular-calendar';
-import { EventColor } from 'calendar-utils';
-import { CalendarOptions } from '@fullcalendar/core'; // useful for typechecking
+  CalendarOptions,
+  DateSelectArg,
+  EventClickArg,
+  EventApi,
+  EventInput,
+  DateInput,
+} from '@fullcalendar/core'; // useful for typechecking
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import esLocale from '@fullcalendar/core/locales/es';
-/*const colors: Record<string, EventColor> = {
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3',
-  },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF',
-  },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA',
-  },
-};*/
+import { INITIAL_EVENTS, createEventId } from '../../utils/cita-utils';
+import { DatePipe } from '@angular/common';
+
 @Component({
   selector: 'app-consulta-citas',
   templateUrl: './consulta-citas.component.html',
   styleUrls: ['./consulta-citas.component.css'],
-  /*changeDetection: ChangeDetectionStrategy.OnPush,
-  styles: [
-    `
-      h3 {
-        margin: 0 0 10px;
-      }
-
-      pre {
-        background-color: #f5f5f5;
-        padding: 15px;
-      }
-    `,
-  ],*/
 })
 export class ConsultaCitasComponent {
-  calendarOptions: CalendarOptions = {
+  calendarVisible = signal(true);
+
+  calendarOptions = signal<CalendarOptions>({
     initialView: 'dayGridMonth',
     themeSystem: 'bootstrap5',
     plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
     locale: esLocale,
-    dateClick: this.handleDateClick.bind(this), // MUST ensure `this` context is maintained
+    //dateClick: this.handleDateClick.bind(this), // MUST ensure `this` context is maintained
     headerToolbar: {
-      left: 'prev,next',
+      left: 'prev,next today',
       center: 'title',
       right: 'dayGridMonth,timeGridWeek,timeGridDay',
     },
-    events: [
-      { title: 'event 1', date: '2023-11-01' },
-      { title: 'event 2', date: '2023-11-02' },
-    ],
-  };
-  handleDateClick(arg: any) {
-    console.log('date click! ' + arg.dateStr);
+    // events: [
+    //   { title: 'event 1', date: '2023-11-01' },
+    //   { title: 'event 2', date: '2023-11-01' },
+    // ],
+    initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
+    eventColor: '#D50000',
+    weekends: true,
+    editable: false,
+    selectable: true,
+    selectMirror: false,
+    dayMaxEvents: false,
+    select: this.handleDateSelect.bind(this),
+    eventClick: this.handleEventClick.bind(this),
+    eventsSet: this.handleEvents.bind(this),
+  });
+  selectedDate: Date | null = null; // Almacena la fecha seleccionada
+  selectedAppointments: EventInput[] = []; // Almacena las citas seleccionadas
+  //currentEvents: Signal<EventApi[]> = signal([]);
+  // handleDateClick(arg: any) {
+  //   console.log('date click! ' + arg.dateStr);
+  // }
+  constructor(
+    private changeDetector: ChangeDetectorRef,
+    private datePipe: DatePipe
+  ) {}
+  ngOnInit() {
+    this.loadDailyAppointments();
   }
-  /*
-  @ViewChild('modalContent', { static: true }) modalContent!: TemplateRef<any>;
+  loadDailyAppointments() {
+    // // Obtén eventos de hoy y actuliza currentEvents
+    const dailyAppointments = this.getDailyAppointments(new Date());
+    // this.currentEvents.update(() => dailyAppointments);
+    //this.calendarOptions.set({ events: dailyAppointments });
+    const hoy = new Date();
+    console.log(hoy);
+    this.selectedDate = hoy;
+    this.selectedAppointments = this.getDailyAppointments(hoy);
+  }
+  handleCalendarToggle() {
+    this.calendarVisible.update((bool) => !bool);
+  }
 
-  view: CalendarView = CalendarView.Month;
+  handleWeekendsToggle() {
+    this.calendarOptions.mutate((options) => {
+      options.weekends = !options.weekends;
+    });
+  }
 
-  CalendarView = CalendarView;
+  handleDateSelect(selectInfo: DateSelectArg) {
+    //const title = prompt('Please enter a new title for your event');
+    const calendarApi = selectInfo.view.calendar;
+    this.selectedDate = selectInfo.start;
+    console.log(this.selectedDate);
 
-  viewDate: Date = new Date();
+    this.selectedAppointments = this.getDailyAppointments(this.selectedDate);
+    console.log(this.selectedAppointments);
+    calendarApi.unselect(); // clear date selection
 
-  modalData: {
-    action: string;
-    event: CalendarEvent;
-  } = { action: '', event: {} as CalendarEvent<any> };
+    // if (title) {
+    //   calendarApi.addEvent({
+    //     id: createEventId(),
+    //     title,
+    //     start: selectInfo.startStr,
+    //     end: selectInfo.endStr,
+    //     allDay: selectInfo.allDay,
+    //   });
+    // }
+  }
 
-  actions: CalendarEventAction[] = [
-    {
-      label: '<i class="fas fa-fw fa-pencil-alt"></i>',
-      a11yLabel: 'Edit',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
-      },
-    },
-    {
-      label: '<i class="fas fa-fw fa-trash-alt"></i>',
-      a11yLabel: 'Delete',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events = this.events.filter((iEvent) => iEvent !== event);
-        this.handleEvent('Deleted', event);
-      },
-    },
-  ];
-
-  refresh = new Subject<void>();
-
-  events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: { ...colors['red'] },
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: { ...colors['yellow'] },
-      actions: this.actions,
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: { ...colors['blue'] },
-      allDay: true,
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: addHours(new Date(), 2),
-      title: 'A draggable and resizable event',
-      color: { ...colors['yellow'] },
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-  ];
-
-  activeDayIsOpen: boolean = true;
-
-  constructor(private modal: NgbModal) {}
-
-  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-    if (isSameMonth(date, this.viewDate)) {
-      if (
-        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-        events.length === 0
-      ) {
-        this.activeDayIsOpen = false;
-      } else {
-        this.activeDayIsOpen = true;
-      }
-      this.viewDate = date;
+  handleEventClick(clickInfo: EventClickArg) {
+    if (
+      confirm(
+        `Are you sure you want to delete the event '${clickInfo.event.title}'`
+      )
+    ) {
+      clickInfo.event.remove();
     }
   }
 
-  eventTimesChanged({
-    event,
-    newStart,
-    newEnd,
-  }: CalendarEventTimesChangedEvent): void {
-    this.events = this.events.map((iEvent) => {
-      if (iEvent === event) {
-        return {
-          ...event,
-          start: newStart,
-          end: newEnd,
-        };
+  handleEvents(events: EventApi[]) {
+    //this.currentEvents.set(events);
+    this.changeDetector.detectChanges(); // workaround for pressionChangedAfterItHasBeenCheckedError
+  }
+
+  getDailyAppointments(date: Date): EventInput[] {
+    const dateStr = date.toISOString().split('T')[0];
+    return INITIAL_EVENTS.filter((event) => {
+      let eventStart: Date | undefined;
+
+      if (typeof event.start === 'string') {
+        eventStart = new Date(event.start);
+      } else if (typeof event.start === 'number') {
+        eventStart = new Date(event.start);
+      } else if (event.start instanceof Date) {
+        eventStart = event.start;
       }
-      return iEvent;
+
+      return (
+        eventStart &&
+        this.datePipe.transform(eventStart, 'yyyy-MM-dd') === dateStr
+      );
     });
-    this.handleEvent('Dropped or resized', event);
   }
+  formatDate(date: DateInput | undefined): string {
+    if (!date) {
+      return ''; // Otra cadena predeterminada o manejo de caso nulo
+    }
 
-  handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });
+    // Convierte 'date' a una cadena si no lo es
+    const dateString = typeof date === 'string' ? date : date.toString();
+
+    const parsedDate = new Date(dateString);
+
+    if (isNaN(parsedDate.getTime())) {
+      return ''; // Manejo del caso en que 'date' no es una fecha válida
+    }
+
+    return this.datePipe.transform(parsedDate, 'hh:mm a') || '';
   }
-
-  addEvent(): void {
-    this.events = [
-      ...this.events,
-      {
-        title: 'New event',
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
-        color: colors['red'],
-        draggable: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true,
-        },
-      },
-    ];
-  }
-
-  deleteEvent(eventToDelete: CalendarEvent) {
-    this.events = this.events.filter((event) => event !== eventToDelete);
-  }
-
-  setView(view: CalendarView) {
-    this.view = view;
-  }
-
-  closeOpenMonthViewDay() {
-    this.activeDayIsOpen = false;
-  }*/
 }
