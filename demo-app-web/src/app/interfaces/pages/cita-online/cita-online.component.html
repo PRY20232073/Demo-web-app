@@ -4,14 +4,14 @@
 <div class="container">
     <div class="side-by-side">
         <div class="left-half">
-            <img src="../../../../assets/Group 34.svg" alt="Imagen" />
+            <img src="../../../../assets/Doctors-bro.svg" alt="Imagen" />
           </div>
           <div class="right-half">
             <mat-card>
               <mat-card-content>
-                <mat-stepper linear labelPosition="bottom" [linear]="false" #stepper>
+                <mat-stepper linear labelPosition="bottom" #stepper>
                  <!-- Paso 1: Datos personales -->
-                    <mat-step [stepControl]="stepOneForm"> 
+                    <mat-step [stepControl]="stepOneForm" [editable]="true"> 
                         
                         <ng-template matStepperIcon="edit">
                             <mat-icon>check</mat-icon>
@@ -29,9 +29,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-1" style="padding-left: 0%;">
-                                    <mat-icon class="icon-input">
-                                        description
-                                    </mat-icon>
+                                    <img src="../../../../assets/business-cards.png" alt="Imagen" class="imagen-input"/>
+
                                 </div>
                                 <div class="col-md-11">
                                     <mat-form-field appearance="outline">
@@ -56,9 +55,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-1" style="padding-left: 0%;">
-                                    <mat-icon class="icon-input">
-                                        person_search
-                                    </mat-icon>
+                                    <img src="../../../../assets/licencia-de-conducir.png" alt="Imagen" class="imagen-input"/>
+
                                 </div>
                                 <div class="col-md-11">
                                     <mat-form-field appearance="outline">
@@ -122,10 +120,12 @@
                         <div class="center">
                             <button mat-raised-button color="primary" (click)="nextStep(0)" matStepperNext>Siguiente</button>   
                         </div>
-                    </mat-step>
-            
+                    </mat-step >
                     <!-- Paso 2: Síntomas y especialidad -->
-                    <mat-step>
+                    <mat-step [stepControl]="stepTwoForm" [editable]="true">
+                        <ng-template matStepperIcon="edit">
+                            <mat-icon>check</mat-icon>
+                        </ng-template>
                         <ng-template matStepLabel>Paso 2: Síntomas y especialidad</ng-template>
                         <form [formGroup]="stepTwoForm">
                             <br>
@@ -133,7 +133,7 @@
                                 <div class="col-md-1" style="padding-left: 0%;">
                                 </div>
                                 <div class="col-md-11 label-input">
-                                    <mat-label >Seleccione la especialidad:</mat-label>
+                                    <mat-label >Escribe la especialidad:</mat-label>
                                 </div>
                             </div>
                             <div class="row">
@@ -146,7 +146,7 @@
                                     <mat-form-field appearance="outline">
                                         <input matInput 
                                         placeholder="Escribe la especialidad" 
-                                        [formControl]="myControl"
+                                        formControlName="especialidad" 
                                         [matAutocomplete]="auto"
                                         required>
                                         <!--
@@ -159,6 +159,9 @@
                                                 {{ option }}
                                               </mat-option>
                                           </mat-autocomplete>
+                                        <mat-hint style="color: red;" *ngIf="stepTwoForm.get('especialidad')?.touched && stepTwoForm.get('especialidad')?.hasError('required')">
+                                            Debe escribir o seleccionar la especialidad
+                                        </mat-hint>
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -178,18 +181,27 @@
                                 </div>
                                 <div class="col-md-11">
                                     <mat-form-field appearance="outline">
-                                        <textarea matNativeControl formControlName="sintomas" placeholder="Síntomas"></textarea>
+                                        <input matNativeControl 
+                                        formControlName="sintomas" 
+                                        placeholder="Síntomas" required>
+                                    <!-- </input> -->
+                                        <mat-hint style="color: red;" *ngIf="stepTwoForm.get('sintomas')?.touched && stepTwoForm.get('sintomas')?.hasError('required')">
+                                            Escriba sus sintomas
+                                        </mat-hint>
                                     </mat-form-field>
                                 </div>
                             </div>
                         </form>
                         <div>
-                        <button mat-raised-button color="primary" (click)="nextStep(1)" matStepperNext>Siguiente</button>
+                        <button mat-button matStepperPrevious>Atrás</button>
+
+                        <!-- <button mat-raised-button color="primary" (click)="nextStep(1)" matStepperNext>Siguiente</button> -->
+                        <button mat-raised-button color="primary" (click)="nextStep(1)"  matStepperNext>Siguiente</button>   
+
                         </div>
                     </mat-step>
-            
                     <!-- Paso 3: Fecha de cita -->
-                    <mat-step>
+                    <mat-step [stepControl]="stepThreeForm" [editable]="true">
                         <ng-template matStepLabel>Paso 3: Fecha de cita</ng-template>
                         <form [formGroup]="stepThreeForm">
                             <br>
@@ -212,8 +224,8 @@
                                         [min]="ahora" (dateChange)="onSelect($event)" >
                                         <mat-datepicker-toggle matSuffix [for]="pickerCita"></mat-datepicker-toggle>
                                         <mat-datepicker #pickerCita ></mat-datepicker>
-                                        <mat-hint style="color: red;" *ngIf="stepOneForm.get('fechaCita')?.touched && stepOneForm.get('fechaCita')?.hasError('required')">
-                                            Debe escribir o seleccionar su fecha de nacimiento
+                                        <mat-hint style="color: red;" *ngIf="stepThreeForm.get('fechaCita')?.touched && stepThreeForm.get('fechaCita')?.hasError('required')">
+                                            Debe escribir o seleccionar su fecha de cita
                                         </mat-hint>
                                     </mat-form-field>
                                 </div>
@@ -245,9 +257,10 @@
                                 </div>
                             </div>
                         </form>
+                        <br>
                         <div>
-                        <button mat-button (click)="prevStep(2)">Atrás</button>
-                        <button mat-button (click)="submitForm()">Enviar</button>
+                            <button mat-button matStepperPrevious>Atrás</button>
+                            <button mat-raised-button color="primary" (click)="submitForm()">Enviar</button>
                         </div>
                     </mat-step>
                 </mat-stepper>

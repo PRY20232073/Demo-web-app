@@ -1,9 +1,9 @@
 <h1 class="text-center">Tus Citas</h1>
-<br>
+<mat-divider></mat-divider>
 <div class="side-by-sides">
   <div class="left-half">
     <div class="citas">
-      <h2>Tus citas programas para hoy:</h2>
+      <h2>Tus citas programadas:</h2>
       <div *ngIf="selectedDate && selectedAppointments.length > 0">
         <h3>Citas para el {{ selectedDate | date: 'dd/MM/yyyy' }}</h3>
         <div *ngFor="let appointment of selectedAppointments">

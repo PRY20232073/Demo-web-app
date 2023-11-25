@@ -21,7 +21,7 @@ export class CitaOnlineComponent {
   ];
   startDate = new Date(2005, 1, 1);
   tipoDocumentocontrol = new FormControl(this.tipoDocumento[0].value);
-  myControl = new FormControl('');
+  especialidad = new FormControl('');
   options: string[] = [
     'Cardiología',
     'Dermatologíawo',
@@ -40,13 +40,21 @@ export class CitaOnlineComponent {
 
   stepTwoForm = this.fb.group({
     especialidad: ['', Validators.required],
-    sintomas: [''],
+    sintomas: ['', Validators.required],
   });
 
   stepThreeForm = this.fb.group({
     fechaCita: ['', Validators.required],
   });
-  constructor(private fb: FormBuilder) {}
+
+  firstFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+  });
+  secondFormGroup = this._formBuilder.group({
+    secondCtrl: ['', Validators.required],
+  });
+
+  constructor(private fb: FormBuilder, private _formBuilder: FormBuilder) {}
   selectedDate: any;
   name = 'Angular 6';
   availableHours: string[] = [];
@@ -89,7 +97,7 @@ export class CitaOnlineComponent {
     return false;
   }
   ngOnInit() {
-    this.filteredOptions = this.myControl.valueChanges.pipe(
+    this.filteredOptions = this.especialidad.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value || ''))
     );
@@ -134,6 +142,7 @@ export class CitaOnlineComponent {
   }
 
   submitForm() {
+    this.markFormGroupTouched(this.stepThreeForm);
     // Método para enviar el formulario una vez que se completen todos los pasos
     if (this.stepThreeForm.valid) {
       // Realiza acciones necesarias para enviar el formulario

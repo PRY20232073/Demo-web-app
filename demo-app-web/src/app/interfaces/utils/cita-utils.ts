@@ -7,7 +7,8 @@ export const INITIAL_EVENTS: any[] = [
   {
     id: createEventId(),
     title: 'Cita Oftalmologia',
-    start: TODAY_STR,
+    start: '2023-11-06' + 'T09:00:00',
+    end: '2023-11-06' + 'T12:00:00',
     doctor: 'Dr. Esteban',
   },
   {
