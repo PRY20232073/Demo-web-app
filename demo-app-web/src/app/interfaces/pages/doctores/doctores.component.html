@@ -1,0 +1,40 @@
+<h1 class="text-center">Doctores</h1>
+<mat-divider></mat-divider>
+<br>
+<div class="row align-items-center justify-content-end buscador">
+  <div style="flex: 0 0 70%;">
+
+    <!--<input matInput [(ngModel)]="filtro" placeholder="Buscar especialidades" />-->
+
+  </div>
+  <div class="card-header" style="flex: 0 0 30%;">
+    <mat-form-field appearance="outline" class="input-buscador">
+      <input matInput [(ngModel)]="filtro" placeholder="Buscar doctores" />
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="filtrarEspecialidades()" class="btn-buscador" >
+      <mat-icon >search</mat-icon> Buscar
+    </button>
+  </div>
+</div>
+<div class="cards-especialidades">
+    <div fxLayout="row " fxLayout.lt-md="column"  class="responsive-grid">
+      <mat-card *ngFor="let especialidad of especialidades" class="especialidad-card">
+        <mat-card-header>
+            <mat-card-title>
+                {{ especialidad.nombre_doctor }}
+            </mat-card-title>
+            <mat-card-subtitle>
+                {{ especialidad.especialidad }}
+            </mat-card-subtitle>
+
+        </mat-card-header>
+        <img mat-card-image [src]="especialidad.imagen" alt="{{ especialidad.nombre_doctor }}" />
+        <br>
+        <mat-card-content style="flex-grow: 1;">
+          <p>{{ especialidad.experiencia }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>

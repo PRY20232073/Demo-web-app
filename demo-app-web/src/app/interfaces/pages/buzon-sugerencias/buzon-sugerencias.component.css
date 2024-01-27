@@ -1,7 +1,7 @@
 .contact-form {
     display: flex;
     flex-direction: column;
-    max-width: 400px;
+    max-width: 800px;
     margin: 0 auto;
     margin-top: 50px;
   }
@@ -10,3 +10,17 @@
     width: 100%;
     margin-bottom: 16px;
   }
+
+/*  ::ng-deep .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mdc-notched-outline--upgraded .mdc-floating-label--float-above{
+    color: #5500d5 !important;
+    font-size: 20px !important;
+  }
+  .mat-mdc-form-field {
+    --mat-mdc-form-field-floating-label-scale: 1;
+}
+.mdc-floating-label {
+  will-change: auto;
+}*/
+::ng-deep .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mdc-notched-outline--upgraded .mdc-floating-label--float-above {
+  --mat-mdc-form-field-label-transform: translateY( -40.75px) scale(var(--mat-mdc-form-field-floating-label-scale, 1)) !important;
+}

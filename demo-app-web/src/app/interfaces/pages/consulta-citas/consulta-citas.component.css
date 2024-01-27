@@ -1,20 +1,35 @@
-@import '../../../../../node_modules/angular-calendar/css/angular-calendar.css'; 
-.container {
-    display: flex;
-    align-items: stretch;
-  }
-  
-  .calendar {
-    flex: 2;
-    padding: 16px;
-  }
-  
-  .doctor-info {
-    flex: 1;
-    padding: 16px;
-  }
-  
-  .mat-card {
-    width: 100%;
-    text-align: center;
-  }
+/*@import '../../../../../node_modules/angular-calendar/css/angular-calendar.css'; */
+
+.fc-daygrid-day-number{
+  color: black !important;
+  font-size: large !important;
+}
+.side-by-sides {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.left-half {
+  flex: 0.6;
+  padding: 16px;
+  /*text-align: center; /* Centra el contenido horizontalmente */
+
+}
+
+.right-half {
+  flex: 1;
+  padding: 16px;
+  text-align: center; /* Centra el contenido horizontalmente */
+}
+.calendar{
+  max-height: 71vh !important;
+}
+.fc-event-start {
+
+  background-color: #D50000 !important;
+  color: white !important;
+
+}
+.card-events{
+  margin-bottom: 5px;
+}

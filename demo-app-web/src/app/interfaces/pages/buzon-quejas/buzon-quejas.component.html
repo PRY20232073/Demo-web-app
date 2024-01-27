@@ -1,40 +1,162 @@
-<form class="contact-form">
-    <mat-form-field appearance="outline">
-      <mat-label>Tipo de Documento</mat-label>
-      <mat-select>
-        <mat-option value="dni">DNI</mat-option>
-        <mat-option value="pasaporte">Pasaporte</mat-option>
-        <!-- Agrega más opciones si es necesario -->
-      </mat-select>
-    </mat-form-field>
-  
-    <mat-form-field appearance="outline">
-      <input matInput placeholder="Número de Documento" />
-    </mat-form-field>
-  
-    <mat-form-field appearance="outline">
-      <input matInput type="email" placeholder="Correo Electrónico" />
-    </mat-form-field>
+<h1 class="text-center">Buzon de quejas</h1>
+<mat-divider></mat-divider>
 
-    <mat-form-field appearance="outline">
-        <mat-label>Fecha de Queja</mat-label>
-        <input matInput type="date" placeholder="Fecha de Queja" />
+<form class="contact-form" [formGroup]="quejas">
+<div class="row">
+  <div class="col-md-1" style="padding-left: 0%;">
+  </div>
+  <div class="col-md-11 label-input">
+      <mat-label >Seleccione el tipo de documento:</mat-label>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-1" style="padding-left: 0%;">
+    <img src="../../../../assets/business-cards.png" alt="Imagen" class="imagen-input"/>
+
+  </div>
+  <div class="col-md-11">
+      <mat-form-field appearance="outline">
+          <mat-select formControlName="tipoDocumento" 
+          placeholder="Seleccione el tipo de documento"
+          value="DNI" required>
+          <mat-option value="DNI">DNI</mat-option>
+          <mat-option value="Pasaporte">Pasaporte</mat-option>
+          <!-- Agrega más opciones según tus necesidades -->
+          </mat-select>
+          <mat-hint style="color: red;" *ngIf="quejas.get('tipoDocumento')?.touched && quejas.get('tipoDocumento')?.hasError('required')">
+            Debe seleccionar el tipo de documento
+        </mat-hint>
       </mat-form-field>
+  </div>
+</div>
+
+  
     
-  
-    <mat-form-field appearance="outline">
-      <mat-label>Comentario</mat-label>
-      <textarea matInput rows="5"></textarea>
-    </mat-form-field>
+<div class="row">
+  <div class="col-md-1" style="padding-left: 0%;">
+  </div>
+  <div class="col-md-11 label-input">
+      <mat-label >Ingrese aqui el N° de Documento (Ej: 70412550):</mat-label>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-1" style="padding-left: 0%;">
+    <img src="../../../../assets/licencia-de-conducir.png" alt="Imagen" class="imagen-input"/>
 
-    <mat-form-field appearance="outline">
-        <mat-label>Tipo de Queja</mat-label>
-        <mat-select>
-          <mat-option value="dni">Atencion al Cliente</mat-option>
-          <mat-option value="pasaporte">Diseño de la web</mat-option>
-          <!-- Agrega más opciones si es necesario -->
-        </mat-select>
+  </div>
+  <div class="col-md-11">
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="numeroDocumento" placeholder="" required/>
+        <mat-hint style="color: red;" *ngIf="quejas.get('numeroDocumento')?.touched && quejas.get('numeroDocumento')?.hasError('required')">
+            Debe escribir su número de documento
+        </mat-hint>
       </mat-form-field>
+  </div>
+</div>
 
-    <button mat-raised-button color="primary">Enviar</button>
+<div class="row">
+  <div class="col-md-1" style="padding-left: 0%;">
+  </div>
+  <div class="col-md-11 label-input">
+      <mat-label >Ingrese aqui su correo electronico (Ej: jperez&#64;gmail.com):</mat-label>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-1" style="padding-left: 0%;">
+    <mat-icon class="icon-input" >
+      mail
+    </mat-icon>
+  </div>
+  <div class="col-md-11">
+    <mat-form-field appearance="outline">
+      <input matInput type="email" placeholder=""  formControlName="correoElectronico"  />
+      <mat-hint style="color: red;" *ngIf="quejas.get('correoElectronico')?.touched && quejas.get('correoElectronico')?.hasError('required')">
+        Debe escribir su correo electronico.
+    </mat-hint>
+    </mat-form-field>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-1" style="padding-left: 0%;">
+  </div>
+  <div class="col-md-11 label-input">
+      <mat-label >Ingrese la fecha de su queja (dia/mes/año):</mat-label>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-1" style="padding-left: 0%;">
+      <mat-icon class="icon-input">
+          calendar_month
+      </mat-icon>
+  </div>
+  <div class="col-md-11">
+      <mat-form-field appearance="outline">
+          <input matInput formControlName="fechaQueja" placeholder="Fecha de queja (dia/mes/año)" [matDatepicker]="picker" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker ></mat-datepicker>
+          <mat-hint style="color: red;" *ngIf="quejas.get('fechaQueja')?.touched && quejas.get('fechaQueja')?.hasError('required')">
+              Debe escribir o seleccionar la fecha de su queja
+          </mat-hint>
+      </mat-form-field>
+  </div>
+</div>
+
+  
+<div class="row">
+  <div class="col-md-1" style="padding-left: 0%;">
+  </div>
+  <div class="col-md-11 label-input">
+    <mat-label>Escriba aqui la queja que quiera transmitirnos</mat-label>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-1" style="padding-left: 0%;">
+    <mat-icon class="icon-input" style="padding-left: 0%;">
+      comment
+    </mat-icon>
+  </div>
+  <div class="col-md-11">
+    <mat-form-field appearance="outline">
+      <textarea matInput rows="5" formControlName="comentario"></textarea>
+      <mat-hint style="color: red;" *ngIf="quejas.get('comentario')?.touched && quejas.get('comentario')?.hasError('required')">
+        Debe escribir la queja que quiere transmitirnos
+      </mat-hint>
+    </mat-form-field>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-1" style="padding-left: 0%;">
+  </div>
+  <div class="col-md-11 label-input">
+      <mat-label >Seleccione el tipo de queja:</mat-label>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-1" style="padding-left: 0%;">
+      <mat-icon class="icon-input">
+        report
+      </mat-icon>
+  </div>
+  <div class="col-md-11">
+      <mat-form-field appearance="outline">
+          <mat-select formControlName="tipoQueja" 
+          placeholder="Seleccione el tipo de queja"
+          value="DNI" required>
+          <mat-option value="DNI">Atencion al Cliente</mat-option>
+          <mat-option value="Pasaporte">Diseño de la web</mat-option>
+          <!-- Agrega más opciones según tus necesidades -->
+          </mat-select>
+          <mat-hint style="color: red;" *ngIf="quejas.get('tipoQueja')?.touched && quejas.get('tipoQueja')?.hasError('required')">
+            Debe seleccionar el tipo de queja
+        </mat-hint>
+      </mat-form-field>
+  </div>
+</div>
+
+
   </form>
+<div class="text-center">
+  <button mat-raised-button color="primary" class="btnEnviar" (click)="submitForm()">Enviar</button>
+</div>

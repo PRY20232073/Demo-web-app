@@ -1,4 +1,10 @@
 import { Component } from '@angular/core';
+import { Especialidad } from '../../models/especialidad.model';
+import { EspecialidadService } from '../../services/especialidad.service';
+import {
+  ESPECIALIDADES,
+  createEventId,
+} from '../../utils/especialidades-utils';
 
 @Component({
   selector: 'app-especialidades',
@@ -6,43 +12,41 @@ import { Component } from '@angular/core';
   styleUrls: ['./especialidades.component.css'],
 })
 export class EspecialidadesComponent {
-  especialidades = [
-    {
-      titulo: 'Especialidad 1',
-      descripcion: 'Descripción de la especialidad 1',
-      imagen: 'url-de-la-imagen-1.jpg',
-    },
-    {
-      titulo: 'Especialidad 2',
-      descripcion: 'Descripción de la especialidad 2',
-      imagen: 'url-de-la-imagen-2.jpg',
-    },
-    // Agrega más especialidades aquí
-  ];
+  especialidades: any[];
 
   filtro: string = '';
+  constructor(private especialidadService: EspecialidadService) {
+    this.especialidades = [];
+  }
 
+  getEspecialidades(): void {
+    // this.especialidadService.getEspecialidad().subscribe((response) => {
+    //   this.especialidades = response;
+    // });
+    this.especialidades = ESPECIALIDADES;
+  }
   // Método para filtrar especialidades
   filtrarEspecialidades() {
     if (this.filtro) {
+      // this.especialidadService.getEspecialidad().subscribe((response) => {
+      //   this.especialidades = response;
+      //   this.especialidades = this.especialidades.filter((especialidad) =>
+      //     especialidad.nombre_especialidad
+      //       .toLowerCase()
+      //       .includes(this.filtro.toLowerCase())
+      //   );
+      // });
+      this.getEspecialidades();
       this.especialidades = this.especialidades.filter((especialidad) =>
-        especialidad.titulo.toLowerCase().includes(this.filtro.toLowerCase())
+        especialidad.nombre_especialidad
+          .toLowerCase()
+          .includes(this.filtro.toLowerCase())
       );
     } else {
-      // Restaurar la lista completa de especialidades si el filtro está vacío
-      this.especialidades = [
-        {
-          titulo: 'Especialidad 1',
-          descripcion: 'Descripción de la especialidad 1',
-          imagen: 'url-de-la-imagen-1.jpg',
-        },
-        {
-          titulo: 'Especialidad 2',
-          descripcion: 'Descripción de la especialidad 2',
-          imagen: 'url-de-la-imagen-2.jpg',
-        },
-        // Agrega más especialidades aquí
-      ];
+      this.getEspecialidades();
     }
+  }
+  ngOnInit(): void {
+    this.getEspecialidades();
   }
 }

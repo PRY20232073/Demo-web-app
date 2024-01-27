@@ -2,3 +2,79 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.button-primary {
+    background-color: #D50000; 
+    color: #FFFFFF; 
+  }
+.button-basic {
+    background-color: #FFFFFF; 
+    color: #D50000 !important; 
+    margin-right: 5px;
+  }
+mat-form-field mat-label,
+mat-form-field mat-select {
+  font-size: 14px !important;
+}
+mat-form-field mat-icon {
+  padding-right:12 !important; padding-top: 0 !important; padding-left: 12 !important;
+  font-size: 34px !important;
+}
+mat-form-field input,
+mat-form-field textarea,
+mat-form-field select {
+  width: 100%;
+  font-size: 14px !important;
+
+}
+
+.icon-input {
+  height: 50px !important ;
+  width: 50px !important;
+  font-size: 50px !important;
+}
+.mat-mdc-form-field{
+  width: 100% !important;
+}
+.mat-mdc-form-field {
+  --mat-mdc-form-field-floating-label-scale: 1 !important;
+}
+.mdc-floating-label {
+will-change: auto;
+}
+::ng-deep .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mdc-notched-outline--upgraded .mdc-floating-label--float-above {
+--mat-mdc-form-field-label-transform: translateY( -50.75px) scale(var(--mat-mdc-form-field-floating-label-scale, 1)) !important;
+}
+.btnEnviar{
+  max-width: 300px;
+  justify-content: center;
+}
+.row{
+  display: flex;
+}
+.col-md-1{
+  flex: 0 0 10%;
+}
+.col-md-11{
+  flex: 0 0 90%;
+}
+.text-center{
+  text-align: center;
+}
+.side-by-side {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.label-input{
+  text-align: left;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+.mat-mdc-form-field-hint-wrapper{
+  padding-left: 0% !important;
+}
+.imagen-input{
+  height: 50px;
+  width: 50px;
+}

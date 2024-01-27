@@ -1,33 +1,154 @@
-<form class="contact-form">
+
+<h1 class="text-center">En Contacto</h1>
+<mat-divider></mat-divider>
+
+<form class="contact-form" [formGroup]="contactenos">
+  <div class="row">
+    <div class="col-md-1" style="padding-left: 0%;">
+    </div>
+    <div class="col-md-11 label-input">
+        <mat-label >Seleccione el tipo de documento:</mat-label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-1" style="padding-left: 0%;">
+      <img src="../../../../assets/business-cards.png" alt="Imagen" class="imagen-input"/>
+
+    </div>
+    <div class="col-md-11">
+        <mat-form-field appearance="outline">
+            <mat-select formControlName="tipoDocumento" 
+            placeholder="Seleccione el tipo de documento"
+            value="DNI" required>
+            <mat-option value="DNI">DNI</mat-option>
+            <mat-option value="Pasaporte">Pasaporte</mat-option>
+            <!-- Agrega más opciones según tus necesidades -->
+            </mat-select>
+            <mat-hint style="color: red;" *ngIf="contactenos.get('tipoDocumento')?.touched && contactenos.get('tipoDocumento')?.hasError('required')">
+              Debe seleccionar el tipo de documento
+          </mat-hint>
+        </mat-form-field>
+    </div>
+</div>
+
+<div class="row">
+  <div class="col-md-1" style="padding-left: 0%;">
+  </div>
+  <div class="col-md-11 label-input">
+      <mat-label >Ingrese aqui el N° de Documento (Ej: 70412550):</mat-label>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-1" style="padding-left: 0%;">
+    <img src="../../../../assets/licencia-de-conducir.png" alt="Imagen" class="imagen-input"/>
+
+  </div>
+  <div class="col-md-11">
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="numeroDocumento" placeholder="" required/>
+        <mat-hint style="color: red;" *ngIf="contactenos.get('numeroDocumento')?.touched && contactenos.get('numeroDocumento')?.hasError('required')">
+            Debe escribir su número de documento
+        </mat-hint>
+      </mat-form-field>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-1" style="padding-left: 0%;">
+  </div>
+  <div class="col-md-11 label-input">
+      <mat-label >Ingrese aqui su número de celular (Ej: 991144192):</mat-label>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-1" style="padding-left: 0%;">
+      <mat-icon class="icon-input">
+          call
+      </mat-icon>
+  </div>
+  <div class="col-md-11">
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="numeroCelular" placeholder="" required/>
+        <mat-hint style="color: red;" *ngIf="contactenos.get('numeroCelular')?.touched && contactenos.get('numeroCelular')?.hasError('required')">
+            Debe escribir su número de celular
+        </mat-hint>
+      </mat-form-field>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-1" style="padding-left: 0%;">
+  </div>
+  <div class="col-md-11 label-input">
+      <mat-label >Ingrese la fecha de su nacimiento (dia/mes/año):</mat-label>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-1" style="padding-left: 0%;">
+      <mat-icon class="icon-input">
+          calendar_month
+      </mat-icon>
+  </div>
+  <div class="col-md-11">
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="fechaNacimiento" placeholder="Fecha de nacimiento (dia/mes/año)" [matDatepicker]="picker" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker startView="multi-year" [startAt]="startDate"></mat-datepicker>
+        <mat-hint style="color: red;" *ngIf="contactenos.get('fechaNacimiento')?.touched && contactenos.get('fechaNacimiento')?.hasError('required')">
+            Debe escribir o seleccionar su fecha de nacimiento
+        </mat-hint>
+      </mat-form-field>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-1" style="padding-left: 0%;">
+  </div>
+  <div class="col-md-11 label-input">
+      <mat-label >Ingrese aqui su correo electronico (Ej: jperez&#64;gmail.com):</mat-label>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-1" style="padding-left: 0%;">
+    <mat-icon class="icon-input" >
+      mail
+    </mat-icon>
+  </div>
+  <div class="col-md-11">
     <mat-form-field appearance="outline">
-      <mat-label>Tipo de Documento</mat-label>
-      <mat-select>
-        <mat-option value="dni">DNI</mat-option>
-        <mat-option value="pasaporte">Pasaporte</mat-option>
-        <!-- Agrega más opciones si es necesario -->
-      </mat-select>
+      <input matInput type="email" placeholder=""  formControlName="correoElectronico"  />
+      <mat-hint style="color: red;" *ngIf="contactenos.get('correoElectronico')?.touched && contactenos.get('correoElectronico')?.hasError('required')">
+        Debe escribir su correo electronico.
+    </mat-hint>
     </mat-form-field>
-  
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-1" style="padding-left: 0%;">
+  </div>
+  <div class="col-md-11 label-input">
+    <mat-label>Escriba aqui el mensaje que quiera transmitirnos</mat-label>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-1" style="padding-left: 0%;">
+    <mat-icon class="icon-input" style="padding-left: 0%;">
+      comment
+    </mat-icon>
+  </div>
+  <div class="col-md-11">
     <mat-form-field appearance="outline">
-      <input matInput placeholder="Número de Documento" />
+      <textarea matInput rows="5" formControlName="comentario"></textarea>
+      <mat-hint style="color: red;" *ngIf="contactenos.get('comentario')?.touched && contactenos.get('comentario')?.hasError('required')">
+        Debe escribir el mensaje que quiere transmitirnos
+      </mat-hint>
     </mat-form-field>
+  </div>
+</div>
+
   
-    <mat-form-field appearance="outline">
-      <input matInput placeholder="Número de Contacto" />
-    </mat-form-field>
-  
-    <mat-form-field appearance="outline">
-      <input matInput type="date" placeholder="Fecha de Nacimiento" />
-    </mat-form-field>
-  
-    <mat-form-field appearance="outline">
-      <input matInput type="email" placeholder="Correo Electrónico" />
-    </mat-form-field>
-  
-    <mat-form-field appearance="outline">
-      <mat-label>Comentario</mat-label>
-      <textarea matInput rows="5"></textarea>
-    </mat-form-field>
-  
-    <button mat-raised-button color="primary">Enviar</button>
   </form>
+  <div class="text-center">
+    <button mat-raised-button color="primary" class="btnEnviar" (click)="submitForm()">Enviar</button>
+  </div>
