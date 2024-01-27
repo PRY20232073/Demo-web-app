@@ -249,6 +249,7 @@
                                             *ngFor="let hour of availableHours" 
                                             (click)="selectHour(hour)" 
                                             [disabled]="isHourDisabled(hour)"
+                                            [class.selected]="isSelectedHour(hour)"
                                             class="button-hour">
                                                 {{ hour }}
                                             </button>

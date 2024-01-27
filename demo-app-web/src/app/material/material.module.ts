@@ -12,6 +12,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [],
@@ -30,6 +32,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatIconModule,
     MatDividerModule,
     MatAutocompleteModule,
+    MatTabsModule,
+    MatToolbarModule,
   ],
   exports: [
     MatStepperModule,
@@ -45,6 +49,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatIconModule,
     MatDividerModule,
     MatAutocompleteModule,
+    MatTabsModule,
+    MatToolbarModule,
   ],
 })
 export class MaterialModule {}

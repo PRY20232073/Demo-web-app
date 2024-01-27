@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { Observable, map, startWith } from 'rxjs';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-cita-online',
   templateUrl: './cita-online.component.html',
@@ -28,7 +28,7 @@ export class CitaOnlineComponent {
     'Obstetricia',
     'Urologia',
   ];
-
+  selectedHour: string | null = null;
   filteredOptions: Observable<string[]> | undefined;
 
   stepOneForm = this.fb.group({
@@ -87,10 +87,19 @@ export class CitaOnlineComponent {
   }
 
   selectHour(hour: string) {
-    // Lógica para manejar la selección de la hora
-    console.log(`Hora seleccionada: ${hour}`);
-  }
+    // Si la hora seleccionada es la misma, deselecciónala
+    if (this.selectedHour === hour) {
+      this.selectedHour = null;
+    } else {
+      // De lo contrario, selecciona la nueva hora
+      this.selectedHour = hour;
+    }
 
+    // Puedes realizar otras acciones según sea necesario
+  }
+  isSelectedHour(hour: string): boolean {
+    return this.selectedHour === hour;
+  }
   isHourDisabled(hour: string): boolean {
     // Puedes agregar lógica aquí para deshabilitar ciertas horas si es necesario
     // Por ejemplo, si ya está reservada, etc.
@@ -144,8 +153,27 @@ export class CitaOnlineComponent {
   submitForm() {
     this.markFormGroupTouched(this.stepThreeForm);
     // Método para enviar el formulario una vez que se completen todos los pasos
-    if (this.stepThreeForm.valid) {
-      // Realiza acciones necesarias para enviar el formulario
+    if (this.selectedHour) {
+      // Verificar si el formulario es válido antes de mostrar el mensaje
+      if (this.stepThreeForm.valid) {
+        // Realiza acciones necesarias para enviar el formulario
+        Swal.fire({
+          title: 'Cita Online',
+          text: 'Su cita fue agendada correctamente',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonText: 'Aceptar',
+        });
+      }
+    } else {
+      // Mostrar un mensaje indicando que se debe seleccionar una hora
+      Swal.fire({
+        title: 'Error',
+        text: 'Por favor, seleccione una hora antes de enviar el formulario',
+        icon: 'error',
+        showCancelButton: false,
+        confirmButtonText: 'Aceptar',
+      });
     }
   }
   private markFormGroupTouched(formGroup: FormGroup) {

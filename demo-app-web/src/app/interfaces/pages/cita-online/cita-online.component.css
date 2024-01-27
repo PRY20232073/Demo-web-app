@@ -37,9 +37,13 @@ mat-form-field {
   margin-top: 5px; 
   font-size: 16px;
   border-style: solid;
-  border-color: gray;
+  border-color: rgb(162, 162, 162);
   border-width: 2px;
 }
-
+.button-hour.selected {
+  background-color: #D50000; /* Color de fondo cuando está seleccionado */
+  color: white; /* Color del texto cuando está seleccionado */
+  border-color: #9b0000; /* Color del borde cuando está seleccionado */
+}
 /* Ajusta el ancho de los campos de texto */
 

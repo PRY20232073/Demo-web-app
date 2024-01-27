@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-contactenos',
@@ -23,4 +29,28 @@ export class ContactenosComponent {
   });
 
   constructor(private fb: FormBuilder) {}
+  private markFormGroupTouched(formGroup: FormGroup) {
+    Object.values(formGroup.controls).forEach((control) => {
+      control.markAsTouched();
+
+      if (control instanceof FormGroup) {
+        this.markFormGroupTouched(control);
+      }
+    });
+  }
+  submitForm() {
+    this.markFormGroupTouched(this.contactenos);
+    if (this.contactenos.valid) {
+      console.log('paso todas las validaciones');
+      Swal.fire({
+        title: 'Buzon de Sugerencia',
+        text: 'Su sugerencia fue registrada correctamente',
+        icon: 'success',
+        showCancelButton: false,
+        confirmButtonText: 'Aceptar',
+      });
+    } else {
+      console.log('no paso todas las validaciones');
+    }
+  }
 }

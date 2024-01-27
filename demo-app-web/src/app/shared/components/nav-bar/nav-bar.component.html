@@ -1,4 +1,4 @@
-<mat-toolbar >
+ <mat-toolbar >
   <img src="../../../../assets/logo_upc_red.png" alt="Imagen" style="scale:0.5;"/>
 
     <button class="button-navbar" mat-button routerLink="crear-cita"><a href="crear-cita">Crear Cita online</a></button>
@@ -9,4 +9,36 @@
     <button class="button-navbar" mat-button routerLink="buzon-sugerencias"><a href="buzon-sugerencias">Buzón de Sugerencias</a></button>
     <button class="button-navbar" mat-button routerLink="buzon-quejas"><a href="buzon-quejas">Buzón de Quejas</a></button>
     <button class="button-navbar" mat-button routerLink="ubicaciones"><a href="ubicaciones">Ubicaciones</a></button>
-</mat-toolbar>
+</mat-toolbar> 
+<!--<nav mat-tab-nav-bar >
+  <img src="../../../../assets/logo_upc_red.png" alt="Imagen" style="scale:0.5;"/>
+
+  <a mat-tab-link 
+     (click)="activeLink = 'crear-cita'"
+      [routerLink]="'crear-cita'"
+     [active]="activeLink == 'crear-cita'"
+     >Crear Cita online</a>
+     <a mat-tab-link 
+     (click)="activeLink = 'consultar-cita'"
+     [routerLink]="'consultar-cita'"
+     [active]="activeLink == 'consultar-cita'"
+     >Consultar cita</a>
+      <a mat-tab-link 
+     (click)="activeLink = 'especialidades'"
+     [active]="activeLink == 'especialidades'">Especialidades</a>
+     <a mat-tab-link 
+     (click)="activeLink = 'en-contacto'"
+     [active]="activeLink == 'en-contacto'">En contacto</a>
+     <a mat-tab-link 
+     (click)="activeLink = 'buzon-sugerencias'"
+     [active]="activeLink == 'buzon-sugerencias'">Buzón de Sugerencias</a>
+     <a mat-tab-link 
+     (click)="activeLink = 'buzon-quejas'"
+     [active]="activeLink == 'buzon-quejas'">Buzón de Quejas</a>
+     <a mat-tab-link 
+     (click)="activeLink = 'ubicaciones'"
+     [active]="activeLink == 'ubicaciones'">Ubicaciones</a> 
+</nav> 
+<div [@routeAnimations]="prepareRoute(outlet)" >
+  <router-outlet #outlet="outlet"></router-outlet>
+</div>-->
