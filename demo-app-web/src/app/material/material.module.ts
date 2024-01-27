@@ -9,6 +9,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -23,6 +29,11 @@ import { MatSelectModule } from '@angular/material/select';
     MatNativeDateModule,
     MatDatepickerModule,
     MatSelectModule,
+    MatIconModule,
+    MatDividerModule,
+    MatAutocompleteModule,
+    MatTabsModule,
+    MatToolbarModule,
   ],
   exports: [
     MatStepperModule,
@@ -35,6 +46,11 @@ import { MatSelectModule } from '@angular/material/select';
     MatNativeDateModule,
     MatDatepickerModule,
     MatSelectModule,
+    MatIconModule,
+    MatDividerModule,
+    MatAutocompleteModule,
+    MatTabsModule,
+    MatToolbarModule,
   ],
 })
 export class MaterialModule {}

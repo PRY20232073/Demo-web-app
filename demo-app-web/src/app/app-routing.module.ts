@@ -8,8 +8,10 @@ import { ContactenosComponent } from './interfaces/pages/contactenos/contactenos
 import { BuzonSugerenciasComponent } from './interfaces/pages/buzon-sugerencias/buzon-sugerencias.component';
 import { BuzonQuejasComponent } from './interfaces/pages/buzon-quejas/buzon-quejas.component';
 import { UbicacionComponent } from './interfaces/pages/ubicacion/ubicacion.component';
+import { DoctoresComponent } from './interfaces/pages/doctores/doctores.component';
 
 const routes: Routes = [
+  { path: '', component: CitaOnlineComponent },
   { path: 'crear-cita', component: CitaOnlineComponent },
   { path: 'consultar-cita', component: ConsultaCitasComponent },
   { path: 'especialidades', component: EspecialidadesComponent },
@@ -18,6 +20,8 @@ const routes: Routes = [
   { path: 'buzon-sugerencias', component: BuzonSugerenciasComponent },
   { path: 'buzon-quejas', component: BuzonQuejasComponent },
   { path: 'ubicaciones', component: UbicacionComponent },
+  { path: 'doctores', component: DoctoresComponent },
+
   // Otras rutas si las tienes
 ];
 

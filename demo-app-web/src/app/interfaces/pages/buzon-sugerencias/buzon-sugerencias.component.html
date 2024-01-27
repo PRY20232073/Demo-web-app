@@ -1,34 +1,123 @@
-<form class="contact-form">
-    <mat-form-field appearance="outline">
-      <mat-label>Tipo de Documento</mat-label>
-      <mat-select>
-        <mat-option value="dni">DNI</mat-option>
-        <mat-option value="pasaporte">Pasaporte</mat-option>
-        <!-- Agrega más opciones si es necesario -->
-      </mat-select>
-    </mat-form-field>
-  
-    <mat-form-field appearance="outline">
-      <input matInput placeholder="Número de Documento" />
-    </mat-form-field>
-  
-    <mat-form-field appearance="outline">
-      <input matInput type="email" placeholder="Correo Electrónico" />
-    </mat-form-field>
-  
-    <mat-form-field appearance="outline">
-      <mat-label>Comentario</mat-label>
-      <textarea matInput rows="5"></textarea>
-    </mat-form-field>
 
+<h1 class="text-center">Buzon de Sugerencias</h1>
+<mat-divider></mat-divider>
+
+<form class="contact-form" [formGroup]="sugerencia">
+  <div class="row">
+    <div class="col-md-1" style="padding-left: 0%;">
+    </div>
+    <div class="col-md-11 label-input">
+        <mat-label >Seleccione el tipo de documento:</mat-label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-1" style="padding-left: 0%;">
+      <img src="../../../../assets/business-cards.png" alt="Imagen" class="imagen-input"/>
+
+    </div>
+    <div class="col-md-11">
+        <mat-form-field appearance="outline">
+            <mat-select formControlName="tipoDocumento" 
+            placeholder="Seleccione el tipo de documento"
+            value="DNI" required>
+            <mat-option value="DNI">DNI</mat-option>
+            <mat-option value="Pasaporte">Pasaporte</mat-option>
+            <!-- Agrega más opciones según tus necesidades -->
+            </mat-select>
+            <mat-hint style="color: red;" *ngIf="sugerencia.get('tipoDocumento')?.touched && sugerencia.get('tipoDocumento')?.hasError('required')">
+              Debe seleccionar el tipo de documento
+          </mat-hint>
+        </mat-form-field>
+    </div>
+</div>
+
+  
+    
+<div class="row">
+  <div class="col-md-1" style="padding-left: 0%;">
+  </div>
+  <div class="col-md-11 label-input">
+      <mat-label >Ingrese aqui el N° de Documento (Ej: 70412550):</mat-label>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-1" style="padding-left: 0%;">
+    <img src="../../../../assets/licencia-de-conducir.png" alt="Imagen" class="imagen-input"/>
+
+  </div>
+  <div class="col-md-11">
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="numeroDocumento" placeholder="" required/>
+        <mat-hint style="color: red;" *ngIf="sugerencia.get('numeroDocumento')?.touched && sugerencia.get('numeroDocumento')?.hasError('required')">
+            Debe escribir su número de documento
+        </mat-hint>
+      </mat-form-field>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-1" style="padding-left: 0%;">
+  </div>
+  <div class="col-md-11 label-input">
+      <mat-label >Ingrese aqui su correo electronico (Ej: jperez&#64;gmail.com):</mat-label>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-1" style="padding-left: 0%;">
+    <mat-icon class="icon-input" >
+      mail
+    </mat-icon>
+  </div>
+  <div class="col-md-11">
     <mat-form-field appearance="outline">
-        <mat-label>Tipo de Sugerencia</mat-label>
+      <input matInput type="email" placeholder=""  formControlName="correoElectronico"  />
+      <mat-hint style="color: red;" *ngIf="sugerencia.get('correoElectronico')?.touched && sugerencia.get('correoElectronico')?.hasError('required')">
+        Debe escribir su correo electronico.
+    </mat-hint>
+    </mat-form-field>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-1" style="padding-left: 0%;">
+  </div>
+  <div class="col-md-11 label-input">
+    <mat-label>Escriba aqui la sugerencia que quiera transmitirnos</mat-label>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-1" style="padding-left: 0%;">
+    <mat-icon class="icon-input" style="padding-left: 0%;">
+      comment
+    </mat-icon>
+  </div>
+  <div class="col-md-11">
+    <mat-form-field appearance="outline">
+      <textarea matInput rows="5" formControlName="comentario"></textarea>
+      <mat-hint style="color: red;" *ngIf="sugerencia.get('comentario')?.touched && sugerencia.get('comentario')?.hasError('required')">
+        Debe escribir la sugerencia que quiere transmitirnos
+      </mat-hint>
+    </mat-form-field>
+  </div>
+</div>
+  
+<!-- <div class="row">
+  <div class="col-md-1">
+    <mat-icon class="icon-input">
+      checklist
+    </mat-icon>
+  </div>
+  <div class="col-md-11">
+    <mat-form-field appearance="outline">
+      <mat-label>Ingrese aqui su sugerencia</mat-label>
         <mat-select>
           <mat-option value="dni">Atencion al Cliente</mat-option>
           <mat-option value="pasaporte">Diseño de la web</mat-option>
-          <!-- Agrega más opciones si es necesario -->
         </mat-select>
-      </mat-form-field>
-
-    <button mat-raised-button color="primary">Enviar</button>
+    </mat-form-field>
+  </div>
+</div> -->
   </form>
+  <div class="text-center">
+    <button mat-raised-button color="primary" class="btnEnviar" (click)="submitForm()">Enviar</button>
+  </div>

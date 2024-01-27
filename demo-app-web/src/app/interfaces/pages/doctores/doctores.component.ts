@@ -1,21 +1,16 @@
 import { Component } from '@angular/core';
-import { Especialidad } from '../../models/especialidad.model';
-import { EspecialidadService } from '../../services/especialidad.service';
-import {
-  ESPECIALIDADES,
-  createEventId,
-} from '../../utils/especialidades-utils';
+import { DOCTORES, createEventId } from '../../utils/doctores-utils';
 
 @Component({
-  selector: 'app-especialidades',
-  templateUrl: './especialidades.component.html',
-  styleUrls: ['./especialidades.component.css'],
+  selector: 'app-doctores',
+  templateUrl: './doctores.component.html',
+  styleUrls: ['./doctores.component.css'],
 })
-export class EspecialidadesComponent {
+export class DoctoresComponent {
   especialidades: any[];
 
   filtro: string = '';
-  constructor(private especialidadService: EspecialidadService) {
+  constructor() {
     this.especialidades = [];
   }
 
@@ -23,7 +18,7 @@ export class EspecialidadesComponent {
     // this.especialidadService.getEspecialidad().subscribe((response) => {
     //   this.especialidades = response;
     // });
-    this.especialidades = ESPECIALIDADES;
+    this.especialidades = DOCTORES;
   }
   // Método para filtrar especialidades
   filtrarEspecialidades() {
