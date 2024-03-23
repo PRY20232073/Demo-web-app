@@ -24,7 +24,7 @@ export class CitaOnlineComponent {
   especialidad = new FormControl('');
   options: string[] = [
     'Cardiología',
-    'Dermatologíawo',
+    'Dermatología',
     'Obstetricia',
     'Urologia',
   ];
