@@ -20,6 +20,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import esLocale from '@fullcalendar/core/locales/es';
 import { INITIAL_EVENTS, createEventId } from '../../utils/cita-utils';
 import { DatePipe } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-consulta-citas',
@@ -28,7 +29,8 @@ import { DatePipe } from '@angular/common';
 })
 export class ConsultaCitasComponent {
   calendarVisible = signal(true);
-
+  @ViewChild('appointmentDetailsModal')
+  appointmentDetailsModal!: TemplateRef<any>; // Referencia al modal
   calendarOptions = signal<CalendarOptions>({
     initialView: 'dayGridMonth',
     themeSystem: 'bootstrap5',
@@ -61,10 +63,20 @@ export class ConsultaCitasComponent {
   // handleDateClick(arg: any) {
   //   console.log('date click! ' + arg.dateStr);
   // }
+  doctor = '';
+  especialidad = '';
+  sintomas = '';
   constructor(
     private changeDetector: ChangeDetectorRef,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private dialog: MatDialog
   ) {}
+  openAppointmentDetailsModal(appointment: EventInput) {
+    this.dialog.open(this.appointmentDetailsModal, {
+      width: '500px',
+      data: appointment,
+    });
+  }
   ngOnInit() {
     this.loadDailyAppointments();
   }
@@ -74,7 +86,6 @@ export class ConsultaCitasComponent {
     // this.currentEvents.update(() => dailyAppointments);
     //this.calendarOptions.set({ events: dailyAppointments });
     const hoy = new Date();
-    console.log(hoy);
     this.selectedDate = hoy;
     this.selectedAppointments = this.getDailyAppointments(hoy);
   }
@@ -92,10 +103,8 @@ export class ConsultaCitasComponent {
     //const title = prompt('Please enter a new title for your event');
     const calendarApi = selectInfo.view.calendar;
     this.selectedDate = selectInfo.start;
-    console.log(this.selectedDate);
 
     this.selectedAppointments = this.getDailyAppointments(this.selectedDate);
-    console.log(this.selectedAppointments);
     calendarApi.unselect(); // clear date selection
 
     // if (title) {
@@ -110,6 +119,11 @@ export class ConsultaCitasComponent {
   }
 
   handleEventClick(clickInfo: EventClickArg) {
+    this.doctor = clickInfo.event.extendedProps['doctor'];
+    this.especialidad = clickInfo.event.extendedProps['especialidad'];
+    this.sintomas = clickInfo.event.extendedProps['sintomas'];
+
+    this.openAppointmentDetailsModal(clickInfo.event.extendedProps);
     // if (
     //   confirm(
     //     `Are you sure you want to delete the event '${clickInfo.event.title}'`

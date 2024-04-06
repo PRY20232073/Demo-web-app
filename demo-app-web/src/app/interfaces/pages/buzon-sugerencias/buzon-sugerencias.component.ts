@@ -24,10 +24,10 @@ export class BuzonSugerenciasComponent {
     numeroDocumento: ['', Validators.required],
     //numeroCelular: ['', Validators.required],
     //fechaNacimiento: ['', Validators.required],
-    correoElectronico: ['', Validators.required],
+    numeroCelular: ['', Validators.required],
     comentario: ['', Validators.required],
   });
-
+  FormComplete = 0;
   constructor(private fb: FormBuilder) {}
   private markFormGroupTouched(formGroup: FormGroup) {
     Object.values(formGroup.controls).forEach((control) => {
@@ -48,6 +48,10 @@ export class BuzonSugerenciasComponent {
         icon: 'success',
         showCancelButton: false,
         confirmButtonText: 'Aceptar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.FormComplete = 1;
+        }
       });
     } else {
       console.log('no paso todas las validaciones');

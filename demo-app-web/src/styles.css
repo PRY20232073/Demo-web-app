@@ -60,6 +60,9 @@ will-change: auto;
 .text-center{
   text-align: center;
 }
+.text-left{
+  text-align: left;
+}
 .side-by-side {
   display: flex;
   align-items: center;
@@ -77,4 +80,7 @@ will-change: auto;
 .imagen-input{
   height: 50px;
   width: 50px;
+}
+.image-submit{
+  height: 80vh;
 }

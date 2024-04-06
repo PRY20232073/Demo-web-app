@@ -31,4 +31,13 @@
     </div>
   </div>
 </div>
+<ng-template #appointmentDetailsModal let-data="data">
+  <h2 mat-dialog-title>Detalles de la cita</h2>
+  <div mat-dialog-content>
+    <p><strong>Doctor:</strong> {{ doctor }}</p>
+    <p><strong>Especialidad:</strong> {{ especialidad }}</p>
+    <p><strong>Sintomas:</strong> {{ sintomas }}</p>
 
+    <!-- Agrega más campos según los datos que desees mostrar -->
+  </div>
+</ng-template>

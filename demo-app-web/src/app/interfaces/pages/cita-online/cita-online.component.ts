@@ -8,10 +8,19 @@ import {
 import { DatePipe } from '@angular/common';
 import { Observable, map, startWith } from 'rxjs';
 import Swal from 'sweetalert2';
+import { CustomErrorStateMatcher } from 'src/app/shared/validators/CustomErrorStateMatcher';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-cita-online',
   templateUrl: './cita-online.component.html',
   styleUrls: ['./cita-online.component.css'],
+  providers: [
+    {
+      provide: ErrorStateMatcher,
+      useClass: CustomErrorStateMatcher,
+    },
+  ],
 })
 export class CitaOnlineComponent {
   ahora: any;
@@ -30,7 +39,8 @@ export class CitaOnlineComponent {
   ];
   selectedHour: string | null = null;
   filteredOptions: Observable<string[]> | undefined;
-
+  SubmitForm = false;
+  StepperForm = 0;
   stepOneForm = this.fb.group({
     tipoDocumento: [this.tipoDocumento[0].value, Validators.required],
     numeroDocumento: ['', Validators.required],
@@ -53,8 +63,12 @@ export class CitaOnlineComponent {
   secondFormGroup = this._formBuilder.group({
     secondCtrl: ['', Validators.required],
   });
-
-  constructor(private fb: FormBuilder, private _formBuilder: FormBuilder) {}
+  customErrorStateMatcher = new CustomErrorStateMatcher();
+  constructor(
+    private fb: FormBuilder,
+    private _formBuilder: FormBuilder,
+    private router: Router
+  ) {}
   selectedDate: any;
   name = 'Angular 6';
   availableHours: string[] = [];
@@ -114,8 +128,6 @@ export class CitaOnlineComponent {
     this.ahora = datePite.transform(new Date(), 'yyyy-MM-dd');
   }
   onSelect(event: any) {
-    console.log(event);
-
     this.selectedDate = event;
     // Calcula las horas disponibles basándose en la fecha seleccionada
     this.calculateAvailableHours();
@@ -125,8 +137,18 @@ export class CitaOnlineComponent {
     switch (step) {
       case 0:
         this.markFormGroupTouched(this.stepOneForm);
+        this.SubmitForm = true;
         // Validar y avanzar al siguiente paso si es válido
         if (this.stepOneForm.valid) {
+          this.SubmitForm = false;
+          window.sessionStorage['fechaNacimiento'] =
+            this.stepOneForm.value.fechaNacimiento;
+          window.sessionStorage['numeroCelular'] =
+            this.stepOneForm.value.numeroCelular;
+          window.sessionStorage['numeroDocumento'] =
+            this.stepOneForm.value.numeroDocumento;
+          window.sessionStorage['tipoDocumento'] =
+            this.stepOneForm.value.tipoDocumento;
           // Marcar como tocados los controles del formulario actual
           this.markFormGroupTouched(this.stepOneForm);
           // Realiza acciones necesarias y avanza al siguiente paso
@@ -134,9 +156,12 @@ export class CitaOnlineComponent {
         }
         break;
       case 1:
+        this.SubmitForm = true;
         this.markFormGroupTouched(this.stepTwoForm);
-
         if (this.stepTwoForm.valid) {
+          window.sessionStorage['especialidad'] =
+            this.stepTwoForm.value.especialidad;
+          window.sessionStorage['sintomas'] = this.stepTwoForm.value.sintomas;
           // Marcar como tocados los controles del formulario actual
           this.markFormGroupTouched(this.stepTwoForm);
           // Realiza acciones necesarias y avanza al siguiente paso
@@ -156,30 +181,31 @@ export class CitaOnlineComponent {
     if (this.selectedHour) {
       // Verificar si el formulario es válido antes de mostrar el mensaje
       if (this.stepThreeForm.valid) {
+        window.sessionStorage['fechaCita'] = this.stepThreeForm.value.fechaCita;
         // Realiza acciones necesarias para enviar el formulario
-        Swal.fire({
-          title: 'Cita Online',
-          text: 'Su cita fue agendada correctamente',
-          icon: 'success',
-          showCancelButton: false,
-          confirmButtonText: 'Aceptar',
-        });
+        this.StepperForm = 1;
       }
     } else {
       // Mostrar un mensaje indicando que se debe seleccionar una hora
-      Swal.fire({
-        title: 'Error',
-        text: 'Por favor, seleccione una hora antes de enviar el formulario',
-        icon: 'error',
-        showCancelButton: false,
-        confirmButtonText: 'Aceptar',
-      });
     }
+  }
+  confirmtForm() {
+    Swal.fire({
+      title: 'Cita Online',
+      text: 'Su cita fue agendada correctamente',
+      icon: 'success',
+      showCancelButton: false,
+      confirmButtonText: 'Aceptar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.router.navigateByUrl('/consultar-cita');
+        //window.location = window."/consultar-cita";
+      }
+    });
   }
   private markFormGroupTouched(formGroup: FormGroup) {
     Object.values(formGroup.controls).forEach((control) => {
       control.markAsTouched();
-
       if (control instanceof FormGroup) {
         this.markFormGroupTouched(control);
       }

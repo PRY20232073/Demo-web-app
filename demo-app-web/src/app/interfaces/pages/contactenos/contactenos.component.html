@@ -1,6 +1,7 @@
 
 <h1 class="text-center">En Contacto</h1>
 <mat-divider></mat-divider>
+<div *ngIf="FormComplete == 0">
 
 <form class="contact-form" [formGroup]="contactenos">
   <div class="row">
@@ -22,7 +23,6 @@
             value="DNI" required>
             <mat-option value="DNI">DNI</mat-option>
             <mat-option value="Pasaporte">Pasaporte</mat-option>
-            <!-- Agrega más opciones según tus necesidades -->
             </mat-select>
             <mat-hint style="color: red;" *ngIf="contactenos.get('tipoDocumento')?.touched && contactenos.get('tipoDocumento')?.hasError('required')">
               Debe seleccionar el tipo de documento
@@ -45,7 +45,7 @@
   </div>
   <div class="col-md-11">
       <mat-form-field appearance="outline">
-        <input matInput formControlName="numeroDocumento" placeholder="" required/>
+        <input matInput maxlength="8" formControlName="numeroDocumento" placeholder="" required/>
         <mat-hint style="color: red;" *ngIf="contactenos.get('numeroDocumento')?.touched && contactenos.get('numeroDocumento')?.hasError('required')">
             Debe escribir su número de documento
         </mat-hint>
@@ -68,7 +68,7 @@
   </div>
   <div class="col-md-11">
       <mat-form-field appearance="outline">
-        <input matInput formControlName="numeroCelular" placeholder="" required/>
+        <input matInput maxlength="9" formControlName="numeroCelular" placeholder="" required/>
         <mat-hint style="color: red;" *ngIf="contactenos.get('numeroCelular')?.touched && contactenos.get('numeroCelular')?.hasError('required')">
             Debe escribir su número de celular
         </mat-hint>
@@ -152,3 +152,22 @@
   <div class="text-center">
     <button mat-raised-button color="primary" class="btnEnviar" (click)="submitForm()">Enviar</button>
   </div>
+</div>
+
+ <!-- 
+   <div class="container">
+    <div class="side-by-side">
+        <div class="left-half">
+            <img src="../../../../assets/Doctors-bro.svg" alt="Imagen" />
+          </div>
+          <div class="right-half">
+            <img src="../../../../assets/contact.svg" alt="Imagen" />
+          </div>
+
+    </div>
+
+  </div>
+     -->
+     <div *ngIf="FormComplete == 1" style="display:flex;justify-content: center;">
+      <img class="image-submit" src="../../../../assets/Mailbox-pana.svg" alt="Imagen" />
+    </div>

@@ -10,3 +10,8 @@
     width: 100%;
     margin-bottom: 16px;
   }
+  .btnEnviar{
+    padding: 23px 40px;
+    margin-bottom: 20px;
+    font-size: 20px;
+  }

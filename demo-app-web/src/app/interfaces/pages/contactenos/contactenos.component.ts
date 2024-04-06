@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 })
 export class ContactenosComponent {
   startDate = new Date(2005, 1, 1);
+  FormComplete = 0;
 
   tipoDocumento: any[] = [
     { value: 'DNI', viewValue: 'DNI' },
@@ -43,11 +44,15 @@ export class ContactenosComponent {
     if (this.contactenos.valid) {
       console.log('paso todas las validaciones');
       Swal.fire({
-        title: 'Buzon de Sugerencia',
-        text: 'Su sugerencia fue registrada correctamente',
+        title: 'En contacto',
+        text: 'Lo estaremos contactando pronto',
         icon: 'success',
         showCancelButton: false,
         confirmButtonText: 'Aceptar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.FormComplete = 1;
+        }
       });
     } else {
       console.log('no paso todas las validaciones');

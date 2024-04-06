@@ -5,14 +5,25 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { CustomErrorStateMatcher } from 'src/app/shared/validators/CustomErrorStateMatcher';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-buzon-quejas',
   templateUrl: './buzon-quejas.component.html',
   styleUrls: ['./buzon-quejas.component.css'],
+  providers: [
+    {
+      provide: ErrorStateMatcher,
+      useClass: CustomErrorStateMatcher,
+    },
+  ],
 })
 export class BuzonQuejasComponent {
+  customErrorStateMatcher = new CustomErrorStateMatcher();
+  SubmitForm = false;
+
   tipoDocumento: any[] = [
     { value: 'DNI', viewValue: 'DNI' },
     { value: 'Pasaporte', viewValue: 'Pasaporte' },
@@ -25,11 +36,11 @@ export class BuzonQuejasComponent {
     tipoDocumento: [this.tipoDocumento[0].value, Validators.required],
     numeroDocumento: ['', Validators.required],
     fechaQueja: ['', Validators.required],
-    correoElectronico: ['', Validators.required],
+    numeroCelular: ['', Validators.required],
     comentario: ['', Validators.required],
     tipoQueja: [this.tipoQueja[0].value, Validators.required],
   });
-
+  FormComplete = 0;
   constructor(private fb: FormBuilder) {}
   private markFormGroupTouched(formGroup: FormGroup) {
     Object.values(formGroup.controls).forEach((control) => {
@@ -42,6 +53,8 @@ export class BuzonQuejasComponent {
   }
   submitForm() {
     this.markFormGroupTouched(this.quejas);
+    this.SubmitForm = true;
+
     if (this.quejas.valid) {
       console.log('paso todas las validaciones');
       Swal.fire({
@@ -50,6 +63,10 @@ export class BuzonQuejasComponent {
         icon: 'success',
         showCancelButton: false,
         confirmButtonText: 'Aceptar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.FormComplete = 1;
+        }
       });
     } else {
       console.log('no paso todas las validaciones');

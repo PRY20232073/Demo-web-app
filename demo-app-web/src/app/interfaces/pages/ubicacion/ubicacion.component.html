@@ -1,2 +1,7 @@
+<link href='https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css' rel='stylesheet' />
 
-<div class="map" id="map" class="match-parent"></div>
+    {{isUserLocationReady}}
+<app-loading *ngIf="!isUserLocationReady"></app-loading>
+
+    <div #mapDiv class="map" id="map" class="match-parent"></div>
+

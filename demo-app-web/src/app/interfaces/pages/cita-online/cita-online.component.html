@@ -7,7 +7,7 @@
             <img src="../../../../assets/Doctors-bro.svg" alt="Imagen" />
           </div>
           <div class="right-half">
-            <mat-card>
+            <mat-card *ngIf="StepperForm == 0">
               <mat-card-content>
                 <mat-stepper linear labelPosition="bottom" #stepper>
                  <!-- Paso 1: Datos personales -->
@@ -60,8 +60,8 @@
                                 </div>
                                 <div class="col-md-11">
                                     <mat-form-field appearance="outline">
-                                        <input matInput formControlName="numeroDocumento" placeholder="" required/>
-                                        <mat-hint style="color: red;" *ngIf="stepOneForm.get('numeroDocumento')?.touched && stepOneForm.get('numeroDocumento')?.hasError('required')">
+                                        <input matInput maxlength="8" formControlName="numeroDocumento" placeholder="" required/>
+                                        <mat-hint style="color: red;" *ngIf="stepOneForm.get('numeroDocumento')?.touched && stepOneForm.get('numeroDocumento')?.hasError('required') && (SubmitForm||stepOneForm.get('numeroDocumento')?.dirty)">
                                             Debe escribir su número de documento
                                         </mat-hint>
                                     </mat-form-field>
@@ -83,8 +83,8 @@
                                 </div>
                                 <div class="col-md-11">
                                     <mat-form-field appearance="outline">
-                                        <input matInput formControlName="numeroCelular" placeholder="" required/>
-                                        <mat-hint style="color: red;" *ngIf="stepOneForm.get('numeroCelular')?.touched && stepOneForm.get('numeroCelular')?.hasError('required')">
+                                        <input matInput maxlength="9" formControlName="numeroCelular" placeholder="" required/>
+                                        <mat-hint style="color: red;" *ngIf="stepOneForm.get('numeroCelular')?.touched && stepOneForm.get('numeroCelular')?.hasError('required') && (SubmitForm||stepOneForm.get('numeroCelular')?.dirty)">
                                             Debe escribir su número de celular
                                         </mat-hint>
                                     </mat-form-field>
@@ -109,7 +109,7 @@
                                         <input matInput formControlName="fechaNacimiento" placeholder="Fecha de nacimiento (dia/mes/año)" [matDatepicker]="picker" required>
                                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                         <mat-datepicker #picker startView="multi-year" [startAt]="startDate"></mat-datepicker>
-                                        <mat-hint style="color: red;" *ngIf="stepOneForm.get('fechaNacimiento')?.touched && stepOneForm.get('fechaNacimiento')?.hasError('required')">
+                                        <mat-hint style="color: red;" *ngIf="stepOneForm.get('fechaNacimiento')?.touched && stepOneForm.get('fechaNacimiento')?.hasError('required') && (SubmitForm||stepOneForm.get('fechaNacimiento')?.dirty)">
                                             Debe escribir o seleccionar su fecha de nacimiento
                                         </mat-hint>
                                     </mat-form-field>
@@ -159,7 +159,7 @@
                                                 {{ option }}
                                               </mat-option>
                                           </mat-autocomplete>
-                                        <mat-hint style="color: red;" *ngIf="stepTwoForm.get('especialidad')?.touched && stepTwoForm.get('especialidad')?.hasError('required')">
+                                        <mat-hint style="color: red;" *ngIf="stepTwoForm.get('especialidad')?.touched && stepTwoForm.get('especialidad')?.hasError('required') && (SubmitForm||stepTwoForm.get('especialidad')?.dirty)">
                                             Debe escribir o seleccionar la especialidad
                                         </mat-hint>
                                     </mat-form-field>
@@ -185,7 +185,7 @@
                                         formControlName="sintomas" 
                                         placeholder="Síntomas" required>
                                     <!-- </input> -->
-                                        <mat-hint style="color: red;" *ngIf="stepTwoForm.get('sintomas')?.touched && stepTwoForm.get('sintomas')?.hasError('required')">
+                                        <mat-hint style="color: red;" *ngIf="stepTwoForm.get('sintomas')?.touched && stepTwoForm.get('sintomas')?.hasError('required') && (SubmitForm||stepTwoForm.get('sintomas')?.dirty)">
                                             Escriba sus sintomas
                                         </mat-hint>
                                     </mat-form-field>
@@ -224,7 +224,7 @@
                                         [min]="ahora" (dateChange)="onSelect($event)" >
                                         <mat-datepicker-toggle matSuffix [for]="pickerCita"></mat-datepicker-toggle>
                                         <mat-datepicker #pickerCita ></mat-datepicker>
-                                        <mat-hint style="color: red;" *ngIf="stepThreeForm.get('fechaCita')?.touched && stepThreeForm.get('fechaCita')?.hasError('required')">
+                                        <mat-hint style="color: red;" *ngIf="stepThreeForm.get('fechaCita')?.touched && stepThreeForm.get('fechaCita')?.hasError('required') && (SubmitForm||stepThreeForm.get('fechaCita')?.dirty)">
                                             Debe escribir o seleccionar su fecha de cita
                                         </mat-hint>
                                     </mat-form-field>
@@ -266,6 +266,23 @@
                     </mat-step>
                 </mat-stepper>
               </mat-card-content>
+            </mat-card>
+            <mat-card *ngIf="StepperForm == 1">
+                <mat-card-header style="justify-content: center;">
+                    <mat-card-title>Resumen de la cita médica</mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="text-left">
+                    <p><strong>Tipo de Documento:</strong> {{ stepOneForm.value.tipoDocumento }}</p>
+                    <p><strong>Número de Documento:</strong> {{ stepOneForm.value.numeroDocumento }}</p>
+                    <p><strong>Fecha de Nacimiento:</strong> {{ stepOneForm.value.fechaNacimiento | date }}</p>
+                    <p><strong>Número de Celular:</strong> {{ stepOneForm.value.numeroCelular }}</p>
+                    <p><strong>Especialidad:</strong> {{ stepTwoForm.value.especialidad }}</p>
+                    <p><strong>Síntomas:</strong> {{ stepTwoForm.value.sintomas }}</p>
+                    <p><strong>Fecha de Cita:</strong> {{ stepThreeForm.value.fechaCita | date }}</p>
+                </mat-card-content>
+                <mat-card-actions style="justify-content: center;">
+                    <button mat-raised-button color="primary" (click)="confirmtForm()">Confirmar</button>
+                </mat-card-actions>
             </mat-card>
           </div>
 

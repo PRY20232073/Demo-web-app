@@ -1,7 +1,7 @@
 
 <h1 class="text-center">Buzon de Sugerencias</h1>
 <mat-divider></mat-divider>
-
+<div *ngIf="FormComplete == 0">
 <form class="contact-form" [formGroup]="sugerencia">
   <div class="row">
     <div class="col-md-1" style="padding-left: 0%;">
@@ -47,7 +47,7 @@
   </div>
   <div class="col-md-11">
       <mat-form-field appearance="outline">
-        <input matInput formControlName="numeroDocumento" placeholder="" required/>
+        <input matInput maxlength="8" formControlName="numeroDocumento" placeholder="" required/>
         <mat-hint style="color: red;" *ngIf="sugerencia.get('numeroDocumento')?.touched && sugerencia.get('numeroDocumento')?.hasError('required')">
             Debe escribir su número de documento
         </mat-hint>
@@ -59,24 +59,25 @@
   <div class="col-md-1" style="padding-left: 0%;">
   </div>
   <div class="col-md-11 label-input">
-      <mat-label >Ingrese aqui su correo electronico (Ej: jperez&#64;gmail.com):</mat-label>
+      <mat-label >Ingrese aqui su número de celular (Ej: 991144192):</mat-label>
   </div>
 </div>
 <div class="row">
   <div class="col-md-1" style="padding-left: 0%;">
-    <mat-icon class="icon-input" >
-      mail
-    </mat-icon>
+      <mat-icon class="icon-input">
+          call
+      </mat-icon>
   </div>
   <div class="col-md-11">
-    <mat-form-field appearance="outline">
-      <input matInput type="email" placeholder=""  formControlName="correoElectronico"  />
-      <mat-hint style="color: red;" *ngIf="sugerencia.get('correoElectronico')?.touched && sugerencia.get('correoElectronico')?.hasError('required')">
-        Debe escribir su correo electronico.
-    </mat-hint>
-    </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input matInput maxlength="9" formControlName="numeroCelular" placeholder="" required/>
+        <mat-hint style="color: red;" *ngIf="sugerencia.get('numeroCelular')?.touched && sugerencia.get('numeroCelular')?.hasError('required')">
+            Debe escribir su número de celular
+        </mat-hint>
+      </mat-form-field>
   </div>
 </div>
+
 
 <div class="row">
   <div class="col-md-1" style="padding-left: 0%;">
@@ -120,4 +121,8 @@
   </form>
   <div class="text-center">
     <button mat-raised-button color="primary" class="btnEnviar" (click)="submitForm()">Enviar</button>
+  </div>
+</div>
+  <div *ngIf="FormComplete == 1" style="display:flex;justify-content: center;">
+    <img class="image-submit" src="../../../../assets/Mailbox-pana.svg" alt="Imagen" />
   </div>

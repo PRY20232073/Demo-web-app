@@ -10,3 +10,33 @@
     width: 100%;
     margin-bottom: 16px;
   }
+  .btnEnviar{
+    padding: 23px 40px;
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .side-by-side {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .left-half {
+    flex: 1;
+    padding: 16px;
+    text-align: center; /* Centra el contenido horizontalmente */
+  }
+  
+  .right-half {
+    flex: 1;
+    padding: 16px;
+    text-align: center; /* Centra el contenido horizontalmente */
+  }
+  

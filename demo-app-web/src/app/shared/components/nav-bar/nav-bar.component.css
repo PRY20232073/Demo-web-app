@@ -11,3 +11,16 @@ a {
   color: #D50000 !important; 
   margin-right: 5px;
 }
+.navbar-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 70%;
+}
+.logo-container {
+  margin-right: 200px; /* Ajusta el espacio entre la imagen y los enlaces según sea necesario */
+}
+.navbar-links a {
+  text-decoration: none;
+  color: inherit;
+}
