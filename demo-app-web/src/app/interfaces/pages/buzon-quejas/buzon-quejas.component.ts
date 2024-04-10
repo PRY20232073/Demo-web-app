@@ -41,6 +41,8 @@ export class BuzonQuejasComponent {
     tipoQueja: [this.tipoQueja[0].value, Validators.required],
   });
   FormComplete = 0;
+  private audio = new Audio();
+
   constructor(private fb: FormBuilder) {}
   private markFormGroupTouched(formGroup: FormGroup) {
     Object.values(formGroup.controls).forEach((control) => {
@@ -56,6 +58,10 @@ export class BuzonQuejasComponent {
     this.SubmitForm = true;
 
     if (this.quejas.valid) {
+      this.audio.src = '../../../../assets/sounds/notificacion.wav';
+      this.audio.volume = 0.3;
+      this.audio.play();
+      setTimeout(() => {}, 400);
       console.log('paso todas las validaciones');
       Swal.fire({
         title: 'Buzon de Quejas',

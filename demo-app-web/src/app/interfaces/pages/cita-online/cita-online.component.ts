@@ -64,10 +64,12 @@ export class CitaOnlineComponent {
     secondCtrl: ['', Validators.required],
   });
   customErrorStateMatcher = new CustomErrorStateMatcher();
+  private audio = new Audio();
   constructor(
     private fb: FormBuilder,
     private _formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private datePipe: DatePipe
   ) {}
   selectedDate: any;
   name = 'Angular 6';
@@ -80,6 +82,21 @@ export class CitaOnlineComponent {
       option.toLowerCase().includes(filterValue)
     );
   }
+  dataSource = [
+    { label: 'Tipo de Documento', value: this.stepOneForm.value.tipoDocumento },
+    {
+      label: 'Número de Documento',
+      value: this.stepOneForm.value.numeroDocumento,
+    },
+    {
+      label: 'Fecha de Nacimiento',
+      value: this.stepOneForm.value.fechaNacimiento,
+    },
+    { label: 'Número de Celular', value: this.stepOneForm.value.numeroCelular },
+    { label: 'Especialidad', value: this.stepTwoForm.value.especialidad },
+    { label: 'Síntomas', value: this.stepTwoForm.value.sintomas },
+    { label: 'Fecha de Cita', value: this.stepThreeForm.value.fechaCita },
+  ];
   calculateAvailableHours() {
     // Lógica para calcular las horas disponibles (puedes personalizar según tus necesidades)
     // Aquí un ejemplo básico para disponibilidad de 10:00 am a 5:00 pm
@@ -125,7 +142,10 @@ export class CitaOnlineComponent {
       map((value) => this._filter(value || ''))
     );
     const datePite = new DatePipe('en-Us');
-    this.ahora = datePite.transform(new Date(), 'yyyy-MM-dd');
+    this.ahora = datePite.transform(
+      new Date().setDate(new Date().getDate() + 1),
+      'yyyy-MM-dd'
+    );
   }
   onSelect(event: any) {
     this.selectedDate = event;
@@ -183,6 +203,36 @@ export class CitaOnlineComponent {
       if (this.stepThreeForm.valid) {
         window.sessionStorage['fechaCita'] = this.stepThreeForm.value.fechaCita;
         // Realiza acciones necesarias para enviar el formulario
+        this.dataSource = [
+          {
+            label: 'Tipo de Documento',
+            value: this.stepOneForm.value.tipoDocumento,
+          },
+          {
+            label: 'Número de Documento',
+            value: this.stepOneForm.value.numeroDocumento,
+          },
+          {
+            label: 'Fecha de Nacimiento',
+            value: this.datePipe.transform(
+              this.stepOneForm.value.fechaNacimiento,
+              'dd/MM/yyyy'
+            ),
+          },
+          {
+            label: 'Número de Celular',
+            value: this.stepOneForm.value.numeroCelular,
+          },
+          { label: 'Especialidad', value: this.stepTwoForm.value.especialidad },
+          { label: 'Síntomas', value: this.stepTwoForm.value.sintomas },
+          {
+            label: 'Fecha de Cita',
+            value: this.datePipe.transform(
+              this.stepThreeForm.value.fechaCita,
+              'dd/MM/yyyy'
+            ),
+          },
+        ];
         this.StepperForm = 1;
       }
     } else {
@@ -190,6 +240,10 @@ export class CitaOnlineComponent {
     }
   }
   confirmtForm() {
+    this.audio.src = '../../../../assets/sounds/notificacion.wav';
+    this.audio.volume = 0.3;
+    this.audio.play();
+    setTimeout(() => {}, 400);
     Swal.fire({
       title: 'Cita Online',
       text: 'Su cita fue agendada correctamente',

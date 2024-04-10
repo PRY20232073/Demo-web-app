@@ -15,7 +15,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { MatTableModule } from '@angular/material/table';
 @NgModule({
   declarations: [],
   imports: [
@@ -36,6 +36,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatTabsModule,
     MatToolbarModule,
     MatDialogModule,
+    MatTableModule,
   ],
   exports: [
     MatStepperModule,
@@ -54,6 +55,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatTabsModule,
     MatToolbarModule,
     MatDialogModule,
+    MatTableModule,
   ],
 })
 export class MaterialModule {}

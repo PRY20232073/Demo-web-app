@@ -84,3 +84,22 @@ will-change: auto;
 .image-submit{
   height: 80vh;
 }
+
+.summary-table td:first-child {
+  background-color: rgba(213, 0, 0, 0.1); /* Color de fondo suave */
+}
+
+.table-header {
+  font-weight: bold;
+}
+
+.data-cell {
+  background-color: white; /* Fondo blanco para las celdas de datos */
+}
+.mat-column-property {
+  border-left: 1px solid #ccc; /* Borde izquierdo */
+  border-right: 1px solid #ccc; /* Borde derecho */
+}
+.mat-column-property:last-child .mat-cell {
+  border-bottom: 1px solid #ccc; /* Elimina el borde inferior */
+}

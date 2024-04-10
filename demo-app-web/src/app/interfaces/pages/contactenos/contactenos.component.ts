@@ -28,6 +28,7 @@ export class ContactenosComponent {
     correoElectronico: ['', Validators.required],
     comentario: ['', Validators.required],
   });
+  private audio = new Audio();
 
   constructor(private fb: FormBuilder) {}
   private markFormGroupTouched(formGroup: FormGroup) {
@@ -42,6 +43,10 @@ export class ContactenosComponent {
   submitForm() {
     this.markFormGroupTouched(this.contactenos);
     if (this.contactenos.valid) {
+      this.audio.src = '../../../../assets/sounds/notificacion.wav';
+      this.audio.volume = 0.3;
+      this.audio.play();
+      setTimeout(() => {}, 400);
       console.log('paso todas las validaciones');
       Swal.fire({
         title: 'En contacto',

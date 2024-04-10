@@ -28,6 +28,8 @@ export class BuzonSugerenciasComponent {
     comentario: ['', Validators.required],
   });
   FormComplete = 0;
+  private audio = new Audio();
+
   constructor(private fb: FormBuilder) {}
   private markFormGroupTouched(formGroup: FormGroup) {
     Object.values(formGroup.controls).forEach((control) => {
@@ -41,6 +43,10 @@ export class BuzonSugerenciasComponent {
   submitForm() {
     this.markFormGroupTouched(this.sugerencia);
     if (this.sugerencia.valid) {
+      this.audio.src = '../../../../assets/sounds/notificacion.wav';
+      this.audio.volume = 0.3;
+      this.audio.play();
+      setTimeout(() => {}, 400);
       console.log('paso todas las validaciones');
       Swal.fire({
         title: 'Buzon de Sugerencia',

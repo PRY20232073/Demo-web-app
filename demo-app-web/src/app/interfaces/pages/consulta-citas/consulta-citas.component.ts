@@ -77,6 +77,9 @@ export class ConsultaCitasComponent {
       data: appointment,
     });
   }
+  closeDetailsModal() {
+    this.dialog.closeAll();
+  }
   ngOnInit() {
     this.loadDailyAppointments();
   }

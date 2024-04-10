@@ -269,18 +269,23 @@
             </mat-card>
             <mat-card *ngIf="StepperForm == 1">
                 <mat-card-header style="justify-content: center;">
-                    <mat-card-title>Resumen de la cita médica</mat-card-title>
+                    <mat-card-title><h3>Resumen de la cita médica</h3></mat-card-title>
                 </mat-card-header>
                 <mat-card-content class="text-left">
-                    <p><strong>Tipo de Documento:</strong> {{ stepOneForm.value.tipoDocumento }}</p>
-                    <p><strong>Número de Documento:</strong> {{ stepOneForm.value.numeroDocumento }}</p>
-                    <p><strong>Fecha de Nacimiento:</strong> {{ stepOneForm.value.fechaNacimiento | date }}</p>
-                    <p><strong>Número de Celular:</strong> {{ stepOneForm.value.numeroCelular }}</p>
-                    <p><strong>Especialidad:</strong> {{ stepTwoForm.value.especialidad }}</p>
-                    <p><strong>Síntomas:</strong> {{ stepTwoForm.value.sintomas }}</p>
-                    <p><strong>Fecha de Cita:</strong> {{ stepThreeForm.value.fechaCita | date }}</p>
+                    <table mat-table class="summary-table" [dataSource]="dataSource" aria-label="Tabla de resumen">
+                        <ng-container matColumnDef="property">
+                          <td mat-cell *matCellDef="let element" class="table-cell">{{element.label}}</td>
+                        </ng-container>
+                  
+                        <ng-container matColumnDef="value">
+                          <td mat-cell *matCellDef="let element" class="table-cell">{{element.value}}</td>
+                        </ng-container>
+                  
+                        <tr mat-row *matRowDef="let row; columns: ['property', 'value'];"></tr>
+                      </table>
+                  
                 </mat-card-content>
-                <mat-card-actions style="justify-content: center;">
+                <mat-card-actions style="justify-content: center;margin-top: 18px;margin-bottom: 18px;">
                     <button mat-raised-button color="primary" (click)="confirmtForm()">Confirmar</button>
                 </mat-card-actions>
             </mat-card>
