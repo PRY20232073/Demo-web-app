@@ -5,7 +5,7 @@
     <div class="side-by-side">
         <div class="left-half">
             <img src="../../../../assets/Doctors-bro.svg" alt="Imagen" />
-          </div>
+        </div>
           <div class="right-half">
             <mat-card *ngIf="StepperForm == 0">
               <mat-card-content>
@@ -29,7 +29,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-1" style="padding-left: 0%;">
-                                    <img src="../../../../assets/business-cards.png" alt="Imagen" class="imagen-input"/>
+                                    <img src="../../../../assets/icons/solar--user-id-outline.svg" alt="Imagen" class="imagen-input"/>
 
                                 </div>
                                 <div class="col-md-11">
@@ -55,12 +55,12 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-1" style="padding-left: 0%;">
-                                    <img src="../../../../assets/licencia-de-conducir.png" alt="Imagen" class="imagen-input"/>
+                                    <img src="../../../../assets/icons/nro-documento.svg" alt="Imagen" class="imagen-input"/>
 
                                 </div>
                                 <div class="col-md-11">
                                     <mat-form-field appearance="outline">
-                                        <input matInput maxlength="8" formControlName="numeroDocumento" placeholder="" required/>
+                                        <input matInput maxlength="8" formControlName="numeroDocumento" placeholder="" required (keypress)="validateFormat($event)"/>
                                         <mat-hint style="color: red;" *ngIf="stepOneForm.get('numeroDocumento')?.touched && stepOneForm.get('numeroDocumento')?.hasError('required') && (SubmitForm||stepOneForm.get('numeroDocumento')?.dirty)">
                                             Debe escribir su número de documento
                                         </mat-hint>
@@ -77,13 +77,12 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-1" style="padding-left: 0%;">
-                                    <mat-icon class="icon-input">
-                                        call
-                                    </mat-icon>
+                                    <img src="../../../../assets/icons/ph_phone.svg" alt="Imagen" class="imagen-input"/>
+
                                 </div>
                                 <div class="col-md-11">
                                     <mat-form-field appearance="outline">
-                                        <input matInput maxlength="9" formControlName="numeroCelular" placeholder="" required/>
+                                        <input matInput maxlength="9" formControlName="numeroCelular" placeholder="" required (keypress)="validateFormat($event)"/>
                                         <mat-hint style="color: red;" *ngIf="stepOneForm.get('numeroCelular')?.touched && stepOneForm.get('numeroCelular')?.hasError('required') && (SubmitForm||stepOneForm.get('numeroCelular')?.dirty)">
                                             Debe escribir su número de celular
                                         </mat-hint>
@@ -100,9 +99,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-1" style="padding-left: 0%;">
-                                    <mat-icon class="icon-input">
-                                        calendar_month
-                                    </mat-icon>
+                                    <img src="../../../../assets/icons/tabler_calendar-event.svg" alt="Imagen" class="imagen-input"/>
+
                                 </div>
                                 <div class="col-md-11">
                                     <mat-form-field appearance="outline">
@@ -138,9 +136,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-1" style="padding-left: 0%;">
-                                    <mat-icon class="icon-input">
-                                        medical_information
-                                    </mat-icon>
+                                    <img src="../../../../assets/icons/solar--user-id-outline.svg" alt="Imagen" class="imagen-input"/>
+
                                 </div>
                                 <div class="col-md-11">
                                     <mat-form-field appearance="outline">
@@ -162,6 +159,10 @@
                                         <mat-hint style="color: red;" *ngIf="stepTwoForm.get('especialidad')?.touched && stepTwoForm.get('especialidad')?.hasError('required') && (SubmitForm||stepTwoForm.get('especialidad')?.dirty)">
                                             Debe escribir o seleccionar la especialidad
                                         </mat-hint>
+                                        <mat-hint style="color: red;" *ngIf="stepTwoForm.get('especialidad')?.value && 
+                                            !verificarValor(stepTwoForm.get('especialidad')?.value)">
+                                            La especialidad ingresada no es válida
+                                        </mat-hint>
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -175,9 +176,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-1" style="padding-left: 0%;">
-                                    <mat-icon class="icon-input">
-                                        checklist
-                                    </mat-icon>
+
                                 </div>
                                 <div class="col-md-11">
                                     <mat-form-field appearance="outline">
@@ -214,9 +213,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-1" style="padding-left: 0%;">
-                                    <mat-icon class="icon-input">
-                                        calendar_month
-                                    </mat-icon>
+                                    <img src="../../../../assets/icons/tabler_calendar-event.svg" alt="Imagen" class="imagen-input"/>
+
                                 </div>
                                 <div class="col-md-11">
                                     <mat-form-field appearance="outline">
@@ -286,6 +284,8 @@
                   
                 </mat-card-content>
                 <mat-card-actions style="justify-content: center;margin-top: 18px;margin-bottom: 18px;">
+                    <button mat-button (click)="backForm()" style="margin-right: 20px;">Atrás</button>
+
                     <button mat-raised-button color="primary" (click)="confirmtForm()">Confirmar</button>
                 </mat-card-actions>
             </mat-card>

@@ -14,7 +14,7 @@
 }
 
 .left-half {
-  flex: 1;
+  flex: 0.7;
   padding: 16px;
   text-align: center; /* Centra el contenido horizontalmente */
 }

@@ -16,6 +16,7 @@ a {
   justify-content: space-between;
   align-items: center;
   width: 70%;
+
 }
 .logo-container {
   margin-right: 200px; /* Ajusta el espacio entre la imagen y los enlaces según sea necesario */
@@ -23,4 +24,7 @@ a {
 .navbar-links a {
   text-decoration: none;
   color: inherit;
+}
+.button-navbar{
+  font-size: 16px;
 }

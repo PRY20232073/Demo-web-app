@@ -16,8 +16,8 @@ export const INITIAL_EVENTS: any[] = [
   {
     id: createEventId(),
     title: 'Cita Cardiología',
-    start: TODAY_STR + 'T00:00:00',
-    end: TODAY_STR + 'T03:00:00',
+    start: TODAY_STR + 'T09:00:00',
+    end: TODAY_STR + 'T13:00:00',
     doctor: 'Dr. Luis',
     especialidad: 'Cardiología',
     sintomas: 'Dolor en el pecho, dificultad para respirar',

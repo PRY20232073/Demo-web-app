@@ -40,7 +40,7 @@ export class CitaOnlineComponent {
   selectedHour: string | null = null;
   filteredOptions: Observable<string[]> | undefined;
   SubmitForm = false;
-  StepperForm = 0;
+  StepperForm = 1;
   stepOneForm = this.fb.group({
     tipoDocumento: [this.tipoDocumento[0].value, Validators.required],
     numeroDocumento: ['', Validators.required],
@@ -49,7 +49,7 @@ export class CitaOnlineComponent {
   });
 
   stepTwoForm = this.fb.group({
-    especialidad: ['', Validators.required],
+    especialidad: ['', [Validators.required, this.customValidator.bind(this)]],
     sintomas: ['', Validators.required],
   });
 
@@ -194,7 +194,9 @@ export class CitaOnlineComponent {
     // Método para retroceder al paso anterior si es necesario
     // Puedes implementarlo de manera similar al método nextStep
   }
-
+  backForm() {
+    this.StepperForm = 0;
+  }
   submitForm() {
     this.markFormGroupTouched(this.stepThreeForm);
     // Método para enviar el formulario una vez que se completen todos los pasos
@@ -264,5 +266,28 @@ export class CitaOnlineComponent {
         this.markFormGroupTouched(control);
       }
     });
+  }
+  validateFormat(event: any) {
+    let key;
+    if (event.type === 'paste') {
+      key = event.clipboardData.getData('text/plain');
+    } else {
+      key = event.keyCode;
+      key = String.fromCharCode(key);
+    }
+    const regex = /[0-9]|\./;
+    if (!regex.test(key)) {
+      event.returnValue = false;
+      if (event.preventDefault) {
+        event.preventDefault();
+      }
+    }
+  }
+  customValidator(control: any) {
+    const inputValue = control.value;
+    return this.verificarValor(inputValue) ? null : { invalidOption: true };
+  }
+  verificarValor(inputValue: any): boolean {
+    return this.options.includes(inputValue);
   }
 }
