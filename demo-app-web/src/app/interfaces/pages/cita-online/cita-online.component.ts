@@ -35,12 +35,14 @@ export class CitaOnlineComponent {
     'Cardiología',
     'Dermatología',
     'Obstetricia',
-    'Urologia',
+    'Urología',
   ];
   selectedHour: string | null = null;
   filteredOptions: Observable<string[]> | undefined;
   SubmitForm = false;
-  StepperForm = 1;
+
+  //Indica si inicia con el form o el resumen
+  StepperForm = 0;
   stepOneForm = this.fb.group({
     tipoDocumento: [this.tipoDocumento[0].value, Validators.required],
     numeroDocumento: ['', Validators.required],
@@ -250,6 +252,7 @@ export class CitaOnlineComponent {
       title: 'Cita Online',
       text: 'Su cita fue agendada correctamente',
       icon: 'success',
+      confirmButtonColor: '#D50000',
       showCancelButton: false,
       confirmButtonText: 'Aceptar',
     }).then((result) => {

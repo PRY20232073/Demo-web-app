@@ -66,15 +66,38 @@ export class ConsultaCitasComponent {
   doctor = '';
   especialidad = '';
   sintomas = '';
+  dataSource = [
+    { label: 'Doctor', value: this.doctor },
+    {
+      label: 'Especialidad',
+      value: this.especialidad,
+    },
+    {
+      label: 'Sintomas',
+      value: this.sintomas,
+    },
+  ];
   constructor(
     private changeDetector: ChangeDetectorRef,
     private datePipe: DatePipe,
     private dialog: MatDialog
   ) {}
-  openAppointmentDetailsModal(appointment: EventInput) {
+  openAppointmentDetailsModal(appointment: any) {
+    this.dataSource = [
+      { label: 'Doctor', value: appointment.doctor },
+      {
+        label: 'Especialidad',
+        value: appointment.especialidad,
+      },
+      {
+        label: 'Sintomas',
+        value: appointment.sintomas,
+      },
+    ];
     this.dialog.open(this.appointmentDetailsModal, {
       width: '500px',
       data: appointment,
+      autoFocus: false,
     });
   }
   closeDetailsModal() {
@@ -125,7 +148,17 @@ export class ConsultaCitasComponent {
     this.doctor = clickInfo.event.extendedProps['doctor'];
     this.especialidad = clickInfo.event.extendedProps['especialidad'];
     this.sintomas = clickInfo.event.extendedProps['sintomas'];
-
+    this.dataSource = [
+      { label: 'Doctor', value: this.doctor },
+      {
+        label: 'Especialidad',
+        value: this.especialidad,
+      },
+      {
+        label: 'Sintomas',
+        value: this.sintomas,
+      },
+    ];
     this.openAppointmentDetailsModal(clickInfo.event.extendedProps);
     // if (
     //   confirm(

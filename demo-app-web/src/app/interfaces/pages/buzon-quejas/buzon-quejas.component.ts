@@ -68,6 +68,7 @@ export class BuzonQuejasComponent {
         text: 'Su queja fue registrada correctamente',
         icon: 'success',
         showCancelButton: false,
+        confirmButtonColor: '#D50000',
         confirmButtonText: 'Aceptar',
       }).then((result) => {
         if (result.isConfirmed) {
@@ -77,5 +78,8 @@ export class BuzonQuejasComponent {
     } else {
       console.log('no paso todas las validaciones');
     }
+  }
+  recargarPagina() {
+    window.location.reload();
   }
 }

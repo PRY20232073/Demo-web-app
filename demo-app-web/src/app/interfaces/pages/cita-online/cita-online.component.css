@@ -46,4 +46,6 @@ mat-form-field {
   border-color: #9b0000; /* Color del borde cuando está seleccionado */
 }
 /* Ajusta el ancho de los campos de texto */
-
+.mat-column-property {
+  max-width: 25px!important;
+}

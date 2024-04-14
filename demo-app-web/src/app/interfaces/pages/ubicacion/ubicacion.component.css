@@ -2,3 +2,34 @@
     width: 100%;
     height: 700px;
   }
+.btn-ubicacion{
+  top: 10px;
+  left: 20px;
+  z-index: 9999;
+}
+.containers {
+  align-items: center;
+}
+
+.side-by-sides {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.left-halfs {
+  flex: 0.7;
+  padding: 16px;
+  text-align: left; /* Centra el contenido horizontalmente */
+}
+
+.right-halfs {
+  flex: 1;
+  padding: 16px;
+  text-align: center; /* Centra el contenido horizontalmente */
+}
+.card-events{
+  margin-bottom: 10px;
+
+}

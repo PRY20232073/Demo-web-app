@@ -15,10 +15,7 @@ mat-form-field mat-label,
 mat-form-field mat-select {
   font-size: 14px !important;
 }
-mat-form-field mat-icon {
-  padding-right:12 !important; padding-top: 0 !important; padding-left: 12 !important;
-  font-size: 34px !important;
-}
+
 mat-form-field input,
 mat-form-field textarea,
 mat-form-field select {
@@ -89,20 +86,23 @@ will-change: auto;
 }
 
 .summary-table td:first-child {
-  background-color: rgba(213, 0, 0, 0.1); /* Color de fondo suave */
+  /* background-color: rgba(213, 0, 0, 0.1); Color de fondo suave */
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 500;
 }
-
+.summary-table tr:nth-child(odd) {
+  background-color: rgba(213, 0, 0, 0.03); /* Color de fondo suave */
+}
 .table-header {
   font-weight: bold;
 }
-
+/* 
 .data-cell {
-  background-color: white; /* Fondo blanco para las celdas de datos */
-}
+  background-color: white; Fondo blanco para las celdas de datos 
+}*/
 .mat-column-property {
   border-left: 1px solid #ccc; /* Borde izquierdo */
   border-right: 1px solid #ccc; /* Borde derecho */
-  max-width: 25px!important;
 }
 .mat-column-value {
   border-right: 1px solid #ccc; /* Borde izquierdo */
@@ -126,4 +126,15 @@ will-change: auto;
   border-color: #D50000; 
   border-style: solid; 
   padding-right: 10px;
+}
+.dialog-close{
+  display: flex;
+  justify-content: end;
+  margin-bottom: 0px;
+}
+.custom-input{
+  margin-bottom: 10px;
+}
+.customs-error-msj{
+  font-weight: 500;
 }

@@ -50,7 +50,7 @@
                                 <div class="col-md-1" style="padding-left: 0%;">
                                 </div>
                                 <div class="col-md-11 label-input">
-                                    <mat-label >Ingrese aqui el N° de Documento (Ej: 70412550)</mat-label>
+                                    <mat-label >Ingrese aquí el N° de Documento (Ej: 70412550)</mat-label>
                                 </div>
                             </div>
                             <div class="row">
@@ -72,7 +72,7 @@
                                 <div class="col-md-1" style="padding-left: 0%;">
                                 </div>
                                 <div class="col-md-11 label-input">
-                                    <mat-label >Ingrese aqui su número de celular (Ej: 991144192)</mat-label>
+                                    <mat-label >Ingrese aquí su número de celular (Ej: 991144192)</mat-label>
                                 </div>
                             </div>
                             <div class="row">
@@ -171,12 +171,12 @@
                                 <div class="col-md-1" style="padding-left: 0%;">
                                 </div>
                                 <div class="col-md-11 label-input">
-                                    <mat-label>Ingrese algun mensaje u observacion de sus sintomas:</mat-label>
+                                    <mat-label>Ingrese algún mensaje u observación de sus sintomas:</mat-label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-1" style="padding-left: 0%;">
-
+                                    <img src="../../../../assets/icons/lets-icons_comment.svg" alt="Imagen" class="imagen-input"/>
                                 </div>
                                 <div class="col-md-11">
                                     <mat-form-field appearance="outline">
@@ -230,7 +230,7 @@
                             </div>
                             <div *ngIf="selectedDate">
                                 <div class="row">
-                                    <div class="col-md-1" style="padding-left: 0%;align-items: center; display:flex">
+                                    <div class="col-md-1" style="padding-left: 0%;display: flex;justify-content: center;">
                                         <mat-icon class="icon-input">
                                             schedule
                                         </mat-icon>
@@ -270,7 +270,7 @@
                     <mat-card-title><h3>Resumen de la cita médica</h3></mat-card-title>
                 </mat-card-header>
                 <mat-card-content class="text-left">
-                    <table mat-table class="summary-table" [dataSource]="dataSource" aria-label="Tabla de resumen">
+                    <table mat-table class="summary-table" [dataSource]="dataSource" aria-label="Tabla de resumen" >
                         <ng-container matColumnDef="property">
                           <td mat-cell *matCellDef="let element" class="table-cell">{{element.label}}</td>
                         </ng-container>
@@ -280,7 +280,7 @@
                         </ng-container>
                   
                         <tr mat-row *matRowDef="let row; columns: ['property', 'value'];"></tr>
-                      </table>
+                    </table>
                   
                 </mat-card-content>
                 <mat-card-actions style="justify-content: center;margin-top: 18px;margin-bottom: 18px;">

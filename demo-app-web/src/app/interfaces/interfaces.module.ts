@@ -21,6 +21,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { DatePipe } from '@angular/common';
 import { DoctoresComponent } from './pages/doctores/doctores.component';
 import { SharedModule } from '../shared/shared.module';
+import { MapScreenComponent } from './pages/ubicacion/components/map-screen/map-screen.component';
+import { MapViewComponent } from './pages/ubicacion/components/map-view/map-view.component';
 @NgModule({
   declarations: [
     CitaOnlineComponent,
@@ -32,6 +34,8 @@ import { SharedModule } from '../shared/shared.module';
     BuzonQuejasComponent,
     UbicacionComponent,
     DoctoresComponent,
+    MapScreenComponent,
+    MapViewComponent,
   ],
   providers: [DatePipe],
   imports: [

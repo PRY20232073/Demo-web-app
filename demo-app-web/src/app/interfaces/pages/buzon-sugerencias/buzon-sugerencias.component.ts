@@ -52,6 +52,7 @@ export class BuzonSugerenciasComponent {
         title: 'Buzon de Sugerencia',
         text: 'Su sugerencia fue registrada correctamente',
         icon: 'success',
+        confirmButtonColor: '#D50000',
         showCancelButton: false,
         confirmButtonText: 'Aceptar',
       }).then((result) => {
@@ -62,5 +63,8 @@ export class BuzonSugerenciasComponent {
     } else {
       console.log('no paso todas las validaciones');
     }
+  }
+  recargarPagina() {
+    window.location.reload();
   }
 }
