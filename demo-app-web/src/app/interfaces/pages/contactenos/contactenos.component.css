@@ -23,13 +23,13 @@
   
   .side-by-side {
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: space-between;
     width: 100%;
   }
   
   .left-half {
-    flex: 1;
+    flex: 0.7;
     padding: 16px;
     text-align: center; /* Centra el contenido horizontalmente */
   }
@@ -39,4 +39,8 @@
     padding: 16px;
     text-align: center; /* Centra el contenido horizontalmente */
   }
-  
+  .subtittle-custom{
+    display: flex;
+    max-width: 500px;
+    margin-top: 0px;
+  }

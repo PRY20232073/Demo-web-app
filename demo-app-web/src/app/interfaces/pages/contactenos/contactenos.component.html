@@ -158,9 +158,9 @@
   -->
   <div class="container">
     <div class="side-by-side">
-        <div class="left-half" style="display: flex;text-align: start;justify-content: center;">
+        <div class="left-half" style="display: flex;text-align: start;justify-content: center;margin-top: 10px;padding-left: 50px;">
           <div class="data-content">
-            <h2>Disponible según horario</h2>
+            <h2 class="subtittle-custom">Disponible según horario</h2>
           <div class="border-box">
             <div class="row" style="flex: 0 0 100%;margin-top: 5px;">
               <div style="flex: 0 0 10%; display: flex;align-items: center;margin-bottom: 10px ;"class="border-right">
@@ -213,7 +213,7 @@
               </div>
             </div>
           </div>
-          <h2>Disponible 24 horas</h2>
+          <h2 class="subtittle-custom">Disponible 24 horas</h2>
           <div class="border-box">
             <div class="row" style="flex: 0 0 100%;margin-top: 15px;">
               <div style="flex: 0 0 10%;" class="border-right">
@@ -237,8 +237,8 @@
           </div>
           
         </div>
-        <div class="right-half">
-          <div *ngIf="FormComplete == 0">
+        <div class="right-half" >
+          <div *ngIf="FormComplete == 0; else Enviado">
 
             <form class="contact-form" [formGroup]="contactenos">
               <div class="row">
@@ -250,10 +250,10 @@
               </div>
               <div class="row">
                 <div class="col-md-1" style="padding-left: 0%;">
-                  <img src="../../../../assets/business-cards.png" alt="Imagen" class="imagen-input"/>
+                  <img src="../../../../assets/icons/solar--user-id-outline.svg" alt="Imagen" class="imagen-input"/>
             
                 </div>
-                <div class="col-md-11">
+                <div class="col-md-11 custom-input">
                     <mat-form-field appearance="outline">
                         <mat-select formControlName="tipoDocumento" 
                         placeholder="Seleccione el tipo de documento"
@@ -261,7 +261,7 @@
                         <mat-option value="DNI">DNI</mat-option>
                         <mat-option value="Pasaporte">Pasaporte</mat-option>
                         </mat-select>
-                        <mat-hint style="color: red;" *ngIf="contactenos.get('tipoDocumento')?.touched && contactenos.get('tipoDocumento')?.hasError('required')">
+                        <mat-hint class="customs-error-msj" style="color: red;" *ngIf="contactenos.get('tipoDocumento')?.touched && contactenos.get('tipoDocumento')?.hasError('required')">
                           Debe seleccionar el tipo de documento
                       </mat-hint>
                     </mat-form-field>
@@ -277,13 +277,13 @@
             </div>
             <div class="row">
               <div class="col-md-1" style="padding-left: 0%;">
-                <img src="../../../../assets/licencia-de-conducir.png" alt="Imagen" class="imagen-input"/>
+                <img src="../../../../assets/icons/nro-documento.svg" alt="Imagen" class="imagen-input"/>
             
               </div>
-              <div class="col-md-11">
+              <div class="col-md-11 custom-input">
                   <mat-form-field appearance="outline">
-                    <input matInput maxlength="8" formControlName="numeroDocumento" placeholder="" required/>
-                    <mat-hint style="color: red;" *ngIf="contactenos.get('numeroDocumento')?.touched && contactenos.get('numeroDocumento')?.hasError('required')">
+                    <input matInput maxlength="8" formControlName="numeroDocumento" placeholder="" required (keypress)="validateFormat($event)"/>
+                    <mat-hint class="customs-error-msj" style="color: red;" *ngIf="contactenos.get('numeroDocumento')?.touched && contactenos.get('numeroDocumento')?.hasError('required')">
                         Debe escribir su número de documento
                     </mat-hint>
                   </mat-form-field>
@@ -299,68 +299,18 @@
             </div>
             <div class="row">
               <div class="col-md-1" style="padding-left: 0%;">
-                  <mat-icon class="icon-input">
-                      call
-                  </mat-icon>
+                <img src="../../../../assets/icons/ph_phone.svg" alt="Imagen" class="imagen-input"/>
               </div>
-              <div class="col-md-11">
+              <div class="col-md-11 custom-input">
                   <mat-form-field appearance="outline">
-                    <input matInput maxlength="9" formControlName="numeroCelular" placeholder="" required/>
-                    <mat-hint style="color: red;" *ngIf="contactenos.get('numeroCelular')?.touched && contactenos.get('numeroCelular')?.hasError('required')">
+                    <input matInput maxlength="9" formControlName="numeroCelular" placeholder="" required (keypress)="validateFormat($event)"/>
+                    <mat-hint class="customs-error-msj" style="color: red;" *ngIf="contactenos.get('numeroCelular')?.touched && contactenos.get('numeroCelular')?.hasError('required')">
                         Debe escribir su número de celular
                     </mat-hint>
                   </mat-form-field>
               </div>
             </div>
-            
-            <div class="row">
-              <div class="col-md-1" style="padding-left: 0%;">
-              </div>
-              <div class="col-md-11 label-input">
-                  <mat-label >Ingrese la fecha de su nacimiento (dia/mes/año):</mat-label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-1" style="padding-left: 0%;">
-                  <mat-icon class="icon-input">
-                      calendar_month
-                  </mat-icon>
-              </div>
-              <div class="col-md-11">
-                  <mat-form-field appearance="outline">
-                    <input matInput formControlName="fechaNacimiento" placeholder="Fecha de nacimiento (dia/mes/año)" [matDatepicker]="picker" required>
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker startView="multi-year" [startAt]="startDate"></mat-datepicker>
-                    <mat-hint style="color: red;" *ngIf="contactenos.get('fechaNacimiento')?.touched && contactenos.get('fechaNacimiento')?.hasError('required')">
-                        Debe escribir o seleccionar su fecha de nacimiento
-                    </mat-hint>
-                  </mat-form-field>
-              </div>
-            </div>
-            
-            <div class="row">
-              <div class="col-md-1" style="padding-left: 0%;">
-              </div>
-              <div class="col-md-11 label-input">
-                  <mat-label >Ingrese aqui su correo electronico (Ej: jperez&#64;gmail.com):</mat-label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-1" style="padding-left: 0%;">
-                <mat-icon class="icon-input" >
-                  mail
-                </mat-icon>
-              </div>
-              <div class="col-md-11">
-                <mat-form-field appearance="outline">
-                  <input matInput type="email" placeholder=""  formControlName="correoElectronico"  />
-                  <mat-hint style="color: red;" *ngIf="contactenos.get('correoElectronico')?.touched && contactenos.get('correoElectronico')?.hasError('required')">
-                    Debe escribir su correo electronico.
-                </mat-hint>
-                </mat-form-field>
-              </div>
-            </div>
-            
+           
             <div class="row">
               <div class="col-md-1" style="padding-left: 0%;">
               </div>
@@ -370,14 +320,13 @@
             </div>
             <div class="row">
               <div class="col-md-1" style="padding-left: 0%;">
-                <mat-icon class="icon-input" style="padding-left: 0%;">
-                  comment
-                </mat-icon>
+                <img src="../../../../assets/icons/lets-icons_comment.svg" alt="Imagen" class="imagen-input"/>
+
               </div>
-              <div class="col-md-11">
+              <div class="col-md-11 custom-input">
                 <mat-form-field appearance="outline">
                   <textarea matInput rows="5" formControlName="comentario"></textarea>
-                  <mat-hint style="color: red;" *ngIf="contactenos.get('comentario')?.touched && contactenos.get('comentario')?.hasError('required')">
+                  <mat-hint class="customs-error-msj" style="color: red;" *ngIf="contactenos.get('comentario')?.touched && contactenos.get('comentario')?.hasError('required')">
                     Debe escribir el mensaje que quiere transmitirnos
                   </mat-hint>
                 </mat-form-field>
@@ -391,9 +340,16 @@
               </div>
             </div>
           </div>
+          <ng-template #Enviado >
+            <div style="display:flex;justify-content: center;"> 
+              <img class="image-submit" src="../../../../assets/Mailbox-pana.svg" alt="Imagen" />
+          
+            </div>
+            <div style="display:flex;justify-content: center;">
+              <button mat-raised-button color="primary" class="btnEnviar" (click)="recargarPagina()">Enviar nuevo mensaje</button>
+          
+            </div>
+          </ng-template> 
     </div>
   </div>
      
-     <!-- <div *ngIf="FormComplete == 1" style="display:flex;justify-content: center;">
-      <img class="image-submit" src="../../../../assets/Mailbox-pana.svg" alt="Imagen" />
-    </div> -->

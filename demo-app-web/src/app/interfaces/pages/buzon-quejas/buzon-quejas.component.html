@@ -1,4 +1,4 @@
-<h1 class="text-center">Buzon de quejas</h1>
+<h1 class="text-center">Buzón de quejas</h1>
 <mat-divider></mat-divider>
 <div *ngIf="FormComplete == 0">
 
@@ -40,7 +40,7 @@
         <div class="col-md-1" style="padding-left: 0%;">
         </div>
         <div class="col-md-11 label-input">
-            <mat-label >Ingrese aqui el N° de Documento (Ej: 70412550):</mat-label>
+            <mat-label >Ingrese aquí el N° de Documento (Ej: 70412550):</mat-label>
         </div>
       </div>
       <div class="row">
@@ -50,7 +50,7 @@
         </div>
         <div class="col-md-11 custom-input">
             <mat-form-field appearance="outline">
-              <input matInput maxlength="8" formControlName="numeroDocumento" placeholder="" required/>
+              <input matInput maxlength="8" formControlName="numeroDocumento" placeholder="" required (keypress)="validateFormat($event)"/>
               <mat-hint class="customs-error-msj" style="color: red;" *ngIf="quejas.get('numeroDocumento')?.touched && quejas.get('numeroDocumento')?.hasError('required') ">
                   Debe escribir su número de documento
               </mat-hint>
@@ -62,7 +62,7 @@
         <div class="col-md-1" style="padding-left: 0%;">
         </div>
         <div class="col-md-11 label-input">
-            <mat-label >Ingrese aqui su número de celular (Ej: 991144192):</mat-label>
+            <mat-label >Ingrese aquí su número de celular (Ej: 991144192):</mat-label>
         </div>
       </div>
       <div class="row">
@@ -72,7 +72,7 @@
         </div>
         <div class="col-md-11 custom-input">
             <mat-form-field appearance="outline">
-              <input matInput maxlength="9" formControlName="numeroCelular" placeholder="" required/>
+              <input matInput maxlength="9" formControlName="numeroCelular" placeholder="" required (keypress)="validateFormat($event)"/>
               <mat-hint class="customs-error-msj" style="color: red;" *ngIf="quejas.get('numeroCelular')?.touched && quejas.get('numeroCelular')?.hasError('required')">
                   Debe escribir su número de celular
               </mat-hint>
@@ -136,7 +136,7 @@
         <div class="col-md-1" style="padding-left: 0%;">
         </div>
         <div class="col-md-11 label-input">
-          <mat-label>Escriba aqui la queja que quiera transmitirnos</mat-label>
+          <mat-label>Escriba aquí la queja que quiera transmitirnos</mat-label>
         </div>
       </div>
       <div class="row">
@@ -169,7 +169,7 @@
 
   </div>
   <div style="display:flex;justify-content: center;">
-    <button mat-raised-button color="primary" class="btnEnviar" (click)="recargarPagina()">Volver a enviar</button>
+    <button mat-raised-button color="primary" class="btnEnviar" (click)="recargarPagina()">Crear nueva queja</button>
 
   </div>
 

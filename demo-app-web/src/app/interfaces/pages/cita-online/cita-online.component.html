@@ -171,7 +171,7 @@
                                 <div class="col-md-1" style="padding-left: 0%;">
                                 </div>
                                 <div class="col-md-11 label-input">
-                                    <mat-label>Ingrese algún mensaje u observación de sus sintomas:</mat-label>
+                                    <mat-label>Ingrese algún mensaje u observación de sus síntomas:</mat-label>
                                 </div>
                             </div>
                             <div class="row">
@@ -252,6 +252,9 @@
                                                 {{ hour }}
                                             </button>
                                         </div>
+                                        <mat-hint style="color: red;display: flex;margin-top: 5px;" *ngIf="faltaHora">
+                                            Debe seleccionar la hora de su cita
+                                        </mat-hint>
                                     </div>
                                 </div>
                             </div>

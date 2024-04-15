@@ -76,7 +76,7 @@ export class CitaOnlineComponent {
   selectedDate: any;
   name = 'Angular 6';
   availableHours: string[] = [];
-
+  faltaHora: boolean = false;
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
@@ -122,8 +122,10 @@ export class CitaOnlineComponent {
   selectHour(hour: string) {
     // Si la hora seleccionada es la misma, deselecciónala
     if (this.selectedHour === hour) {
+      this.faltaHora = true;
       this.selectedHour = null;
     } else {
+      this.faltaHora = false;
       // De lo contrario, selecciona la nueva hora
       this.selectedHour = hour;
     }
@@ -240,6 +242,7 @@ export class CitaOnlineComponent {
         this.StepperForm = 1;
       }
     } else {
+      this.faltaHora = true;
       // Mostrar un mensaje indicando que se debe seleccionar una hora
     }
   }
