@@ -32,6 +32,8 @@
 }
 .card-events{
   margin-bottom: 5px;
+  border-width: 1px;
+  border-color: #D50000;
 }
 .mat-column-property {
   max-width: 150px!important;
