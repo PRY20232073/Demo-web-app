@@ -14,7 +14,7 @@
 }
 
 .left-half {
-  flex: 1;
+  flex: 0.7;
   padding: 16px;
   text-align: center; /* Centra el contenido horizontalmente */
 }
@@ -46,4 +46,6 @@ mat-form-field {
   border-color: #9b0000; /* Color del borde cuando está seleccionado */
 }
 /* Ajusta el ancho de los campos de texto */
-
+.mat-column-property {
+  max-width: 25px!important;
+}

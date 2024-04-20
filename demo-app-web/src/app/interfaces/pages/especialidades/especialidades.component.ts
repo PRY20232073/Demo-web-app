@@ -13,7 +13,7 @@ import {
 })
 export class EspecialidadesComponent {
   especialidades: any[];
-
+  especialidades_vacias: number = 0;
   filtro: string = '';
   constructor(private especialidadService: EspecialidadService) {
     this.especialidades = [];
@@ -27,6 +27,8 @@ export class EspecialidadesComponent {
   }
   // Método para filtrar especialidades
   filtrarEspecialidades() {
+    this.especialidades_vacias = 0;
+
     if (this.filtro) {
       // this.especialidadService.getEspecialidad().subscribe((response) => {
       //   this.especialidades = response;
@@ -36,12 +38,20 @@ export class EspecialidadesComponent {
       //       .includes(this.filtro.toLowerCase())
       //   );
       // });
+
       this.getEspecialidades();
       this.especialidades = this.especialidades.filter((especialidad) =>
         especialidad.nombre_especialidad
           .toLowerCase()
           .includes(this.filtro.toLowerCase())
       );
+      if (this.especialidades.length == 0) {
+        this.especialidades_vacias = 1;
+      }
+      if (this.filtro.toLowerCase() == '') {
+        console.log('vacio el buscador');
+        this.especialidades_vacias = 0;
+      }
     } else {
       this.getEspecialidades();
     }
