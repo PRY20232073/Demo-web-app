@@ -1,7 +1,7 @@
 .contact-form {
     display: flex;
     flex-direction: column;
-    max-width: 800px;
+    max-width: 90%;
     margin: 0 auto;
     margin-top: 50px;
   }
@@ -9,4 +9,25 @@
   .mat-form-field {
     width: 100%;
     margin-bottom: 16px;
+  }
+  .btnEnviar{
+    padding: 23px 40px;
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
+  .side-by-side {
+    display: flex;
+    width: 100%;
+  }
+  
+  .left-half {
+    flex: 0 0 50%;
+    padding: 16px;
+    text-align: center; /* Centra el contenido horizontalmente */
+  }
+  
+  .right-half {
+    flex: 0 0 50%;
+    padding: 16px;
+    text-align: center; /* Centra el contenido horizontalmente */
   }

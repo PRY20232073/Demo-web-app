@@ -21,6 +21,11 @@
 .mdc-floating-label {
   will-change: auto;
 }*/
+.btnEnviar{
+  padding: 23px 40px;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
 ::ng-deep .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mdc-notched-outline--upgraded .mdc-floating-label--float-above {
   --mat-mdc-form-field-label-transform: translateY( -40.75px) scale(var(--mat-mdc-form-field-floating-label-scale, 1)) !important;
 }

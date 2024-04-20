@@ -11,3 +11,33 @@ a {
   color: #D50000 !important; 
   margin-right: 5px;
 }
+.navbar-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 70%;
+
+}
+.logo-container {
+  margin-right: 200px; /* Ajusta el espacio entre la imagen y los enlaces según sea necesario */
+}
+.navbar-links a {
+  text-decoration: none;
+  color: inherit;
+}
+.button-navbar{
+  font-size: 16px;
+}
+.active {
+  border-style: solid;
+  border-color: #FFFFFF;
+  background-color: white; /* Color de fondo cuando esté activo */
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 12px;
+  border-bottom-color: #D50000;
+  border-bottom-width: 3px;
+  font-weight: 500;
+  height: 63px;
+}

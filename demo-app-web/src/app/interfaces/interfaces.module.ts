@@ -20,6 +20,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { DatePipe } from '@angular/common';
 import { DoctoresComponent } from './pages/doctores/doctores.component';
+import { SharedModule } from '../shared/shared.module';
+import { MapScreenComponent } from './pages/ubicacion/components/map-screen/map-screen.component';
+import { MapViewComponent } from './pages/ubicacion/components/map-view/map-view.component';
 @NgModule({
   declarations: [
     CitaOnlineComponent,
@@ -31,7 +34,10 @@ import { DoctoresComponent } from './pages/doctores/doctores.component';
     BuzonQuejasComponent,
     UbicacionComponent,
     DoctoresComponent,
+    MapScreenComponent,
+    MapViewComponent,
   ],
+  providers: [DatePipe],
   imports: [
     FullCalendarModule,
     CommonModule,
@@ -45,7 +51,7 @@ import { DoctoresComponent } from './pages/doctores/doctores.component';
       useFactory: adapterFactory,
     }),
     HttpClientModule,
+    SharedModule,
   ],
-  providers: [DatePipe],
 })
 export class InterfacesModule {}

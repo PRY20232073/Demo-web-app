@@ -1,7 +1,7 @@
 
-<h1 class="text-center">Buzon de Sugerencias</h1>
+<h1 class="text-center">Buzón de Sugerencias</h1>
 <mat-divider></mat-divider>
-
+<div *ngIf="FormComplete == 0">
 <form class="contact-form" [formGroup]="sugerencia">
   <div class="row">
     <div class="col-md-1" style="padding-left: 0%;">
@@ -12,10 +12,10 @@
   </div>
   <div class="row">
     <div class="col-md-1" style="padding-left: 0%;">
-      <img src="../../../../assets/business-cards.png" alt="Imagen" class="imagen-input"/>
+      <img src="../../../../assets/icons/solar--user-id-outline.svg" alt="Imagen" class="imagen-input"/>
 
     </div>
-    <div class="col-md-11">
+    <div class="col-md-11 custom-input">
         <mat-form-field appearance="outline">
             <mat-select formControlName="tipoDocumento" 
             placeholder="Seleccione el tipo de documento"
@@ -24,7 +24,7 @@
             <mat-option value="Pasaporte">Pasaporte</mat-option>
             <!-- Agrega más opciones según tus necesidades -->
             </mat-select>
-            <mat-hint style="color: red;" *ngIf="sugerencia.get('tipoDocumento')?.touched && sugerencia.get('tipoDocumento')?.hasError('required')">
+            <mat-hint class="customs-error-msj" style="color: red;" *ngIf="sugerencia.get('tipoDocumento')?.touched && sugerencia.get('tipoDocumento')?.hasError('required')">
               Debe seleccionar el tipo de documento
           </mat-hint>
         </mat-form-field>
@@ -37,18 +37,18 @@
   <div class="col-md-1" style="padding-left: 0%;">
   </div>
   <div class="col-md-11 label-input">
-      <mat-label >Ingrese aqui el N° de Documento (Ej: 70412550):</mat-label>
+      <mat-label >Ingrese aquí el N° de Documento (Ej: 70412550):</mat-label>
   </div>
 </div>
 <div class="row">
   <div class="col-md-1" style="padding-left: 0%;">
-    <img src="../../../../assets/licencia-de-conducir.png" alt="Imagen" class="imagen-input"/>
+    <img src="../../../../assets/icons/nro-documento.svg" alt="Imagen" class="imagen-input"/>
 
   </div>
-  <div class="col-md-11">
+  <div class="col-md-11 custom-input">
       <mat-form-field appearance="outline">
-        <input matInput formControlName="numeroDocumento" placeholder="" required/>
-        <mat-hint style="color: red;" *ngIf="sugerencia.get('numeroDocumento')?.touched && sugerencia.get('numeroDocumento')?.hasError('required')">
+        <input matInput maxlength="8" formControlName="numeroDocumento" placeholder="" required (keypress)="validateFormat($event)" />
+        <mat-hint class="customs-error-msj" style="color: red;" *ngIf="sugerencia.get('numeroDocumento')?.touched && sugerencia.get('numeroDocumento')?.hasError('required')">
             Debe escribir su número de documento
         </mat-hint>
       </mat-form-field>
@@ -59,42 +59,41 @@
   <div class="col-md-1" style="padding-left: 0%;">
   </div>
   <div class="col-md-11 label-input">
-      <mat-label >Ingrese aqui su correo electronico (Ej: jperez&#64;gmail.com):</mat-label>
+      <mat-label >Ingrese aquí su número de celular (Ej: 991144192):</mat-label>
   </div>
 </div>
 <div class="row">
   <div class="col-md-1" style="padding-left: 0%;">
-    <mat-icon class="icon-input" >
-      mail
-    </mat-icon>
+    <img src="../../../../assets/icons/ph_phone.svg" alt="Imagen" class="imagen-input"/>
+
   </div>
-  <div class="col-md-11">
-    <mat-form-field appearance="outline">
-      <input matInput type="email" placeholder=""  formControlName="correoElectronico"  />
-      <mat-hint style="color: red;" *ngIf="sugerencia.get('correoElectronico')?.touched && sugerencia.get('correoElectronico')?.hasError('required')">
-        Debe escribir su correo electronico.
-    </mat-hint>
-    </mat-form-field>
+  <div class="col-md-11 custom-input">
+      <mat-form-field appearance="outline">
+        <input matInput maxlength="9" formControlName="numeroCelular" placeholder="" required (keypress)="validateFormat($event)"/>
+        <mat-hint class="customs-error-msj" style="color: red;" *ngIf="sugerencia.get('numeroCelular')?.touched && sugerencia.get('numeroCelular')?.hasError('required')">
+            Debe escribir su número de celular
+        </mat-hint>
+      </mat-form-field>
   </div>
 </div>
+
 
 <div class="row">
   <div class="col-md-1" style="padding-left: 0%;">
   </div>
   <div class="col-md-11 label-input">
-    <mat-label>Escriba aqui la sugerencia que quiera transmitirnos</mat-label>
+    <mat-label>Escriba aquí la sugerencia que quiera transmitirnos</mat-label>
   </div>
 </div>
 <div class="row">
   <div class="col-md-1" style="padding-left: 0%;">
-    <mat-icon class="icon-input" style="padding-left: 0%;">
-      comment
-    </mat-icon>
+    <img src="../../../../assets/icons/lets-icons_comment.svg" alt="Imagen" class="imagen-input"/>
+
   </div>
-  <div class="col-md-11">
+  <div class="col-md-11 custom-input">
     <mat-form-field appearance="outline">
       <textarea matInput rows="5" formControlName="comentario"></textarea>
-      <mat-hint style="color: red;" *ngIf="sugerencia.get('comentario')?.touched && sugerencia.get('comentario')?.hasError('required')">
+      <mat-hint class="customs-error-msj" style="color: red;" *ngIf="sugerencia.get('comentario')?.touched && sugerencia.get('comentario')?.hasError('required')">
         Debe escribir la sugerencia que quiere transmitirnos
       </mat-hint>
     </mat-form-field>
@@ -120,4 +119,16 @@
   </form>
   <div class="text-center">
     <button mat-raised-button color="primary" class="btnEnviar" (click)="submitForm()">Enviar</button>
+  </div>
+</div>
+  <div *ngIf="FormComplete == 1" >
+    <div style="display:flex;justify-content: center;"> 
+      <img class="image-submit" src="../../../../assets/Mailbox-pana.svg" alt="Imagen" />
+  
+    </div>
+    <div style="display:flex;justify-content: center;">
+      <button mat-raised-button color="primary" class="btnEnviar" (click)="recargarPagina()">Crear nueva sugerencia</button>
+  
+    </div>
+
   </div>

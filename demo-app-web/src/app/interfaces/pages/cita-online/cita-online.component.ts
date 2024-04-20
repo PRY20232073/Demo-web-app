@@ -8,10 +8,19 @@ import {
 import { DatePipe } from '@angular/common';
 import { Observable, map, startWith } from 'rxjs';
 import Swal from 'sweetalert2';
+import { CustomErrorStateMatcher } from 'src/app/shared/validators/CustomErrorStateMatcher';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-cita-online',
   templateUrl: './cita-online.component.html',
   styleUrls: ['./cita-online.component.css'],
+  providers: [
+    {
+      provide: ErrorStateMatcher,
+      useClass: CustomErrorStateMatcher,
+    },
+  ],
 })
 export class CitaOnlineComponent {
   ahora: any;
@@ -24,13 +33,16 @@ export class CitaOnlineComponent {
   especialidad = new FormControl('');
   options: string[] = [
     'Cardiología',
-    'Dermatologíawo',
+    'Dermatología',
     'Obstetricia',
-    'Urologia',
+    'Urología',
   ];
   selectedHour: string | null = null;
   filteredOptions: Observable<string[]> | undefined;
+  SubmitForm = false;
 
+  //Indica si inicia con el form o el resumen
+  StepperForm = 0;
   stepOneForm = this.fb.group({
     tipoDocumento: [this.tipoDocumento[0].value, Validators.required],
     numeroDocumento: ['', Validators.required],
@@ -39,7 +51,7 @@ export class CitaOnlineComponent {
   });
 
   stepTwoForm = this.fb.group({
-    especialidad: ['', Validators.required],
+    especialidad: ['', [Validators.required, this.customValidator.bind(this)]],
     sintomas: ['', Validators.required],
   });
 
@@ -53,12 +65,18 @@ export class CitaOnlineComponent {
   secondFormGroup = this._formBuilder.group({
     secondCtrl: ['', Validators.required],
   });
-
-  constructor(private fb: FormBuilder, private _formBuilder: FormBuilder) {}
+  customErrorStateMatcher = new CustomErrorStateMatcher();
+  private audio = new Audio();
+  constructor(
+    private fb: FormBuilder,
+    private _formBuilder: FormBuilder,
+    private router: Router,
+    private datePipe: DatePipe
+  ) {}
   selectedDate: any;
   name = 'Angular 6';
   availableHours: string[] = [];
-
+  faltaHora: boolean = false;
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
@@ -66,6 +84,21 @@ export class CitaOnlineComponent {
       option.toLowerCase().includes(filterValue)
     );
   }
+  dataSource = [
+    { label: 'Tipo de Documento', value: this.stepOneForm.value.tipoDocumento },
+    {
+      label: 'Número de Documento',
+      value: this.stepOneForm.value.numeroDocumento,
+    },
+    {
+      label: 'Fecha de Nacimiento',
+      value: this.stepOneForm.value.fechaNacimiento,
+    },
+    { label: 'Número de Celular', value: this.stepOneForm.value.numeroCelular },
+    { label: 'Especialidad', value: this.stepTwoForm.value.especialidad },
+    { label: 'Síntomas', value: this.stepTwoForm.value.sintomas },
+    { label: 'Fecha de Cita', value: this.stepThreeForm.value.fechaCita },
+  ];
   calculateAvailableHours() {
     // Lógica para calcular las horas disponibles (puedes personalizar según tus necesidades)
     // Aquí un ejemplo básico para disponibilidad de 10:00 am a 5:00 pm
@@ -89,8 +122,10 @@ export class CitaOnlineComponent {
   selectHour(hour: string) {
     // Si la hora seleccionada es la misma, deselecciónala
     if (this.selectedHour === hour) {
+      this.faltaHora = true;
       this.selectedHour = null;
     } else {
+      this.faltaHora = false;
       // De lo contrario, selecciona la nueva hora
       this.selectedHour = hour;
     }
@@ -111,11 +146,12 @@ export class CitaOnlineComponent {
       map((value) => this._filter(value || ''))
     );
     const datePite = new DatePipe('en-Us');
-    this.ahora = datePite.transform(new Date(), 'yyyy-MM-dd');
+    this.ahora = datePite.transform(
+      new Date().setDate(new Date().getDate() + 1),
+      'yyyy-MM-dd'
+    );
   }
   onSelect(event: any) {
-    console.log(event);
-
     this.selectedDate = event;
     // Calcula las horas disponibles basándose en la fecha seleccionada
     this.calculateAvailableHours();
@@ -125,8 +161,18 @@ export class CitaOnlineComponent {
     switch (step) {
       case 0:
         this.markFormGroupTouched(this.stepOneForm);
+        this.SubmitForm = true;
         // Validar y avanzar al siguiente paso si es válido
         if (this.stepOneForm.valid) {
+          this.SubmitForm = false;
+          window.sessionStorage['fechaNacimiento'] =
+            this.stepOneForm.value.fechaNacimiento;
+          window.sessionStorage['numeroCelular'] =
+            this.stepOneForm.value.numeroCelular;
+          window.sessionStorage['numeroDocumento'] =
+            this.stepOneForm.value.numeroDocumento;
+          window.sessionStorage['tipoDocumento'] =
+            this.stepOneForm.value.tipoDocumento;
           // Marcar como tocados los controles del formulario actual
           this.markFormGroupTouched(this.stepOneForm);
           // Realiza acciones necesarias y avanza al siguiente paso
@@ -134,9 +180,12 @@ export class CitaOnlineComponent {
         }
         break;
       case 1:
+        this.SubmitForm = true;
         this.markFormGroupTouched(this.stepTwoForm);
-
         if (this.stepTwoForm.valid) {
+          window.sessionStorage['especialidad'] =
+            this.stepTwoForm.value.especialidad;
+          window.sessionStorage['sintomas'] = this.stepTwoForm.value.sintomas;
           // Marcar como tocados los controles del formulario actual
           this.markFormGroupTouched(this.stepTwoForm);
           // Realiza acciones necesarias y avanza al siguiente paso
@@ -149,40 +198,102 @@ export class CitaOnlineComponent {
     // Método para retroceder al paso anterior si es necesario
     // Puedes implementarlo de manera similar al método nextStep
   }
-
+  backForm() {
+    this.StepperForm = 0;
+  }
   submitForm() {
     this.markFormGroupTouched(this.stepThreeForm);
     // Método para enviar el formulario una vez que se completen todos los pasos
     if (this.selectedHour) {
       // Verificar si el formulario es válido antes de mostrar el mensaje
       if (this.stepThreeForm.valid) {
+        window.sessionStorage['fechaCita'] = this.stepThreeForm.value.fechaCita;
         // Realiza acciones necesarias para enviar el formulario
-        Swal.fire({
-          title: 'Cita Online',
-          text: 'Su cita fue agendada correctamente',
-          icon: 'success',
-          showCancelButton: false,
-          confirmButtonText: 'Aceptar',
-        });
+        this.dataSource = [
+          {
+            label: 'Tipo de Documento',
+            value: this.stepOneForm.value.tipoDocumento,
+          },
+          {
+            label: 'Número de Documento',
+            value: this.stepOneForm.value.numeroDocumento,
+          },
+          {
+            label: 'Fecha de Nacimiento',
+            value: this.datePipe.transform(
+              this.stepOneForm.value.fechaNacimiento,
+              'dd/MM/yyyy'
+            ),
+          },
+          {
+            label: 'Número de Celular',
+            value: this.stepOneForm.value.numeroCelular,
+          },
+          { label: 'Especialidad', value: this.stepTwoForm.value.especialidad },
+          { label: 'Síntomas', value: this.stepTwoForm.value.sintomas },
+          {
+            label: 'Fecha de Cita',
+            value: this.datePipe.transform(
+              this.stepThreeForm.value.fechaCita,
+              'dd/MM/yyyy'
+            ),
+          },
+        ];
+        this.StepperForm = 1;
       }
     } else {
+      this.faltaHora = true;
       // Mostrar un mensaje indicando que se debe seleccionar una hora
-      Swal.fire({
-        title: 'Error',
-        text: 'Por favor, seleccione una hora antes de enviar el formulario',
-        icon: 'error',
-        showCancelButton: false,
-        confirmButtonText: 'Aceptar',
-      });
     }
+  }
+  confirmtForm() {
+    this.audio.src = '../../../../assets/sounds/notificacion.wav';
+    this.audio.volume = 0.3;
+    this.audio.play();
+    setTimeout(() => {}, 400);
+    Swal.fire({
+      title: 'Cita Online',
+      text: 'Su cita fue agendada correctamente',
+      icon: 'success',
+      confirmButtonColor: '#D50000',
+      showCancelButton: false,
+      confirmButtonText: 'Aceptar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.router.navigateByUrl('/consultar-cita');
+        //window.location = window."/consultar-cita";
+      }
+    });
   }
   private markFormGroupTouched(formGroup: FormGroup) {
     Object.values(formGroup.controls).forEach((control) => {
       control.markAsTouched();
-
       if (control instanceof FormGroup) {
         this.markFormGroupTouched(control);
       }
     });
+  }
+  validateFormat(event: any) {
+    let key;
+    if (event.type === 'paste') {
+      key = event.clipboardData.getData('text/plain');
+    } else {
+      key = event.keyCode;
+      key = String.fromCharCode(key);
+    }
+    const regex = /[0-9]|\./;
+    if (!regex.test(key)) {
+      event.returnValue = false;
+      if (event.preventDefault) {
+        event.preventDefault();
+      }
+    }
+  }
+  customValidator(control: any) {
+    const inputValue = control.value;
+    return this.verificarValor(inputValue) ? null : { invalidOption: true };
+  }
+  verificarValor(inputValue: any): boolean {
+    return this.options.includes(inputValue);
   }
 }

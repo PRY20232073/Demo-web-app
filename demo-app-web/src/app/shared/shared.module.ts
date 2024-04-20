@@ -4,9 +4,10 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../material/material.module';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [LoadingComponent],
   imports: [
     CommonModule,
     MatToolbarModule,
@@ -14,6 +15,6 @@ import { MaterialModule } from '../material/material.module';
     MaterialModule,
     NavBarComponent,
   ],
-  exports: [NavBarComponent],
+  exports: [NavBarComponent, LoadingComponent],
 })
 export class SharedModule {}

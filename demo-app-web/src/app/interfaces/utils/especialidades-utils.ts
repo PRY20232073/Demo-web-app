@@ -6,51 +6,45 @@ const TODAY_STR = new Date().toISOString().replace(/T.*$/, ''); // YYYY-MM-DD of
 export const ESPECIALIDADES: any[] = [
   {
     id: createEventId(),
-    nombre_especialidad: 'Cardiologia',
+    nombre_especialidad: 'Cardiología',
     descripcion:
       'Nuestros cardiólogos se especializan en el diagnóstico y tratamiento de enfermedades del corazón, asegurando que tu motor principal esté en óptimas condiciones.',
-    imagen:
-      'https://especialidadesmedicas.pe/wp-content/uploads/2022/02/PORTADA-para-moviles-de-ESPECIALIDADES_CARDIOLOGIA-1.png',
+    imagen: '../../../../assets/especialistas/Cardiologia.jpeg',
   },
   {
     id: createEventId(),
-    nombre_especialidad: 'Dermatologia',
+    nombre_especialidad: 'Dermatología',
     descripcion:
       'Nuestros dermatólogos cuidan de la salud y apariencia de tu piel, ofreciendo soluciones para afecciones cutáneas y procedimientos estéticos.',
-    imagen:
-      'https://especialidadesmedicas.pe/wp-content/uploads/2022/02/PORTADA-para-moviles-de-ESPECIALIDADES_Dermatologia-1.png',
+    imagen: '../../../../assets/especialistas/Dermatologia.jpeg',
   },
   {
     id: createEventId(),
-    nombre_especialidad: 'Ginecologia y Obstetricia',
+    nombre_especialidad: 'Ginecología y Obstetricia',
     descripcion:
-      'Nuestros expertos ginecólogos y obstetras brindan atención integral a mujeres, desde la adolescencia hasta la maternidad y más allá.',
-    imagen:
-      'https://especialidadesmedicas.pe/wp-content/uploads/2022/02/PORTADA-para-moviles-de-ESPECIALIDADES_GINECOLOGIA-Y-OBSTETRICIA-1.png',
+      'Nuestros expertos en ginecología y obstetricia brindan atención integral a mujeres, desde la adolescencia hasta la maternidad y más allá.',
+    imagen: '../../../../assets/especialistas/Ginecologia.jpeg',
   },
   {
     id: createEventId(),
-    nombre_especialidad: 'Urologia',
+    nombre_especialidad: 'Urología',
     descripcion:
-      'Nuestros expertos ginecólogos y obstetras brindan atención integral a mujeres, desde la adolescencia hasta la maternidad y más allá.',
-    imagen:
-      'https://especialidadesmedicas.pe/wp-content/uploads/2022/02/PORTADA-para-moviles-de-ESPECIALIDADES_UROLOGIA.png',
+      'Nuestros urólogos se especializan en el diagnóstico y tratamiento de enfermedades del tracto urinario, asegurando una salud óptima en esta área.',
+    imagen: '../../../../assets/especialistas/Urologia.jpeg',
   },
   {
     id: createEventId(),
-    nombre_especialidad: 'Reumatologia',
+    nombre_especialidad: 'Reumatología',
     descripcion:
-      'Nuestros expertos ginecólogos y obstetras brindan atención integral a mujeres, desde la adolescencia hasta la maternidad y más allá.',
-    imagen:
-      'https://especialidadesmedicas.pe/wp-content/uploads/2022/02/PORTADA-para-moviles-de-ESPECIALIDADES_REUMATOLOGIA.png',
+      'Nuestros reumatólogos se dedican al diagnóstico y tratamiento de enfermedades del sistema musculoesquelético y tejidos conectivos, para mejorar tu calidad de vida.',
+    imagen: '../../../../assets/especialistas/Reumatologia.jpeg',
   },
   {
     id: createEventId(),
-    nombre_especialidad: 'Neurocirugia',
+    nombre_especialidad: 'Neurocirugía',
     descripcion:
-      'Nuestros expertos ginecólogos y obstetras brindan atención integral a mujeres, desde la adolescencia hasta la maternidad y más allá.',
-    imagen:
-      'https://especialidadesmedicas.pe/wp-content/uploads/2022/02/PORTADA-para-moviles-de-ESPECIALIDADES_NEUROCIRUGIA-1.png',
+      'Nuestros neurocirujanos son expertos en el diagnóstico y tratamiento quirúrgico de enfermedades del sistema nervioso central y periférico, garantizando tu bienestar neurológico.',
+    imagen: '../../../../assets/especialistas/Neurocirugia.jpeg',
   },
 ];
 
