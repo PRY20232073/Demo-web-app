@@ -17,14 +17,15 @@
   }
 .card-header{
   display: flex;
-  align-items: center;
+  justify-content: end;
 }
 .input-buscador{
-  margin-bottom: -1.0em;
-  display: flex;
-  flex: 0 0 50%;
-  margin-right: 5px;
+  min-width: 370px;
 
+}
+.buscador{
+  justify-content: end;
+  margin-right: 50px;
 }
 a {
   text-decoration: none;
@@ -35,6 +36,7 @@ a {
 }
 .btn-doctores {
   border-radius: 10px;
+  font-size: 14px;
 }
 .accions-butons{
   display: flex;
@@ -42,4 +44,11 @@ a {
   margin-bottom: 15px;
   margin-top: 15px;
   margin-right: 15px;
+}
+.label-input-buscador{
+  margin-bottom: 5px;
+}
+.image-container{
+  display:flex;
+  justify-content: center;
 }

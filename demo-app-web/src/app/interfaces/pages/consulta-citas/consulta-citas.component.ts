@@ -66,6 +66,7 @@ export class ConsultaCitasComponent {
   doctor = '';
   especialidad = '';
   sintomas = '';
+  fecha_cita = '';
   dataSource = [
     { label: 'Doctor', value: this.doctor },
     {
@@ -83,6 +84,11 @@ export class ConsultaCitasComponent {
     private dialog: MatDialog
   ) {}
   openAppointmentDetailsModal(appointment: any) {
+    console.log(appointment);
+    const fecha_cita_aux = this.datePipe
+      .transform(appointment.start, 'dd/MM/yyyy hh:mm a')
+      ?.toString();
+    if (fecha_cita_aux) this.fecha_cita = fecha_cita_aux;
     this.dataSource = [
       { label: 'Doctor', value: appointment.doctor },
       {
@@ -92,6 +98,10 @@ export class ConsultaCitasComponent {
       {
         label: 'Sintomas',
         value: appointment.sintomas,
+      },
+      {
+        label: 'Fecha de la cita',
+        value: this.fecha_cita,
       },
     ];
     this.dialog.open(this.appointmentDetailsModal, {
@@ -148,6 +158,11 @@ export class ConsultaCitasComponent {
     this.doctor = clickInfo.event.extendedProps['doctor'];
     this.especialidad = clickInfo.event.extendedProps['especialidad'];
     this.sintomas = clickInfo.event.extendedProps['sintomas'];
+
+    const fecha_cita_aux = this.datePipe
+      .transform(clickInfo.event.start, 'dd/MM/yyyy hh:mm a')
+      ?.toString();
+    if (fecha_cita_aux) this.fecha_cita = fecha_cita_aux;
     this.dataSource = [
       { label: 'Doctor', value: this.doctor },
       {
@@ -157,6 +172,10 @@ export class ConsultaCitasComponent {
       {
         label: 'Sintomas',
         value: this.sintomas,
+      },
+      {
+        label: 'Fecha de la cita',
+        value: this.fecha_cita,
       },
     ];
     this.openAppointmentDetailsModal(clickInfo.event.extendedProps);

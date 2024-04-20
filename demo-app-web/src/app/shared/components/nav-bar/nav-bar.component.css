@@ -28,3 +28,16 @@ a {
 .button-navbar{
   font-size: 16px;
 }
+.active {
+  border-style: solid;
+  border-color: #FFFFFF;
+  background-color: white; /* Color de fondo cuando esté activo */
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 12px;
+  border-bottom-color: #D50000;
+  border-bottom-width: 3px;
+  font-weight: 500;
+  height: 63px;
+}

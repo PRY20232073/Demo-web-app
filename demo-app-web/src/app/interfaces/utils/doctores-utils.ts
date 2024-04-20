@@ -9,7 +9,7 @@ export const DOCTORES: any[] = [
     nombre_doctor: 'Dr. Juan Pérez',
     especialidad: 'Cardiologia',
     experiencia: 'Más de 15 años de experiencia en cardiología.',
-    imagen: 'https://www.hndac.gob.pe/wp-content/uploads/DR.-ACOSTA-VELA.jpg',
+    imagen: '../../../../assets/doctores/Doctor1.jpeg',
   },
   {
     id_doctor: 2,
@@ -17,36 +17,35 @@ export const DOCTORES: any[] = [
     especialidad: 'Dermatologia',
     experiencia:
       'Especializada en el cuidado de la piel y procedimientos estéticos.',
-    imagen: 'https://www.hndac.gob.pe/wp-content/uploads/ACOSTA-CACERES.jpg',
+    imagen: '../../../../assets/doctores/Doctor2.jpeg',
   },
   {
     id_doctor: 3,
     nombre_doctor: 'Dr. Roberto Sánchez',
     especialidad: 'Ginecologia y Obstetricia',
     experiencia: 'Atención integral a mujeres en todas las etapas de la vida.',
-    imagen: 'https://www.hndac.gob.pe/wp-content/uploads/DR.-AGUILAR.jpg',
+    imagen: '../../../../assets/doctores/Doctor3.jpeg',
   },
   {
     id_doctor: 4,
-    nombre_doctor: 'Dra. Cesar Martinez',
+    nombre_doctor: 'Dra. Lucia Martinez',
     especialidad: 'Pediatría',
     experiencia: 'Enfoque especializado en la salud de los niños.',
-    imagen: 'https://www.hndac.gob.pe/wp-content/uploads/DR.-EGUSQUIZA.jpg',
+    imagen: '../../../../assets/doctores/Doctor4.jpeg',
   },
   {
     id_doctor: 5,
     nombre_doctor: 'Dr. Andrés Rodríguez',
     especialidad: 'Neurología',
     experiencia: 'Diagnóstico y tratamiento de trastornos neurológicos.',
-    imagen:
-      'https://www.hndac.gob.pe/wp-content/uploads/DR.-BUENDIA-APARICIO.jpg',
+    imagen: '../../../../assets/doctores/Doctor5.jpeg',
   },
   {
     id_doctor: 6,
-    nombre_doctor: 'Dra. Marcos Octavio',
+    nombre_doctor: 'Dra. Marcia Villanueva',
     especialidad: 'Oftalmología',
     experiencia: 'Especializado en problemas de la vista y cirugía ocular.',
-    imagen: 'https://www.hndac.gob.pe/wp-content/uploads/DR.-CUADROS.jpg',
+    imagen: '../../../../assets/doctores/Doctor6.jpeg',
   },
 ];
 
