@@ -9,8 +9,25 @@ import { DatePipe } from '@angular/common';
 import { Observable, map, startWith } from 'rxjs';
 import Swal from 'sweetalert2';
 import { CustomErrorStateMatcher } from 'src/app/shared/validators/CustomErrorStateMatcher';
-import { ErrorStateMatcher } from '@angular/material/core';
+import {
+  DateAdapter,
+  ErrorStateMatcher,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+} from '@angular/material/core';
 import { Router } from '@angular/router';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+export const MY_DATE_FORMAT = {
+  parse: {
+    dateInput: 'DD/MM/YYYY', // this is how your date will be parsed from Input
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY', // this is how your date will get displayed on the Input
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 @Component({
   selector: 'app-cita-online',
   templateUrl: './cita-online.component.html',
@@ -20,6 +37,12 @@ import { Router } from '@angular/router';
       provide: ErrorStateMatcher,
       useClass: CustomErrorStateMatcher,
     },
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE],
+    },
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMAT },
   ],
 })
 export class CitaOnlineComponent {
@@ -233,10 +256,13 @@ export class CitaOnlineComponent {
           { label: 'Síntomas', value: this.stepTwoForm.value.sintomas },
           {
             label: 'Fecha de Cita',
-            value: this.datePipe.transform(
-              this.stepThreeForm.value.fechaCita,
-              'dd/MM/yyyy'
-            ),
+            value:
+              this.datePipe.transform(
+                this.stepThreeForm.value.fechaCita,
+                'dd/MM/yyyy'
+              ) +
+              ' ' +
+              this.selectedHour,
           },
         ];
         this.StepperForm = 1;

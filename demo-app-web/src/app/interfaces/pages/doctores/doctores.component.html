@@ -1,5 +1,18 @@
-<h1 class="text-center">Doctores</h1>
-<mat-divider></mat-divider>
+<div style=" display: flex;">
+  <h1 style="flex: 0 0 55%; text-align: end;">Doctores</h1>
+  <div style="flex: 0 0 40%;display: flex; justify-content: end;">
+    <div style="min-width: 250px; margin-top: 20px;">
+      <mat-form-field appearance="outline">
+        <mat-label>Cambia el tamaño de letra</mat-label>
+        <mat-select (selectionChange)="cambiarTamanioLetra($event.value)">
+          <mat-option value="normal">Normal</mat-option>
+          <mat-option value="grande">Grande</mat-option>
+          <mat-option value="muy grande">Muy Grande</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+</div><mat-divider></mat-divider>
 <br>
 <div class="row align-items-center justify-content-end buscador">
   <div style="flex: 0 0 70%;">
@@ -20,20 +33,33 @@
     <div fxLayout="row " fxLayout.lt-md="column"  class="responsive-grid">
       <mat-card *ngFor="let especialidad of especialidades" class="especialidad-card">
         <mat-card-header>
-            <mat-card-title>
+            <mat-card-title class="titulo-card"> 
                 {{ especialidad.nombre_doctor }}
             </mat-card-title>
-            <mat-card-subtitle>
+            <mat-card-subtitle class="subtitulo-card">
                 {{ especialidad.especialidad }}
             </mat-card-subtitle>
 
         </mat-card-header>
         <img mat-card-image [src]="especialidad.imagen" alt="{{ especialidad.nombre_doctor }}" />
         <br>
-        <mat-card-content style="flex-grow: 1;">
-          <p>{{ especialidad.experiencia }}</p>
+        <mat-card-content class="parrafo-card" style="flex-grow: 1;">
+          <p style="margin-top: 0px;">{{ especialidad.experiencia }}</p>
         </mat-card-content>
         <mat-card-actions>
+          <div *ngIf="especialidad.disponibilidad == 1">
+            <div class="chip-container">
+              <mat-icon fontIcon="check"></mat-icon>
+              <label>Disponible</label>
+            </div>
+          </div>
+          <div *ngIf="especialidad.disponibilidad == 0">
+            <div class="chip-container-disabled">
+              <mat-icon fontIcon="check"></mat-icon>
+              <label>No disponible</label>
+            </div>
+          </div>
+
         </mat-card-actions>
       </mat-card>
     </div>

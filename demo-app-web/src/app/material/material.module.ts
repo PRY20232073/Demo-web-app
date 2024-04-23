@@ -16,6 +16,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
+import { MatChipsModule } from '@angular/material/chips';
 @NgModule({
   declarations: [],
   imports: [
@@ -37,6 +38,7 @@ import { MatTableModule } from '@angular/material/table';
     MatToolbarModule,
     MatDialogModule,
     MatTableModule,
+    MatChipsModule,
   ],
   exports: [
     MatStepperModule,
@@ -56,6 +58,7 @@ import { MatTableModule } from '@angular/material/table';
     MatToolbarModule,
     MatDialogModule,
     MatTableModule,
+    MatChipsModule,
   ],
 })
 export class MaterialModule {}

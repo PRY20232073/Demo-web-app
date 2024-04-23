@@ -7,7 +7,7 @@
             <img src="../../../../assets/Doctors-bro.svg" alt="Imagen" />
         </div>
           <div class="right-half">
-            <mat-card *ngIf="StepperForm == 0">
+            <div *ngIf="StepperForm == 0">
               <mat-card-content>
                 <mat-stepper linear labelPosition="bottom" #stepper>
                  <!-- Paso 1: Datos personales -->
@@ -267,7 +267,7 @@
                     </mat-step>
                 </mat-stepper>
               </mat-card-content>
-            </mat-card>
+            </div>
             <mat-card *ngIf="StepperForm == 1">
                 <mat-card-header style="justify-content: center;">
                     <mat-card-title><h3>Resumen de la cita médica</h3></mat-card-title>
