@@ -42,7 +42,9 @@ export const MY_DATE_FORMAT = {
       useClass: MomentDateAdapter,
       deps: [MAT_DATE_LOCALE],
     },
+
     { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMAT },
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
   ],
 })
 export class CitaOnlineComponent {
@@ -55,10 +57,26 @@ export class CitaOnlineComponent {
   tipoDocumentocontrol = new FormControl(this.tipoDocumento[0].value);
   especialidad = new FormControl('');
   options: string[] = [
+    'Medicina General',
     'Cardiología',
     'Dermatología',
     'Obstetricia',
     'Urología',
+    'Pediatría',
+    'Oncología',
+    'Neurología',
+    'Ginecología',
+    'Traumatología',
+    'Oftalmología',
+    'Endocrinología',
+    'Gastroenterología',
+    'Psiquiatría',
+    'Nefrología',
+    'Hematología',
+    'Radiología',
+    'Fisioterapia',
+    'Nutrición',
+    'Rehabilitación',
   ];
   selectedHour: string | null = null;
   filteredOptions: Observable<string[]> | undefined;
@@ -100,13 +118,7 @@ export class CitaOnlineComponent {
   name = 'Angular 6';
   availableHours: string[] = [];
   faltaHora: boolean = false;
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
 
-    return this.options.filter((option) =>
-      option.toLowerCase().includes(filterValue)
-    );
-  }
   dataSource = [
     { label: 'Tipo de Documento', value: this.stepOneForm.value.tipoDocumento },
     {
@@ -172,6 +184,13 @@ export class CitaOnlineComponent {
     this.ahora = datePite.transform(
       new Date().setDate(new Date().getDate() + 1),
       'yyyy-MM-dd'
+    );
+  }
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    console.log(filterValue);
+    return this.options.filter((option) =>
+      option.toLowerCase().includes(filterValue)
     );
   }
   onSelect(event: any) {
@@ -317,6 +336,11 @@ export class CitaOnlineComponent {
   }
   customValidator(control: any) {
     const inputValue = control.value;
+    this.filteredOptions = this.especialidad.valueChanges.pipe(
+      startWith(''),
+      map((value) => this._filter(inputValue || ''))
+    );
+
     return this.verificarValor(inputValue) ? null : { invalidOption: true };
   }
   verificarValor(inputValue: any): boolean {

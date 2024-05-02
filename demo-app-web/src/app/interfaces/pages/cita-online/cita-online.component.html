@@ -142,15 +142,11 @@
                                 <div class="col-md-11">
                                     <mat-form-field appearance="outline">
                                         <input matInput 
+                                        type="text"
                                         placeholder="Escribe la especialidad" 
                                         formControlName="especialidad" 
                                         [matAutocomplete]="auto"
                                         required>
-                                        <!--
-                                        <mat-select formControlName="especialidad">
-                                        <mat-option value="Cardiología">Cardiología</mat-option>
-                                        <mat-option value="Dermatología">Dermatología</mat-option>
-                                        </mat-select>-->
                                         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
                                             <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                                                 {{ option }}
