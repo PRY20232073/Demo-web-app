@@ -4,13 +4,22 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
 import { RouterOutlet } from '@angular/router';
 import { Location } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css'],
   standalone: true,
-  imports: [MatToolbarModule, MatButtonModule, MatTabsModule, RouterOutlet],
+  imports: [
+    MatToolbarModule,
+    MatButtonModule,
+    MatTabsModule,
+    RouterOutlet,
+    MatFormFieldModule,
+    MatSelectModule,
+  ],
 })
 export class NavBarComponent {
   links = ['crear-cita', 'p2', 'p3'];

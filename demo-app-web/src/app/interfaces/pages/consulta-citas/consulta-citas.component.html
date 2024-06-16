@@ -24,7 +24,7 @@
     <div class='demo-app-main'>
       <full-calendar *ngIf='calendarVisible()' [options]='calendarOptions()' class="calendar">
         <ng-template #eventContent let-arg>
-          <i style="font-size: 14px;">{{ arg.event.title }}</i>
+          <i class="event-title">{{ arg.event.title }}</i>
         </ng-template>
       </full-calendar>
     </div>

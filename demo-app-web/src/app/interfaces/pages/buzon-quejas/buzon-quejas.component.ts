@@ -5,10 +5,26 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
+import {
+  DateAdapter,
+  ErrorStateMatcher,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+} from '@angular/material/core';
 import { CustomErrorStateMatcher } from 'src/app/shared/validators/CustomErrorStateMatcher';
 import Swal from 'sweetalert2';
-
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+export const MY_DATE_FORMAT = {
+  parse: {
+    dateInput: 'DD/MM/YYYY', // this is how your date will be parsed from Input
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY', // this is how your date will get displayed on the Input
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 @Component({
   selector: 'app-buzon-quejas',
   templateUrl: './buzon-quejas.component.html',
@@ -18,6 +34,13 @@ import Swal from 'sweetalert2';
       provide: ErrorStateMatcher,
       useClass: CustomErrorStateMatcher,
     },
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE],
+    },
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMAT },
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
   ],
 })
 export class BuzonQuejasComponent {

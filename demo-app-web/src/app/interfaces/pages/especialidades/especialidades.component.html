@@ -1,8 +1,24 @@
-<h1 class="text-center">Especialidades</h1>
+<div style=" display: flex;">
+  <h1 style="flex: 0 0 55%; text-align: end;">Especialidades</h1>
+  <div style="flex: 0 0 40%;display: flex; justify-content: end;">
+    <div style="min-width: 250px; margin-top: 20px; max-width: 250px;">
+      <mat-label >Cambia el tamaño de letra</mat-label>
+      <mat-form-field appearance="outline" style="margin-top: 5px !important;">
+        <mat-select (selectionChange)="cambiarTamanioLetra($event.value)" [(value)]='valueCambioLetra'>
+          <mat-option value="normal">Normal</mat-option>
+          <mat-option value="grande">Grande</mat-option>
+          <mat-option value="muy grande">Muy Grande</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+</div>
 <mat-divider></mat-divider>
 <br>
 <div class="row buscador">
+
   <div >
+
     <div class="input-buscador">
       <mat-form-field appearance="outline" >
 
@@ -30,8 +46,8 @@
       <mat-card *ngFor="let especialidad of especialidades" class="especialidad-card">
         <img mat-card-image [src]="especialidad.imagen" alt="{{ especialidad.nombre_especialidad }}" />
         <mat-card-content style="flex-grow: 1;">
-          <h3>{{ especialidad.nombre_especialidad }}</h3>
-          <p>{{ especialidad.descripcion }}</p>
+          <h3 class="titulo-card">{{ especialidad.nombre_especialidad }}</h3>
+          <p class="parrafo-card">{{ especialidad.descripcion }}</p>
         </mat-card-content>
         <mat-card-actions class="accions-butons">
           <button mat-raised-button color="primary" class="btn-doctores"><a href="doctores">Ver lista de doctores</a></button>

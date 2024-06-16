@@ -2,6 +2,9 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+:root {
+  --tamanio-letra: 14px; /* Tamaño de letra predeterminado */
+}
 .button-primary {
     background-color: #D50000; 
     color: #FFFFFF; 
@@ -13,14 +16,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
 mat-form-field mat-label,
 mat-form-field mat-select {
-  font-size: 14px !important;
+  font-size: var(--tamanio-letra) !important;
 }
 
 mat-form-field input,
 mat-form-field textarea,
 mat-form-field select {
   width: 100%;
-  font-size: 14px !important;
+  font-size: var(--tamanio-letra) !important;
 
 }
 
@@ -71,7 +74,7 @@ will-change: auto;
 }
 .label-input{
   text-align: left;
-  font-size: 14px;
+  font-size: var(--tamanio-letra);
   margin-bottom: 5px;
 }
 .mat-mdc-form-field-hint-wrapper{
