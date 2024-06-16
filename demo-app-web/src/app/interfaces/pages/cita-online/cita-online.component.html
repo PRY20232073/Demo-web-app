@@ -7,7 +7,7 @@
             <img src="../../../../assets/Doctors-bro.svg" alt="Imagen" />
         </div>
           <div class="right-half">
-            <mat-card *ngIf="StepperForm == 0">
+            <div *ngIf="StepperForm == 0">
               <mat-card-content>
                 <mat-stepper linear labelPosition="bottom" #stepper>
                  <!-- Paso 1: Datos personales -->
@@ -142,15 +142,11 @@
                                 <div class="col-md-11">
                                     <mat-form-field appearance="outline">
                                         <input matInput 
+                                        type="text"
                                         placeholder="Escribe la especialidad" 
                                         formControlName="especialidad" 
                                         [matAutocomplete]="auto"
                                         required>
-                                        <!--
-                                        <mat-select formControlName="especialidad">
-                                        <mat-option value="Cardiología">Cardiología</mat-option>
-                                        <mat-option value="Dermatología">Dermatología</mat-option>
-                                        </mat-select>-->
                                         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
                                             <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                                                 {{ option }}
@@ -267,7 +263,7 @@
                     </mat-step>
                 </mat-stepper>
               </mat-card-content>
-            </mat-card>
+            </div>
             <mat-card *ngIf="StepperForm == 1">
                 <mat-card-header style="justify-content: center;">
                     <mat-card-title><h3>Resumen de la cita médica</h3></mat-card-title>

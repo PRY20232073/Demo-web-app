@@ -36,7 +36,7 @@ a {
 }
 .btn-doctores {
   border-radius: 10px;
-  font-size: 14px;
+  font-size: var(--tamanio-letra);
 }
 .accions-butons{
   display: flex;
@@ -51,4 +51,10 @@ a {
 .image-container{
   display:flex;
   justify-content: center;
+}
+.titulo-card{
+  font-size: calc(var(--tamanio-letra) + 4px);
+}
+.parrafo-card{
+  font-size: calc(var(--tamanio-letra) + 2px) ;
 }

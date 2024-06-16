@@ -13,7 +13,7 @@
   .btnEnviar{
     padding: 23px 40px;
     margin-bottom: 20px;
-    font-size: 20px;
+    font-size: calc(var(--tamanio-letra) + 6px);
   }
   .container {
     display: flex;
@@ -44,3 +44,15 @@
     max-width: 500px;
     margin-top: 0px;
   }
+.hora-contacto{
+  font-size: var(--tamanio-letra); 
+  margin-top: 0px;
+}
+.subtitulo-contacto{
+  font-size: calc(var(--tamanio-letra) + 6px);
+}
+.dia-contacto{
+  font-size: var(--tamanio-letra);
+  margin-top: 0px;
+  margin-bottom: 2px;
+}
