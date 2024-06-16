@@ -15,6 +15,7 @@ export class EspecialidadesComponent {
   especialidades: any[];
   especialidades_vacias: number = 0;
   filtro: string = '';
+  valueCambioLetra = 'normal';
   constructor(private especialidadService: EspecialidadService) {
     this.especialidades = [];
   }
